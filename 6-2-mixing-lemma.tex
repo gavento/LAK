@@ -1,0 +1,33 @@
+\subsection{Mixing lemma}
+
+
+\vt (Mixing lemma) $\forall G, \forall S,T \subseteq V, S\cap T = \emptyset: |e(S,T) - {d\cdot|S|\cdot|T|\over n}| \le \lambda\cdot\sqrt{|S|\cdot|T|}$
+
+\dk Buďte $\chi_S, \chi_T$ charakteristické vektory $S$ a $T$. $u = (1,1,\dots)$ je první vlastní vektor. $\chi_S^\bot$ značí vektor kolmý na $\chi_S$.
+
+$${\sk{\chi_S \cdot u} \over \|u\|^2} = {|S|\over n} \qquad\Rightarrow\qquad \chi_S = u\cdot {|S|\over n} + \chi_S^\bot \qquad\qquad \chi_T = u\cdot {|T|\over n} + \chi_T^\bot$$
+
+$$e(S,T) = \sum_{i\in S, j\in T} A_{ij} = \chi_T^TA\chi_S = \underbrace{{|S|\cdot |T| \over n^2} \underbrace{u^TAu}_{dn}}_{d\cdot |S|\cdot |T|\over n} + \xttt A\chi_s^\bot$$
+
+Zbývá dokázat, že $|\xttt A\chi_S^\bot| \le \lambda\cdot\sqrt{|S|\cdot |T|}$.
+
+$$|\xttt A\chi_S^\bot| \le \|\xttt \| \cdot \|A\chi_S^\bot\| \le \|\xttt\|\cdot\lambda\cdot\|\chi_S^\bot\|$$
+
+První nerovnost plyne z toho, že skalární součin dvou vektorů (tedy součin
+jejich délek a sinu úhlu, který svírají) je vždy nejvýš roven součinu jejich
+délek. Druhá nerovnost plyne z toho, že si $\chi_S^\bot$ můžu vyjádřit jako
+lineární kombinaci vlastních vektorů $A$:
+
+$$\chi_S^\bot = \sum_{i=2}^n y_i\alpha_i$$
+
+Pro každý vlastní vektor $y_i$ můžu nahradit matici $A$ vlastním číslem
+$\lambda_i$ (pak bude zachována rovnost) a tím spíš můžu nahradit matici $A$
+největším vlastním číslem, což je v našem případě $\lambda =
+\max\{\lambda_2,-\lambda_n\}$, abych zachoval nerovnost.
+
+$$\|\chi_S\|^2 = |S| \qquad\Rightarrow\qquad \|\xttt\| \le \sqrt S$$
+$$\|\chi_T\|^2 = |T| \qquad\Rightarrow\qquad \|\chi_S^\bot\| \le \sqrt T$$
+
+$$|\xttt A\chi_S^\bot| \le \lambda\cdot\sqrt{|S|\cdot |T|}$$
+\qed
+

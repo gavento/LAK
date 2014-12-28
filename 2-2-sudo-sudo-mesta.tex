@@ -1,0 +1,32 @@
+\subsection{Sudo-sudo města}
+
+
+\df $|X| = n$, $A_1, A_2, \dots A_k \subseteq X$, $|A_i| \equiv 0 \mod 2$, $|A_i\cap A_j| \equiv 0 \mod 2$. Jaké největší může být $k = k(n)$?
+
+\vt $k(n) \ge 2^{n\over 2}$
+
+\dk Utvoříme páry -- $2^{n\over 2}$ je počet podmnožin $n\over 2$ prvkové množiny. \qed
+
+\vt $k(n) \le 2^{n\over 2}$
+
+\dk\footnote{$A_i$ budeme považovat za charakteristický vektor podmnožiny $A_i$
+v množině $X$.} $A_i \in GF(2^n)$. Nechť $M=\{A_1, A_2, \dots A_k\}$ je maximální (co do inkluze)
+sudo-sudo město. Ukážeme že $M$ je vektorový prostor.
+Vektory mají sudé průniky {\it (sudo-sudo město)} nad $GF(2)$ tedy platí $\forall x,y\in M: \sk{x,y} = 0$.
+Dále:
+
+\begin{align}
+	&\emptyset \in M \\
+	&\forall u \in M, \forall c\in GF(2): c\cdot u \in M \\
+	&\forall x,u,v\in M: \sk{x, u+v} = \sk{x,u} + \sk{x,v} = 0 + 0 = 0 \\
+	&\forall u,v \in M: \sk{u+v,u+v} = \sk{u,u} + 2\sk{u,v} + \sk{v,v} = 0 + 0 + 0 = 0
+\end{align}
+
+Když $M << GF(2)^n$ a $\dim M = k$, pak $|M| = 2^k$. 
+
+$$\forall x\in M: x\in M^\bot \quad\Rightarrow\quad M\subseteq M^\bot \quad\Rightarrow\quad \dim M \le \dim M^\bot$$
+
+$$k = \dim M \le \dim M^\bot = n-k \quad\Rightarrow\quad 2k \le n \quad\Rightarrow\quad k \le {n\over 2}$$
+\qed
+
+

@@ -1,0 +1,44 @@
+\subsection{Expanze}
+
+
+\df
+\begin{itemize}
+	\item $E(S,T) = \{$ hrany mezi $S$ a $T$ $\}$
+	\item $e(S,T) = |E(S,T)|$
+	\item $e(S) = $ počet hran uvnitř $S$
+	\item vrcholová expanze $h_v(G) = \min\limits_{S\subseteq V, |S|\le {n\over 2}} {|N(S) \over |S|}$
+	\item hranová expanze $h(G) = \min\limits_{S\subseteq V, |S|\le {n\over 2}} {e(S,\bar S) \over |S|}$
+\end{itemize}
+
+\poz $h_v(G) \le h(G) \le d . h_v(G)$
+
+\df 
+\begin{itemize}
+	\item Rodina expanderů $\{G_i\}_\infty$\quad$2^i \ge |G_i| \ge i: h(G_i) \ge \varepsilon$, $G_i$ je $d$-regulární.
+	\item Spectral gap $= d - \max\{\lambda_2,-\lambda_n\}$
+	\item Spektrální expanze $= d - \lambda_2$
+	\item $\lambda = \max\{\lambda_2,-\lambda_n\}$
+\end{itemize}
+
+\vt ${1\over 2}(d-\lambda_2) \le h(G) \le \sqrt{d(d-\lambda_2)}$ (G je $d$-regulární graf).
+
+\dk (Jen první nerovnost, druhá je bez důkazu). Sporem: nechť $S$ je množina
+vrcholů s malou hranovou expanzí.
+
+Pro $x \bot (1,1,\dots,1)$ platí $\lambda_2 \ge {x^TAx\over x^Tx}$ (Raileighův
+princip). Zvolíme $x = (n-s)1_S - s1_{\bar S}$, kde $s = |S|$ a $1_S$ je
+charakteristický vektor množiny $S$.
+
+$$x^Tx = (n-s)^2s + s^2(n-s) = s(n-s)n$$
+$$x^TAx = \sum_{(a,b)\in E} 2x_ax_b = 2(n-s)^2e(S)-2s(n-s)e(S,\bar S) + 2s^2e(\bar S)$$
+
+Platí $ds = 2e(S) + e(S,\bar S)$, neboť $ds$ odpovídá počtu konců hran v $S$. Analogicky $d(n-s) = 2e(\bar S) + e(S,\bar S)$ pro $\bar S$. Z toho si vyjádříme $e(S)$ a $e(\bar S)$ a dosadíme do rovnice výše:
+
+$$x^TAx = -e(S,\bar S)n^2 + (n-s)ds(n-s+s) = (n-s)dsn - e(S,\bar S)n^2$$
+$$\lambda_2 \ge {(n-s)dsn - e(S,\bar S)n^2 \over s(n-s)n} = d - {n\over n-s}\cdot{e(S,\bar S)\over s}$$
+$$d-\lambda_2 \le {n\over n-s} \cdot {e(S,\bar S)\over s} \le 2\cdot{e(S,\bar S)\over s} = 2h(G)$$
+\qed
+
+\lm Pro náhodný d-regulární graf skoro jistě platí $\lambda \le 2\sqrt{d-1} + O(1)$. Bez důkazu.
+
+

@@ -1,0 +1,121 @@
+\subsection{Raileighův princip a proplétání}
+
+
+\vt (Raileighův princip) Nechť $A$ je matice s ortonormální bazí z vlastních 
+vektorů $x_i$ a vlastními čísly $\lambda_i \geq \lambda_k$. Potom:
+\begin{enumerate}
+\item $x \in\sk{x_1,\dots,x_k} \Rightarrow x^*Ax\ge \lambda_kx^*x$
+\item $x \in\sk{x_k,\dots,x_n} \Rightarrow x^*Ax\le \lambda_kx^*x$
+\end{enumerate}
+
+\dk $x \in\sk{x_1,\dots,x_k} \Rightarrow x = \sum_{i=1}^k \alpha_ix_i$
+\begin{align*}
+	x^*Ax &= x^*(Ax) = x^*\left(A\cdot\sum_{i=1}^k\alpha_ix_i\right) = x^*\left(\sum_{i=1}^k\alpha_iAx_i\right) = x^*\left(\sum_{i=1}^k\alpha_i\lambda_ix_i\right) = \\
+	&= \sum_{i=1}^k\alpha_i\lambda_ix^*x_i = \sum_{i=1}^k\alpha_i\lambda_i\left(\sum_{j=1}^k \alpha_jx_j\right)^*x_i = \sum_{i=1}^k \alpha_i\lambda_i(\alpha_ix_i)^*x_i = \\
+	&= \sum_{i=1}^k \lambda_i\underbrace{\alpha_i\overline{\alpha_i}}_{\ge 0} \ge \sum_{i=1}^k \lambda_k\alpha_i\overline{\alpha_i} = \lambda_k\sum_{i=1}^k \alpha_i\overline{\alpha_i} = \lambda_kx^*x
+\end{align*}
+
+Poslední rovnost plyne z následujícího:
+\begin{align*}
+	 \lambda_kx^*x = \left(\sum_{i=1}^k \alpha_ix_i\right)^*\left(\sum_{i=1}^k \alpha_ix_i\right) = \sum_{i=1}^k \alpha_i\overline{\alpha_i}
+\end{align*}
+
+Druhou nerovnost dokážeme analogicky. \qed
+
+
+\vt (Věta o proplétání) Nechť $A$ a $B$ jsou matice takové, že $B$ vznikla z $A$ 
+vymazáním nějakého řádku a sloupce. Potom pro vlastní čísla $\lambda_i,\mu_i$ 
+matic $A,B$ platí:
+\begin{align}
+	\lambda_1 \geq \mu_1 \geq \lambda_2 \geq \dots\geq \mu_{n-1} \geq \lambda_n
+\end{align}
+
+\dk Dokazujeme indukcí $\lambda_k \geq \mu_k \geq \lambda_{k+1}$. Označme $x_i$ 
+a $y_i$ vlastní vektory matic $A$ a $B$.  Zaveďme následující vektorové 
+podprostory $\C^n$ (ačkoli druhý z nich nemá dostatek složek, můžeme mu jednu 
+nulovou přidat a nic se nestane):
+\begin{align}
+S_1 := \L\{x_k, \dots, x_n\} \subseteq \C^n \\
+S_2 := \L\{y_1, \dots, y_k\} \subseteq \C^n
+\end{align}
+Zřejmě $\dim(S_1) + \dim(S_2) = (n-k+1) + k > n$, tedy $\exists x \in S_1\cap S_2$. Použijeme 
+Reileighův princip pro oba prostory a máme:
+\begin{align}
+	\mu_k \leq \frac{y^*By}{y^*y} = \frac{x^*Ax}{x^*x} \leq \lambda_k
+\end{align}
+Stačí ukázat, že $\mu_k \geq \lambda_{k+1}$ -- to je ale snadné, stačí vzít $-A$ 
+a $-B$, čímž se obrátí znaménka vlastních čísel a nerovnosti. \qed
+
+\vt (Věta o proplétání při násobení maticí) Nechť $A$ je symetrická čtvercová matice 
+s vlastními čísly a vektory $\lambda_i$ a $x_i$, $S$ reálná matice, že $S^TS=I$.  
+Definujeme $B := S^TAS$ a označíme vlastní čísla a vektory matice $B$ jako 
+$\mu_i$ a $y_i$. Potom $\mu_i$ proplétají $\lambda_i$ a pokud navíc $\mu_i = 
+\lambda_i$ pro nějaké $i$, tak $Sy_i$ je vlastní vektor $A$ příslušící vlastnímu 
+číslu $\lambda_i$.
+
+\dk Použijeme Raileighův princip podobně, jako v předchozím tvrzení. Všimneme 
+si, že:
+\begin{align}
+	x \in \L\{ S^Tx_k, \dots, S^Tx_{k-1}\}^\perp \Leftrightarrow
+	Sx \in \L\{ x_k, \dots, x_{k-1}\}^\perp
+\end{align}
+Stačí si opět vzít vhodný prvek $x$ z průniku:
+\begin{align}
+	x \in \L\{ S^Tx_k, \dots, S^Tx_{k-1}\}^\perp \cap \L\{y_1, \dots, y_k\}
+\end{align}
+A můžeme použít Reileighův princip:
+\begin{align}
+	\lambda_i \geq \frac{Sx^TASx}{Sx^TSx} = \frac{x^TBx}{x^Tx} \geq \mu_i \\
+\end{align}
+Na navíc platí pokud $\lambda_i = \mu_i$, potom:
+\begin{align}
+	\frac{x^TBx}{x^Tx} = \lambda_i \quad\Rightarrow\quad x^TBx=x^Tx\lambda_i 
+	\quad\Rightarrow\quad Bx = \lambda_i x
+\end{align}
+A $x$ je vlastní vektor příslušící $\lambda_i$, jak jsme chtěli dokázat.\qed
+
+\df $A$ je bloková matice s bloky velikosti $x_1, \dots, x_m$. Kvocient $A$ je matice $B^{m\times m}$, kde $b_{i,j} = $ průměr hodnot $A_{i,j}$.
+\begin{align*}
+	A = \left(\begin{matrix}
+		A_{1,1} & A_{1,2} & \dots \\
+		A_{2,1} & A_{2,2} & \dots \\
+		\vdots & \vdots & \ddots 
+		\end{matrix}\right)
+	\qquad
+	\qquad
+	B = \left(\begin{matrix}
+		b_{1,1} & b_{1,2} & \dots \\
+		b_{2,1} & b_{2,2} & \dots \\
+		\vdots & \vdots & \ddots 
+		\end{matrix}\right)
+\end{align*}
+
+\vt (Věta o proplétání kvocientu) Pokud $B$ je kvocient $A$, pak vlastní čísla
+$B$ proplétají vlastní čísla $A$.
+
+\dk Mějme $\widetilde S$ je matici incidence blokové $A$:
+\begin{align*}
+	\widetilde S = \left(\begin{array}{llll}
+		\framebox[3em][c]{1} & & & \hfil\bigzero \\
+		& \framebox[4em][c]{1} & & \\
+		\bigzero & & \framebox[2em][c]{1} & \\
+		& & & \framebox[1em][c]{1}
+		\end{array}\right)
+\end{align*}
+
+\begin{align*}
+	& \widetilde S\cdot\widetilde S^T = \text{diagonální matice } (x_1, x_2, \dots, x_m) = D \\
+	& S := \widetilde S \cdot D^{-{1\over2}} \\
+	& \widetilde B = S^TAS
+\end{align*}
+
+Kromě toho platí:
+\begin{align*}
+	& S^TS = I
+	& B = D^{-{1\over2}}\widetilde BD^{-{1\over2}}
+\end{align*}
+
+Tedy $B$ je matice podobná $\widetilde B$ a má stejná vlastní čísla. Matice
+$\widetilde B$ proplétá matici $A$, což plyne z věty o proplétání při násobení
+maticí. \qed
+

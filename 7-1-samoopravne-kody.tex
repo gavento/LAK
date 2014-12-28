@@ -1,0 +1,23 @@
+\subsection{Připomenutí pojmů}
+
+
+\df Samoopravný kód $C$ s parametry $(n,q)$ je pro nás systém množin $C \subseteq M = \{0, \ldots, q-1\}^n$ (prvkům této množiny říkáme kódová slova).
+
+\df Grafem kódu rozumíme graf $G=(V,E)$, že $V(G) = \{0, \ldots, q-1 \}^n$ a hrana mezi vrcholy $u,v$ vede právě tehdy, když $d(u,v) = 1$, tedy liší se právě v jedné souřadnici ($d$ je hammingovská vzdálenost). Kód v takovém grafu je pak podmnožina vrcholů, které odpovídají kódovým slovům.
+
+\df Kód opravuje $t$ chyb, pokud jsou $N_t(u)$ (okolí vrcholu $u$ do vzdálenosti $t$) disjunktní pro všechny dvojce kódových slov.
+
+\df Kód $C$ je $t$-perfektní, pokud opravuje $t$ chyb a navíc úplně pokrývá svou nosnou množinu $M$.
+
+\tv Pokud $C$ opravuje $t$ chyb, platí:
+\begin{align*}
+	|C| \leq { q^n \over \sum_{i=0}^t \binom{n}{i} (q-1)^i }
+\end{align*}
+
+\dk Okolíčka musí být disjunktní, stačí tedy spočítat, kolik může být kódových
+slov, což je daný výraz: V čitateli je počet všech slov. Jmenovatel počítá
+velikost každého $t$-okolí, tedy vybírá možné souřadnice ke změně a jejich
+potenciální nové hodnoty.
+
+
+

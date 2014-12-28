@@ -1,0 +1,82 @@
+\subsection{Charakteristické polynomy}
+
+
+\df Definujme polynomy $v_i \in \Q[\lambda]$ takové, že $\deg v_i(\lambda) = i$ a:
+\begin{enumerate} 
+	\item $v_0(\lambda) = 1$
+	\item $v_1(\lambda) = \lambda$
+	\item pro $i \in \{ 2, \dots, d-1\}$ induktivně, aby splňovaly rovnici 
+	\begin{align}
+		(s_{1,i,i-1} v_{i-1}(\lambda)) + (s_{1,i,i-\lambda}v_i(\lambda)) + (s_{1,i,i+1}v_{i+1}(\lambda)) = 0
+	\end{align}
+\end{enumerate}
+
+\lm (O charakteristickém polynomu) Nechť $\lambda_1,\ldots,\lambda_d \in \Sp(B_1)$. Potom pokud $\lambda_i \neq k$ platí:
+\begin{align}
+	v_o(\lambda) + \ldots + v_d(\lambda) = c \cdot (\lambda - \lambda_1) \cdot \ldots \cdot (\lambda - \lambda_d)
+\end{align}
+
+\dk Vytvořme vektor $\vec{v} = (v_1(\lambda), \ldots, v_d(\lambda))$ a uvažme systém rovnic $B\vec{v} = \lambda \vec{v}$. Ten umíme řešit po řádcích (známe první dva členy vektoru a celou matici obsahující potřebné koeficienty), známe tedy vlastní čísla (kořeny této rovnice) a jejich vlastní vektory (obsahují složky $v_i(\lambda)$.
+
+Nejprve si ukážeme, že jedno z vlastních čísel je $k$ (všimněte si, že v předpokladech používáme $d$ vlastních čísel, ale dimenze matice $B$ je $d+1$). Vezměme si výše používaný systém rovnic a sečtěme levé a pravé strany. Podle Lemma o sousedech jsou sloupcové součty matice $B$ rovny $k$, získáme tedy rovnici $k(v_0(\lambda) + \ldots + v_d(\lambda)) = \lambda (v_0(\lambda) + \ldots + v_d(\lambda))$, z čehož po úpravě plyne, že $\lambda = k$.
+
+\todo{Rovnost s char. polynomem}
+
+\lm Pro polynomy $v_i$ platí, že $v_i(A) = A_i$ a $v_i(B) = B_i$.
+
+\dk {\it(bez důkazu)}
+
+
+\df $z\in V(G)$, $T\in\{0,1\}^{d+1 \times n}$\\
+\indent $T_{i,u} = \left\{\begin{matrix}
+1\quad & d(u,z) = i\hfill \\
+0\quad & \text{jinak}\hfill
+\end{matrix}\right.$
+
+\lm (O zastřešování) $X\in\A(G), z\in V(G) \Rightarrow TX = \widehat XT$
+
+\dk 
+\begin{align*}
+(TA)_{iu} &= \sum_w T_{iw}A_{wu} = s_{1,i,d(u,z)} \\
+(BT)_{iu} &= \sum_j B_{ij}T_{ju} = s_{1,i,d(u,z)} \\
+TA = BT \quad&\Rightarrow\quad TA^2 = BTA = B^2T \quad\Rightarrow\quad TA^m = B^mT \\
+Tp(A) = p(B)T \quad&\Rightarrow\quad TX = \widehat XT
+\end{align*}
+\qed
+
+\df Definujme si pomocné polynomy: 
+	$x_i(\lambda) = v_0(\lambda) + \dots + v_i(\lambda)$ \hfil $S_t = x_t(A) = A_0 + A_1 + \dots + A_t$
+Kde $S_t$ je matice, která označuje dvojce vrcholů jedničkou, pokud jsou vzdálené nanejvýš $t$ (je to součet vzdálenostních matic do $t$).
+
+\lm $C$ je perfektní kód (množina vrcholů) v $G$ a $c$ je jeho charakteristický vektor. Pak $S_t\cdot c = \vec 1$.
+
+\dk $(S_t\cdot c)_u = |\{w: w\in C, d(w,u) \le t\}| = 1$, což plyne z definice perfektního kódu.
+\qed
+
+\lm $\exists$ $t$-perfektní kód $\Rightarrow$ $\dim \Ker \widehat S_t \ge t$
+
+\dk $z_0 = z \in C$
+
+$z_1,z_2,\dots,z_t \quad d(z,z_i) = i$ pro $i = 1,2,\dots,t$
+
+$(T_{z_i} \cdot c)_j = \delta_{ij}$ (Kroneckerovo delta $= 1$ pro $i=j$, $0$ jinak)
+
+Tedy vektory $T_{z_i} \cdot c$ pro $i = 0, 1, \dots, t$ jsou lineárně nezávislé.
+
+\begin{align*}
+	&\widehat S_t(T_{z_i}\cdot c) = (\widehat S_t \cdot T_{z_i}) \cdot c \overset{1}{=} T_{z_i} \cdot S_t \cdot c \overset{2}{=} T_{z_i}\cdot \vec 1 = \left(\begin{matrix}
+		k_0 \\ \vdots \\ k_d
+	\end{matrix}\right) \\
+\end{align*}
+
+$\overset{1}{=}$ plyne z lemma o zastřešování, $\overset{2}{=}$ plyne z předchozího lemmatu. Výsledný vektor je pro všechnyvolby $z_i$ stejný, protože jeho položky je počet sousedů s pevnými vzdálenostmi, a protože je to vzdálenostně regulární graf, jsou to nějaké hodnoty $s_{hij}$ se stejným $hij$ pro řádek.
+
+\begin{align*}
+	&u_i = T_{z_i}\cdot c - T_{z_0}\cdot c\qquad i = 1, 2, \dots, t \\
+	&\widehat S_t u_i = \widehat S_t T_{z_i}\cdot c - \widehat S_t T_{z_i}\cdot c = \left(\begin{matrix}k_0 \\ \vdots \\ k_d\end{matrix}\right) - \left(\begin{matrix}k_0 \\ \vdots \\ k_d\end{matrix}\right) = \vec 0 \quad\Rightarrow\quad u_i\in\Ker \widehat S_t\\
+\end{align*}
+
+Vektory $u_1,\dots, u_t$ tvoří $\Ker \widehat S_t$ a jsou lineárně nezávislé. Tedy $\dim\Ker\widehat S_t \ge t$.
+\qed
+
+

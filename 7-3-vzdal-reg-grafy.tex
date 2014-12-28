@@ -1,0 +1,24 @@
+\subsection{Vzdálenostně regulární grafy}
+
+
+\df Vzdálenostně regulární graf: $\exists s_{hij}$ t. že $\forall u,v\in V(G), d_G(u,v) = j:$ $|\{w: d_G(u,w) = h, d_G(w,v) = i\}| = s_{hij}$.
+
+\poz $|h-j| > j \Rightarrow s_{hij} = 0$ (plyne z $\Delta$ nerovnosti), $k = s_{110}$ (počet sousedů vrcholu $u = v$ v $k$-regulárním grafu)
+
+\lm $Z_{mi} = Z_{m-1,i-1} \cdot s_{1,i-1,i} + Z_{m-1,i} \cdot s_{1,i,i} + Z_{m-1,i+1} \cdot s_{1,i+1,i}.$ $Z_{mi}$ značí počet sledů délky $m$ mezi vrcholy ve vzdálenosti $i$.
+
+\dk $Z_{00} = 1$, jinak $Z_{0i} = 0$. Dále dokážeme indukcí pro $m \ge 1$ a $i
+\ge 1$. $s_{1,i,j}$ je nenulové pouze pro $i \in \{j-1,j,j+1\}$ (z $\Delta$
+nerovnosti). V rovnici sčítáme vrcholy sousedící s $u$, které jsou ve
+vzdálenosti $i-1$, $i$ a $i+1$ od $v$.
+
+\df Matice sousednosti $A = A_G$. $\A(G) = \{p(A): p(x) \in \C[x]\}$. $\A(G)$ je
+vektorový prostor.
+
+\df Vzdálenostní matice $A_1, A_2, \dots, A_d$ grafu $G$: \\
+\indent $(A_i)_{uv} = \left\{\begin{matrix}
+1\quad & d_G(u,v) = i \hfill & \hspace{4cm} A_0 = I \\
+0\quad & \text{jinak} \hfill & \hspace{4cm} A_1 = A \\
+\end{matrix}\right.$
+
+

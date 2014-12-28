@@ -1,0 +1,60 @@
+\subsection{Sudo-licho města}
+
+
+\df Nechť $|X|=n$ a $A_1, \dots, A_m \subseteq X$ $A_i \ne A_j$  jsou neprázdné podmnožiny.  
+Úloha A-B město se ptá, jak velké může být $m$, pokud $|A_i| \sim B$ a $|A_i\cap 
+A_j|\sim A$ (tedy pro sudo-licho město máme omezení na liché velikosti a sudé 
+průniky).
+
+\vt Pro úlohu sudo-licho město platí $m \leq n$.
+
+\dk Počítejme nad $GF(2)$. Matice $A$ nechť je charakteristická matice dimenze 
+$n \times m$. Podívejme se na součin $AA^T$, tedy na matici skalárních součinů:
+\begin{align}
+	AA^T = \left(\begin{matrix}A_1\\ A_2 \\ \vdots \\ A_m \end{matrix}\right) 
+	\cdot \left(\begin{matrix}A_1, A_2, \dots, A_m\end{matrix}\right) =
+	\left(\begin{matrix}
+	1 & &\bigzero & \\
+	& \ddots && \\
+	&\bigzero& \ddots & \\
+	&&  &1
+	\end{matrix}\right)
+\end{align}
+Tedy víme, že $\rank(AA^T) = m$ a $\rank(A) \leq n$. Z vlastností ranku již 
+snadno získáme nerovnost $m=\rank(AA^T) \leq \rank(A) \leq n$. \todo{důkaz 
+rankové nerovnosti obrázkem pomocí zobrazení} \qed
+
+\vt Nechť $|X|=n$ a $A_1, \dots, A_m \subseteq X$ že platí $|A_i \cap A_j| = 1 $ 
+a $A_i \neq A_j$. Potom $m \leq n$.
+\dk Podobně jako v předchozím příkladě vezměme matici charakteristických vektorů 
+$A$ a podívejme se na součit $AA^T$, tentokrát již nad $Q$:
+\begin{align}
+	AA^T = \left(\begin{matrix}
+	|A_1| & &\bigone & \\
+	& \ddots && \\
+	&\bigone& \ddots & \\
+	&&  &|A_m|
+	\end{matrix}\right)
+\end{align}
+Dále označme $a_i := |A_i|$. Můžeme předpokládat, že $a_1 \leq a_2 \leq \dots 
+\leq a_m$. Zřejmě také $a_2 > 1$ (jinak $A_1 = A_2$). Nyní bychom chtěli 
+dokázat, že je matice regulární -- proto se podíváme na determinant této matice:
+\begin{align}
+	|AA^T| = \left|\left(\begin{matrix}
+	a_1 & &\bigone & \\
+	& \ddots && \\
+	&\bigone& \ddots & \\
+	&&  &a_m
+	\end{matrix}\right)\right|
+	%= \left|\begin{matrix}\text{{\fontsize{120}{120}\selectfont 1}}\end{matrix}
+	= \left|\begin{matrix}\text{\bf\Huge 1}\end{matrix}
+	+\left(\begin{matrix}
+	a_1-1 & &\bigzero & \\
+	& \ddots && \\
+	&\bigzero& \ddots & \\
+	&&  &a_m-1
+	\end{matrix}\right)\right|
+\end{align}
+Zatímco matice jedniček je singulární \todo{Pochopit proč se to dá spočítat, ale 
+determinant vyjde kladně}.  \qed
+
