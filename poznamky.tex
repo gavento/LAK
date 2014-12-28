@@ -1,0 +1,1407 @@
+\documentclass[a4paper,12pt,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{a4wide}
+\usepackage[czech]{babel}
+\usepackage{amsfonts, amsmath, amsthm, amssymb}
+\usepackage[small,compact]{titlesec}
+\usepackage{anyfontsize}
+\usepackage{rotating}
+\usepackage{mdwlist}
+
+\newcommand{\shn}{\Theta}
+\newcommand{\lm}{\smallskip\noindent\bf Lemma\rm{} }
+\newcommand{\dk}{\smallskip\noindent\bf Důkaz\rm{} }
+\newcommand{\df}{\smallskip\noindent\bf Definice\rm{} }
+\newcommand{\vt}{\smallskip\noindent\bf Věta\rm{} }
+\newcommand{\poz}{\smallskip\noindent\bf Pozorování\rm{} }
+\newcommand{\pzn}{\smallskip\noindent\bf Poznámka\rm{} }
+\newcommand{\dsl}{\smallskip\noindent\bf Důsledek\rm{} }
+\newcommand{\tv}{\smallskip\noindent\bf Tvrzení\rm{} }
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\A}{\mathcal{A}}
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Ft}{\mathbb{F}}
+\newcommand{\xttt}{{\chi_T^\bot}^T}
+\newcommand{\todo}[1]{\bf TODO: \rm#1}
+\renewcommand{\L}{\mathcal{L}}
+%\newcommand{\qed}{\hfill QED}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Ker}{Ker}
+\newcommand\bigzero{\makebox(0,0){\text{\huge0}}}
+\newcommand\bigone{\makebox(0,0){\text{\huge1}}}
+\newcommand{\bigddots}[1]{\makebox(0,0){\rotatebox{-35}{\text{\xleaders\hbox{$\cdot$\hskip4pt}\hskip#1\kern0pt}}}}
+\newcommand{\sk}[1]{{\langle #1\rangle}}
+\newcommand{\diagdots}[3][-25]{%
+  \rotatebox{#1}{\makebox[0pt]{\makebox[#2]{\xleaders\hbox{$\cdot$\hskip#3}\hfill\kern0pt}}}%
+}
+
+\title{Linearní Algebra v Kombinatorice}
+\author{Ladislav Láska\\ Jan Musílek}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+
+\section{Lineární nezávislost}
+\df Vektory $v_i$ jsou lineárně nezávislé, pokud existuje netriviální řešení 
+rovnice $\sum_i \alpha_iv_i=0$.
+\subsection{Sudo-licho města}
+\df Nechť $|X|=n$ a $A_1, \dots, A_m \subseteq X$ $A_i \ne A_j$  jsou neprázdné podmnožiny.  
+Úloha A-B město se ptá, jak velké může být $m$, pokud $|A_i| \sim B$ a $|A_i\cap 
+A_j|\sim A$ (tedy pro sudo-licho město máme omezení na liché velikosti a sudé 
+průniky).
+
+\vt Pro úlohu sudo-licho město platí $m \leq n$.
+
+\dk Počítejme nad $GF(2)$. Matice $A$ nechť je charakteristická matice dimenze 
+$n \times m$. Podívejme se na součin $AA^T$, tedy na matici skalárních součinů:
+\begin{align}
+	AA^T = \left(\begin{matrix}A_1\\ A_2 \\ \vdots \\ A_m \end{matrix}\right) 
+	\cdot \left(\begin{matrix}A_1, A_2, \dots, A_m\end{matrix}\right) =
+	\left(\begin{matrix}
+	1 & &\bigzero & \\
+	& \ddots && \\
+	&\bigzero& \ddots & \\
+	&&  &1
+	\end{matrix}\right)
+\end{align}
+Tedy víme, že $\rank(AA^T) = m$ a $\rank(A) \leq n$. Z vlastností ranku již 
+snadno získáme nerovnost $m=\rank(AA^T) \leq \rank(A) \leq n$. \todo{důkaz 
+rankové nerovnosti obrázkem pomocí zobrazení} \qed
+
+\vt Nechť $|X|=n$ a $A_1, \dots, A_m \subseteq X$ že platí $|A_i \cap A_j| = 1 $ 
+a $A_i \neq A_j$. Potom $m \leq n$.
+\dk Podobně jako v předchozím příkladě vezměme matici charakteristických vektorů 
+$A$ a podívejme se na součit $AA^T$, tentokrát již nad $Q$:
+\begin{align}
+	AA^T = \left(\begin{matrix}
+	|A_1| & &\bigone & \\
+	& \ddots && \\
+	&\bigone& \ddots & \\
+	&&  &|A_m|
+	\end{matrix}\right)
+\end{align}
+Dále označme $a_i := |A_i|$. Můžeme předpokládat, že $a_1 \leq a_2 \leq \dots 
+\leq a_m$. Zřejmě také $a_2 > 1$ (jinak $A_1 = A_2$). Nyní bychom chtěli 
+dokázat, že je matice regulární -- proto se podíváme na determinant této matice:
+\begin{align}
+	|AA^T| = \left|\left(\begin{matrix}
+	a_1 & &\bigone & \\
+	& \ddots && \\
+	&\bigone& \ddots & \\
+	&&  &a_m
+	\end{matrix}\right)\right|
+	%= \left|\begin{matrix}\text{{\fontsize{120}{120}\selectfont 1}}\end{matrix}
+	= \left|\begin{matrix}\text{\bf\Huge 1}\end{matrix}
+	+\left(\begin{matrix}
+	a_1-1 & &\bigzero & \\
+	& \ddots && \\
+	&\bigzero& \ddots & \\
+	&&  &a_m-1
+	\end{matrix}\right)\right|
+\end{align}
+Zatímco matice jedniček je singulární \todo{Pochopit proč se to dá spočítat, ale 
+determinant vyjde kladně}.  \qed
+
+\subsection{Dvouvzdálenostní množiny}
+\vt $P_1, P_2, \dots, P_m$ jsou body v $\R^n$ a $\exists \alpha, \beta \in \R$ t. že $\|P_iP_j\| \in {\alpha, \beta}$. Pak $m(n) \leq {(n+1)(n+4)\over 2}$.
+
+\dk
+\begin{align}
+F(x,y) = (\|x,y\|^2-\alpha^2)(\|x,y\|)-\beta^2)&\qquad F: (\R^n \rightarrow \R) \\
+f_i(x) = F(x, P_i)&\qquad f_i: \R^n \rightarrow \R
+\end{align}
+
+Když jsou $f_1, f_2, \dots, f_m$ lineárně nezávislé, pak $m \leq \dim($prostor funkcí $\R^n \rightarrow \R)$. Lineární kombinace $\sum_{i=1}^m \gamma_if_i(x) = 0$.
+
+\begin{align}
+f_i(P_j) &= \alpha^2\beta^2&\qquad {\rm pro}\ i=j\\
+f_i(P_j) &= 0&\qquad {\rm pro}\ i\neq j
+\end{align}
+
+\begin{align}
+\forall j: \sum_{i=1}^m \gamma_if_i(P_j) = \alpha^2\beta^2\gamma_j = 0 \qquad\Rightarrow\qquad \forall j: \gamma_j = 0
+\end{align}
+
+Z toho plyne, že funkce $f_1, f_2, \dots f_m$ jsou lineárně nezávislé.
+
+\begin{align}
+f_i(x) &= ((x_1-p_1)^2+\dots+(x_n-p_n)^2-\alpha^2) ((x_1-p_1)^2+\dots+(x_n-p_n)^2-\beta^2) \\
+&= (x_1^2+\dots+x_n^2-2p_1x_1-\dots-2p_nx_n-\alpha^2) (x_1^2+\dots-2p_1x_1-\dots-\beta^2)
+\end{align}
+
+$p_i^2$ se ztratí do $\alpha$ a $\beta$. Následuj rozbor případů po roznásobení:
+
+\begin{align}
+	&(x_1^2+\dots+x_n^2)(x_1^2+\dots+x_n^2) &\qquad 1\\
+	&(x_1^2+\dots+x_n^2)x_i &\qquad n\\
+	&x_i^2 &\qquad n\\
+	&x_ix_j &\qquad {n \choose 2}\\
+	&x_i &\qquad n\\
+	&1 &\qquad 1\\
+\end{align}
+
+Případ $(x_1^2+\dots+x_n^2)$ není potřeba, vyjádříme ho jako kombinaci $x_i^2$. Velikost lineárního obalu:
+
+$${n\choose 2} + 3n + 2 = {n(n-1) \over 2} + {6n\over 2} + {4\over 2} = {n^2-5nn+4 \over 2} = {(n+1)(n+4)\over 2}$$ \qed
+
+
+\vt Pro dvouvzdálenostní množinu na kouli platí: $${n(n+1)\over 2} \leq m_{sf}(n) \leq {n(n+3)\over 2}$$
+
+\dk
+
+{\bf Horní odhad} (ostatní řádky nepotřebujeme, $(x_1^2 + \dots + x_n^2)$ se na kouli posčítá na konstantu):
+\begin{align}
+	&x_i^2 &\qquad n\\
+	&x_ix_j &\qquad {n \choose 2}\\
+	&x_i &\qquad n\\
+\end{align}
+
+$${n\choose 2} + 2n = {n(n-1)\over 2} + {4n\over 2} = {n^2+3n\over 2} = {n(n+3) \over 2}$$
+
+{\bf Dolní odhad} (konstrukce 2-vzdálenostní množiny v $\R^n$):
+
+Body budou všechny vektory délky $n$ s dvěma jedničkovými souřadnicemi. Vzdálenost dvou bodů s $1$ na různých souřadnicích je $2$, zatímco vzdálenost bodů které se v jedné souřadnici shodují je $\sqrt 2$.
+
+Uvažujme nyní body v $\R^{n+1}$ místo v $\R^n$. Takových je $n+1 \choose 2$. 
+
+\bigskip
+$\sum x_i^2 = 2 \Rightarrow$ všechny body leží na sféře\footnote{$x_i$ je $i$-tá souřadnice bodu $x$}\\
+\indent$\sum x_i = 2 \Rightarrow$ všechny body leží v nadrovině \\
+
+$$\left\{x | \sum x_i = 2 \right\} \cap \R^{n+1} \simeq \R^n$$
+
+Tedy máme 2-vzdálenostní množinu $n+1 \choose 2$ bodů na kouli v $\R^n$.
+
+
+\subsection{Fišerova nerovnost}
+
+\vt Nechť máme graf $K_n$ a jeho hranově disjunktní rozklad na $m$ úplných 
+bipartitních grafů. Potom $m \geq n-1$.
+
+\dk Označme si úplné bipartitní grafy $B_1, \ldots, B_m$ a $X_k$, $Y_k$ jejich 
+partity, přičemž jednotlivý $B_i$ nemusí být pokrývat všechny vrcholy $K_n$.  
+Mějme matici $A_k$ pro graf $B_k$ velikosti $n \times n$ definovanou:
+\begin{align}
+	a_{ij} = \left\{\begin{array}{ll}1 & \text{pokud } i \in X_k\text{ a }j \in 
+	Y_k \\ 0 & \text{jinak} \end{array}\right.
+\end{align}
+Protože v každém nenulovém řádku jsou jedničky právě pro sousedy daného vrcholu 
+v druhé partitě, jsou všechny nenulové řádky stejné (sousedství jsou stejná), 
+$A_k$ má tedy hodnost $1$.
+
+Nyní uvažme matici $A=A_1 + \ldots + A_m$. Hodnost součtu je nanejvýš rovna 
+součtu hodností, proto $\rank(A) \leq m$. Nyní budeme chtít dokázat, že 
+$\rank(A) \geq n-1$:
+
+Protože každá hrana grafu náleží právě jednomu $B_k$, je jednička právě na 
+jednom z míst $a_{ij}$ nebo $a_{ji}$ (pozor, matice nejsou matice sousednosti -- 
+rozlišují partitu!). Na diagonále $A$ jsou pak samé nuly. Sečtením $A+A^T$ 
+získáme matici incidence $K_n$, tedy $A+A^T=J_n - I_n$.
+
+Dále pro spor předpokládejme, že $\rank(A) \leq n-2$. Připíšeme k matici jeden 
+řádek samých jedniček, čímž hodnost zvýšíme nanejvýš o $1$. Protože ale $A$ nemá 
+plnou hodnost, existuje netriviální lineární kombinace sloupců, která dává 
+$\vec{0}$ -- nechť jsou její koeficienty zaznamenány ve vektoru $\vec{x} \in 
+\R^n$ a tedy $A\vec{x}=\vec{0}$. Zároveň protože poslední řádek jsou samé 
+jedničky, platí $\sum x_i \cdot 1 = 0$ a tedy také $J_n\vec{x} = 0$. Počítejme 
+dvěmi způsoby:
+
+\begin{align}
+	&x^T(A + A^T) x = x^T(J_n - I_n)x = x^T(J_nx) - x^T(I_nx) = 0 - x^T x = - 
+	\sum x_i^2 < 0 \\
+	&x^T(A+A^T) x = x^TA^Tx + x^TAx = 0^Tx + x^T0 = 0
+\end{align}
+
+což dává spor. \qed
+
+\subsection{Dolní odhad na Ramseyovo číslo}
+\vt (Ramsey) $\forall n\ \exists N\ \forall G$ na $\ge N$ vrcholech má $\omega(G) \ge n$ nebo $\alpha(G) \ge n$.
+
+Víme, že $R_2(n) = \min N \le {2n-2\choose n-1}$. Konstrukcí si ukážeme dolní odhad.
+
+\vt $R_2(n) \ge {n-1\choose 3}$
+
+\dk $|X| = n-1$. Zkonstruujeme $G=\left(V={X\choose 3}, E=\{ab: |a\cap b|=1, a,b\in V\}\right)$.
+
+Klika v $G$ je {\it skorodisjunktní systém podmnožin} $X$ $\Rightarrow$ $\omega(G) \le |X| = n-1$.
+
+Vrcholy jsou nezávislé, pokud $|a\cap b| \in \{0,2\}$ a velikost nezávislé množiny 
+v $G$ je tedy {\it sudo-licho město} $\Rightarrow$ $\alpha(G) \le |X| = n-1$.
+\qed
+
+\section{Skalární součin}
+
+Mějme vektorový prostor $V = T^n$.
+
+\df (Skalární součin) $\sk{x,y} = \sum x_iy_i$ \quad(= $\sum x_i\overline{y_i}$ nad $\C$)
+
+\subsection{Ortogonální doplněk}
+
+\df $M \subseteq T^n$ \quad $M^\bot = \{x\ |\ \forall a\in M: \sk{x,a} = 0\}$ je ortogonální doplněk $M$.
+
+\poz $\dim M^\bot = n - \dim \sk M$
+
+\poz ${(M^\bot)}^\bot = \L M$
+
+\dk \uv{$\supseteq$} jednuduché \uv{$\subseteq$} přes dimenze\quad $n-(n-k) = k = \dim M$ \qed
+
+\df (Součet podprostorů) $\L M + \L N = \L{(M\cup N)}$
+
+\poz $$\dim\left(\L M + \L N\right) + \dim\left(\L M \cap \L N\right) = \dim \L M + \dim \L N$$
+
+\dsl Podprostory $M,N << T^n: \dim M + \dim N > n \Rightarrow \dim M \cap N \ge 1$ $\Rightarrow$ $\exists u \neq 0, u \in M\cap N$.
+
+\dsl Pro tělesa, ve kterých platí $\sk{x,x} \neq 0$ pro $x\neq 0$ platí:
+$$M << T^n \Rightarrow M\cap M^\bot = \{0\} \Rightarrow \dim(M+M^\bot) = n \Rightarrow M + M^\bot = T^n$$
+
+\subsection{Sudo-sudo města}
+
+\df $|X| = n$, $A_1, A_2, \dots A_k \subseteq X$, $|A_i| \equiv 0 \mod 2$, $|A_i\cap A_j| \equiv 0 \mod 2$. Jaké největší může být $k = k(n)$?
+
+\vt $k(n) \ge 2^{n\over 2}$
+
+\dk Utvoříme páry -- $2^{n\over 2}$ je počet podmnožin $n\over 2$ prvkové množiny. \qed
+
+\vt $k(n) \le 2^{n\over 2}$
+
+\dk\footnote{$A_i$ budeme považovat za charakteristický vektor podmnožiny $A_i$
+v množině $X$.} $A_i \in GF(2^n)$. Nechť $M=\{A_1, A_2, \dots A_k\}$ je maximální (co do inkluze)
+sudo-sudo město. Ukážeme že $M$ je vektorový prostor.
+Vektory mají sudé průniky {\it (sudo-sudo město)} nad $GF(2)$ tedy platí $\forall x,y\in M: \sk{x,y} = 0$.
+Dále:
+
+\begin{align}
+	&\emptyset \in M \\
+	&\forall u \in M, \forall c\in GF(2): c\cdot u \in M \\
+	&\forall x,u,v\in M: \sk{x, u+v} = \sk{x,u} + \sk{x,v} = 0 + 0 = 0 \\
+	&\forall u,v \in M: \sk{u+v,u+v} = \sk{u,u} + 2\sk{u,v} + \sk{v,v} = 0 + 0 + 0 = 0
+\end{align}
+
+Když $M << GF(2)^n$ a $\dim M = k$, pak $|M| = 2^k$. 
+
+$$\forall x\in M: x\in M^\bot \quad\Rightarrow\quad M\subseteq M^\bot \quad\Rightarrow\quad \dim M \le \dim M^\bot$$
+
+$$k = \dim M \le \dim M^\bot = n-k \quad\Rightarrow\quad 2k \le n \quad\Rightarrow\quad k \le {n\over 2}$$
+\qed
+
+\subsection{Eulerovské a úplné bipartitní podgrafy}
+
+$G = (V,E)$ je souvislý graf. $V_G = \{$ spanning\footnote{Česky též \uv{napnuté} -- podgrafy obsahující všechny vrcholy grafu $G$ (i kdyby některé z nich byly izolované).} podgrafy $G$ $\}$
+
+\tv $V_G$ je vektorový prostor nad $GF(2)$, místo stčítání vektorů je symetrická diference. $V_H \in GF(2)^E$.
+
+\bigskip
+\todo Obrázek se symetrickou diferencí podgrafů.
+\bigskip
+
+\df $\varepsilon_G = \{ $ eulerovské podgrafy $\equiv
+\forall $ stupně sudé $ \}$. Součtem dvou eulerovských podgrafů je eulerovský
+podgraf, tvoří tedy podprostor $V_G$.
+
+\lm $\dim \varepsilon_G = |E| - n + 1$
+
+\dk Vybereme si libovolnou kostru $T$ grafu $G$. Pro každou hranu, která není v
+kostře existuje právě jedna elementární kružnice $K_e$ určená touto hranou. $\{
+K_e\ |\ e \in E(G) - E(T) \}$ tvoří lineárně nezávislé vektory. Lze dokázat,
+že tvoří bázi $\varepsilon_G$.
+
+Z toho $\dim \varepsilon_G = |E| - n + 1$, což je počet hran mimo kostru. \qed
+
+\df $\beta_G = \{$ úplné bipartitní spanning podgrafy $G$ $\}$. $\beta_G$ je
+prostor všech řezů v $G$.
+
+\lm $\beta_G << V_G$, $\beta_G = \langle\{$ hvězdy $\}\rangle$
+
+\dk Každý úplný bipartitní podgraf lze zapsat jako symetrickou diferenci hvězd.
+Vezmeme hvězdy ze všech vrcholů v jedné z partit. Mezi těmito vrcholy se hrany
+vyruší, mezi vrcholy z druhé partity žádné nevedou a všude jinde ano. 
+
+Mám-li dva různé úplné bipartitní podgrafy, rozepíšu si je na součet hvězd a
+výsledkem musí být dle výše uvedeného opět úplný bipartitní podgraf.
+
+\vt $\varepsilon_G^\bot = \beta_G$. Tedy eulerovské podgrafy jsou ortogonálním
+doplňkem úplných bipartitních podgrafů.
+
+\dk Vezmeme si $H \in \varepsilon_G$ eulerovský podgraf a $u \in V(G)$. $H_u$
+označíme hvězdu z vrcholu $u$. Platí $\sk{H,H_u} = \deg_H u$, neboť hvězda
+obsahuje všechny hrany jdoucí z $u$ a žádné jiné. Protože v $H$ vychází z
+každého vrcholu sudý počet hran a počítáme nad $GF(2)$:
+\begin{align*}
+\forall u: \sk{H,H_u} = 0 \quad\Rightarrow\quad \forall B\in \beta_G: \sk{H,B} = 0 \quad\Rightarrow\quad H \in \beta_G^\bot \quad\Rightarrow\quad \varepsilon_G \subseteq \beta_G^\bot
+\end{align*}
+
+Naopak, každý podgraf $H$, který je kolmý na všechny hvězdy je nutně eulerovský:
+\begin{align*}
+\forall u: \sk{H,H_u} = 0 \quad\Rightarrow\quad \forall u: \deg_H u \equiv 0 \mod 2 \quad\Rightarrow\quad H \in \varepsilon_G \quad\Rightarrow\quad \beta_G^\bot \subseteq \varepsilon_G
+\end{align*}
+
+Tedy $\varepsilon_G = \beta_G^\bot$, protože $\varepsilon_B^\bot = {\left(\beta_G^\bot\right)}^\bot = \beta_G$.
+\qed
+
+\dsl $\dim \varepsilon_G = \dim \beta_G^\bot = |E| - n + 1$.
+
+
+\vt $M \subseteq GF(2)^n \quad\Rightarrow\quad (1,1,\dots,1) \in \sk M + M^\bot = \sk{M\cup M^\bot}$
+
+\dk $\sk M \cap M^\bot$
+\begin{enumerate}
+\item[(a)] $\dim(\sk M \cap M^\bot) = 0 \quad\Rightarrow\quad \dim(\sk M + M^\bot) = k+n-k = n \Rightarrow \sk M + M^\bot = GF(2)^n \Rightarrow (1,1,\dots,1)\in \sk M + M^\bot$
+\item[(b)] $\dim(\sk M \cap M^\bot) > 0 \quad\Rightarrow\quad \exists u\in \sk M \cap M^\bot$ \\ 
+$\forall u\in \sk M \cap M^\bot: \sk{u,u} = 0 \Rightarrow \sum u_i^2 \equiv 0 \mod 2 \Rightarrow \sum u_i = \sk{u, (1,1,\dots,1)}$ \\
+nad $GF(2)$ platí $u_i^2 = u_i$ \\
+$\Rightarrow (1,1,\dots,1) \in {(\sk M \cap M^\bot)}^\bot = {\sk M}^\bot + {(M^\bot)}^\bot = M^\bot + \sk M$
+\end{enumerate}
+\qed
+
+
+\vt $\forall G \ \exists V_1,V_2,\ V_1\overset{.}{\cup} V_2 = V(G)$ t. že $G[V_1]$ i $G[V_2]$ mají všechny stupně sudé.
+
+\dk $M = \varepsilon_G << V_G$
+
+$G = (1,1,\dots,1) \in \varepsilon_G + \varepsilon_G^\bot = \varepsilon_G + \beta_G$
+\qed
+
+\dsl $\exists H \in \varepsilon_G\ \exists B\in \beta_G: G = H + B$ (tedy každý graf lze zapsat jako symetrickou diferenci eulerovského podgrafu a hranového řezu).
+
+
+
+\section{Shannonova kapacita a Lovászova $\vartheta$ funkce}
+
+\df Domečkový součin grafů $G$ a $H$ je graf $G \boxtimes H$ takový, že:
+\begin{align*}
+	&V(G \boxtimes H) = \{ (u,v) \ |\  u\in V(G), v\in V(H) \} \\
+	&E(G \boxtimes H) = \{ ((u_1,v_1),(u_2,v_2))\} \left\{\begin{matrix}
+		&u_1 = u_2, v_1 \sim v_2 &\text{(sousedí)} \\
+		&v_1 = v_2, u_1 \sim u_2 \\
+		&v_1 \sim v_2, u_1 \sim u_2
+		\end{matrix}\right.
+\end{align*}
+
+Motivací ke zkoumání Shannonovy kapacity grafu může být posílání zpráv.
+Potřebujeme-li kód, který opraví jednu chybu, můžeme na $C_5$ najít pouze dvě
+kódová slova ($\alpha(C_5) = 2$). Naproti tomu, $\alpha(C_5 \boxtimes C_5) = 5
+> 2^2$. Posílání zpráv ve větších blocích tedy může být efektivnější.
+
+\subsection{Shannonova kapacita}
+\df Shannonova kapacida grafu:
+$$\shn(G) = \sup_{i\ge 1}(\alpha(G^i))^{1/i}$$
+
+\lm $\shn(G\boxtimes H) \ge \shn(G) \cdot \shn(H)$
+
+\dk Vezměme si maximální nezávislou množinu v $G$ a maximální nezávislou
+množinu v $H$. Z vlastností domečkového součinu plyne, že mezi vrcholy
+$G\boxtimes H$ zkombinovanými z těchto množin nepovede žádná hrana a tudíž
+budou tvořit nezávislou množinu velikosti alespoň $\alpha(G)\cdot\alpha(H)$.
+
+\poz $\shn(G^i) \ge \shn(G)^i$
+
+\dk Postupnou iterací lemmatu.
+
+\df Ortonormální reprezentace grafu $G$ je funkce $\rho: V(G) \rightarrow \R^d$,
+$\|\rho(v)\| = 1$. Pro každé $(u,v) \not\in E(G)$ platí $\rho(u)\bot\rho(v)$,
+neboli $\sk{\rho(u), \rho(v)} = 0$.
+
+\df Lovászova theta funkce:
+$$\vartheta(G,\rho) = \max_{v\in V(G)} {1\over \sk{\rho(v),e_1}^2}$$
+
+Vezmeme si reprezentaci grafu $C_5$ ta se skládá z pěti vektorů $v_1, \dots,
+v_5$ a jednoho speciálního vektoru $e_1$, vůči kterému budeme ostatní
+vztahovat. Protože se jedná o ortonormální reprezentaci, musí každé dva
+nesousední vrcholy z $C_5$ svírat pravý úhel. Představíme si \uv{paraplíčko},
+kde vektor $e_1$ tvoří držadlo a vektory $v_1, \dots, v_5$ jsou okolo něj a
+tvoří dráty deštníku. Představme si dále, že deštník roztahujeme, dokud nebudou každé dva nesousední dráty svírat pravý úhel. Pak můžeme spočíst úhel mezi dráty a držadlem, který vyjde $\sk{\rho(v),e_1} = 5^{-{1\over 4}}$. Z toho:
+$$
+\vartheta(C_5,\rho) = \sqrt 5
+$$
+
+\df $\vartheta(G) = \min\limits_{\rho\ \text{ONR}} \vartheta(G,\rho)$
+
+Z toho plyne $\vartheta(C_5)\le \sqrt 5$. Kdybychom ještě znali vztah mezi
+$\shn(G)$ a $\vartheta(G)$, měli bychom vyhráno. Tuto charakterizaci přináší
+následující věta.
+
+\vt $\shn(G) \le \vartheta(G)$
+
+\dk K důkazu věty budeme potřebovat dvě pomocná lemmata.
+
+
+\lm (O vztahu $\vartheta$ a $\alpha$) Nechť $H$ je graf a $\rho$ nějaká jeho ortonormální reprezentace. Pak $\alpha(H) \leq \vartheta(H, \rho)$.
+
+\dk Nechť $A$ je nějaká nezávislá množina $H$. Zřejmě vektory $\rho(v)$ pro $v \in A$ tvoří ortonormální systém vektorů. Přáli bychom si odhadnout, jak velký bude skalární součin $\sk{\rho(v),e_1}^2$, z čehož nám vztah vyplyne.
+
+Nechť $u$ je libovolný vektor a $b_i$ jsou vektory ortonormální báze. Chceme-li vyjádřit vektor $u$ proti bázi $b_i$, získáme $i$-tou souřadnici skalárním součinem $\sk{b_i,u}$ (můžeme si to představovat tak, že z vektorů $b_i$ složíme matici předhocu). Použijeme-li Pythagorovu větu, získáme:
+\begin{align}
+	||u||^2 = \sum_{i=1}^n \sk{b_i,u}^2
+\end{align}
+Pokud aplikujeme tento poznatek na vektory $\rho{v}$ rozšířené na bázi (což jistě lze), a vektor $e_1$, rovnost se změní na nerovnost (nezajímají nás přidané vektory) a s vědomím, že všechny vektory máme ortonormální, získáme:
+\begin{align}
+	1=||u||^2 \geq \sum_{v\in A}\sk{\rho(v),e_1}^2
+\end{align}
+Tedy existuje alespoň jeden vrchol $w$, že $\sk{\rho(w),e_1}^2 \leq 1/|A|$ a dosadíme-li do zlomku z definice $\vartheta$, získáme odhad $ \alpha(G) = |A| \leq\vartheta(H,\rho)$, což jsme chtěli dokázat. \qed
+
+
+
+\lm (O součinu $\vartheta$) Nechť $H_1$ a $H_2$ jsou grafy, a $\rho_i$ jejich 
+ortonormální reprezentace. Potom existuje ortonormální reprezentace $\rho$ 
+silného součinu $H_1 \boxtimes H_2$, pro niž platí $\vartheta(H_1 \boxtimes H_2, 
+\rho) = \vartheta(H_1, \rho_1) \cdot \vartheta(H_2,\rho_2)$.
+
+\dk Zadefinujme si funkci $\rho$ pro vrcholy $v_i$ následovně:
+\begin{align}
+	\rho(v) = \rho_1(v_1) \otimes \rho_2(v_2)
+\end{align}
+Kde operace $\otimes$ je tenzorový součin vektorů, tedy pro $x \in \R^n$ a $y 
+\in \R^m$ je výsledek vektor $z \in \R^{mn}$, který obsahuje všechny součiny 
+$x_iy_i$. 
+
+Zbývá pouze ověřit, že dělá správnou věc. Podívejme se tedy nejdříve na skalární 
+součin:
+\begin{align}
+	\sk{x \otimes y , x' \otimes y'} = \sk{x | x'} \cdot \sk{y | y'}
+\end{align}
+Pokud levou a pravou stranu zvlášť rozepíšeme, je vidět, že roznásobením sum 
+napravo získáme sumu nalevo a rovnost tedy platí:
+\begin{align}
+	\sum_{ij} (x_iy_j) \cdot (x_i' y_j') = \left( \sum_i x_ix_i'\right) \left(\sum_j 
+	y_jy_j' \right)
+\end{align}
+Zde již jednoduchou úvahou zjistíme, že $\rho$ je stále ortonormální 
+reprezentace: zjevně pro kolmé vektory jsou opět kolmé, a všechny vektory si 
+zachovají délku $1$. Nyní se stačí podívat, co se stane s $\vartheta$ funkcí, 
+rozepišme si ji ted z definice:
+\begin{align*}
+	\vartheta(H_1 \boxtimes H_2, \rho) &= \max_{v\in V(H_1 \boxtimes H_2)} { 1 
+	\over \sk{\rho(v) , e_1}^2} \\
+	&= \max_{v\in V(H_1 \boxtimes H_2)} { 1 \over \sk{\rho_1(v_1)\otimes \rho_2(v_2) , e_{11} \otimes e_{12}}^2} \\
+	&= \max_{v\in V(H_1 \boxtimes H_2)} { 1 \over \sk{\rho_1(v_1) , e_{11}}^2
+		\cdot \sk{\rho_2(v_2) , e_{12}}^2} \\
+	&= \max_{v_1\in V(H_1)} { 1 \over \sk{\rho_1(v_1) , e_{11}}^2} \cdot
+	  \max_{v_2\in V(H_2)} { 1 \over \sk{\rho_2(v_2) , e_{12}}^2} 
+	&= \vartheta(H_1,\rho_1) \cdot \vartheta(H_2, \rho_2)
+\end{align*}
+A lemma je dokázáno. \qed
+
+
+\dk (Věty o vztahu $\Theta$ a $\vartheta$)  $$\alpha(G^i) \le \vartheta(G^i) \le \vartheta(G)^i$$
+První nerovnost plyne z lemma o vztahu $\vartheta$ a $\alpha$. Druhá plyne z
+opakovaného použití lemma o součinu $\vartheta$.
+\qed
+
+
+\lm (O dvojité kapacitě) $\shn(G + \overline{G}) \ge \sqrt{2|G|}$
+
+\dk Ukážeme, že $\alpha ((G+\overline G)^2) \geq 2|G|$.
+\begin{align*}
+	V_{G+\overline G} = \{ v_1, ..., v_n, v_1', ..., v_n'\}
+\end{align*}
+
+Vezeme graf $(G+\overline G)^2$ a najdeme v něm nezávislou množinu $A$:
+\begin{align*}
+	A = \left\{\begin{matrix}
+		(v_1, v_1'), (v_2, v_2'), \dots \\
+		(v_1', v_1), (v_2', v_2), \dots
+		\end{matrix}\right\}
+\end{align*}
+
+Velikost $A$ je zřejmě $2|G|$ a z definice Shannonovy kapacity dostaneme:
+$$\shn(G + \overline{G}) \ge \sqrt{2|G|}$$
+\qed
+
+
+\subsection{Funkční reprezentace grafu}
+
+\df Nechť $G$ je graf, $\F$ je systém funkcí, $X$ množina reprezentantů
+a $\Ft$ těleso. Pak pro vrchol $v$ mějme $c_v\in X$ a $f_v \in \F$, že
+$f_v: X \to \Ft$ a platí:
+\begin{enumerate*}
+	\item $f_v(c_v) \neq 0$
+	\item $uv \notin E_G \Rightarrow f_u(c_v) = 0$
+\end{enumerate*}
+
+\df Dimenzi $\F$ definujeme jako $\dim\L(\{f_v\})$, tedy chápeme funkce
+jako vektorový prostor.
+
+\lm(O vztahu $\alpha$ a $\dim\F$) G má reprezentaci $\F$, pak $\alpha(G)
+\leq \dim \F$.
+
+\dk Nechť $A$ je nezávislá v $G$. Pak $\{f_a\}_{a\in A}$ je lineárně
+nezávislá, stejně jako $\{c_a\}_{a\in A}$. Vyhodnotím reprezentující
+funkci v bodech $A$.
+\begin{align}
+M = \left(
+	\begin{matrix}
+		f_1(c_1) & f_2(c_2) & \dots \\
+		f_2(c_1) & f_2(c_2) & \dots \\
+		\vdots &&\\
+	\end{matrix}\right)
+\end{align}
+
+Matice $M$ bude mít na diagonále nenuly a všude jinde nuly. Tím pádem
+jsou její řádky lineárně nezávislé a její dimenze je $|A|$. Navíc zjevně
+$\dim M \le \dim\F$.
+\qed
+
+
+\lm(O dimenzi součinu reprezentací) Pokud $G_1$ má reprezentaci $\F_1$,
+$G_2$ reprezentaci $\F_2$ nad stejným tělesem, pak $G = G_1 \boxtimes
+G_2$ má reprezentaci $\F$ a $\dim\F \leq \dim\F_1 \cdot \dim\F_2$.
+
+\dk Definujeme: 
+\begin{align*}
+& X = X_1 \times X_1 \\
+& c_{(v_1,v_2)} = (c_{v_1}, c_{v_2}) \\
+& f_{(v_1, v_2)}((x_1,x_2)) = f_{v_1}(x_1) \cdot f_{v_2}(x_2)
+\end{align*}
+
+Ověříme, že výše uvedené je funkční reprezentace a vezmeme si $B_1$ bázi
+$\F_1$ a $B_2$ bázi $\F_2$. Pak $\{b_1 \otimes b_2\}_{b_1\in B_1, b_2\in
+B_2}$ generuje celý prostor $\F$ a tudíž:
+$$
+	\dim\F \le |B_1|\cdot |B_2| = \dim\F_1 \cdot \dim\F_2
+$$
+\qed
+
+\lm(O vztahu $\shn$ a $\dim\F$) G má reprezentaci $\F$, pak $\shn(G)
+\leq \dim \F$.
+
+\dk 
+$$\shn(G) = \sup_i \alpha(G^i)^{1/i} \leq \sup_i(\dim f.r.(G^i))^{1/i} \leq \sup_i\dim f.r. (G) = \dim f.r.(G)$$
+
+První nerovnost plyne z lemma o vztahu $\alpha$ a $\dim\F$, druhá z
+lemma o dimenzi součinu reprezentací.
+\qed
+
+
+\vt Existuje $G, H$, že $\shn(G+H) > \shn(G) + \shn(H)$
+
+\dk Zvolím $G$ takový, že $V_G={S\choose 3}$, $S = \{1, \dots, s\}$ a $E_G = \{ (A, B): |A\cap B| = 1\}$. 
+
+Reprezentaci vytvoříme nad tělesem $\Ft = \Z_2$, $X = \Z_2^s$:
+\begin{align*}
+	c_A &= \text{charakteristický vektor } A \\ 
+	f_A(x) &= \sum_{a\in A} x_a
+\end{align*}
+
+Ověříme, že se jedná o funkční reprezentaci a všimneme si, že každá
+funkce $f_A$ je kombinace tří funkcí $b_i(x) = x_i$, přičemž funkcí
+$b_i$ je $s$.
+$$
+\dim f.r.(G) \le s \qquad\Rightarrow\qquad \shn(G) \le s
+$$
+
+Dále pro $H = \overline G$ zvolíme reprezentaci pro $\Ft = \R$, $X =
+\R^s$:
+\begin{align*}
+	c_A &= \text{charakteristický vektor } A \\ 
+	f_A(x) &= (\sum_{a\in A} x_a) - 1
+\end{align*}
+
+Opět ověříme, že se jedná o funkční reprezentaci.
+$$
+\dim f.r.(\overline G) \le s+1 \qquad\Rightarrow\qquad \shn(\overline G) \le s+1
+$$
+
+$$\shn(G + \overline G) \ge \sqrt{2{s\choose 3}} > 2s+1 \ge \shn(G) + \shn(\overline G)$$
+
+První nerovnost platí z lemma o dvojité kapacitě a ostrou nerovnost
+musíme splnit, aby věta platila. Zvolíme si tedy $s \ge 16$.
+\qed
+
+\df Obecná poloha vektorů množiny $\check N$ v  $\R^d$ je taková, že libovolná podmnožina velikosti $\leq d$ je lineárně nezávislá.
+
+\df Lokálně obecná poloha vektorů reprezentace v $\R^d$ na grafu $G$ jsou takové vrcholy, že $\rho(\overline{N(v)})$ jsou lineárně nezávislé.
+
+\vt Pro $G$ s $|G| = n$ jsou následující tvrzení ekvivalentní:
+\begin{enumerate}
+	\item $G$ má ortogonální reprezentaci v $\R^d$ v obecné poloze.
+	\item $G$ má ortogonální reprezentaci v $\R^d$ v lokálně obecné poloze.
+	\item $G$ je $(n-d)$-souvislý.
+\end{enumerate}
+
+
+\section{Vlastní čísla grafu}
+\df Nechť $A$ je čtvercová matice. Potom pokud pro nějaké $\lambda$ a $x$ netriviální platí, že $Ax=\lambda x$ říkáme, že $\lambda$ je vlastní číslo $A$ a $x$ je vlastní vektor příslušící k $\lambda$.
+
+\df Spektrum matice $A$ je množina množina jejích vlastních čísel. Značíme $\Sp(A) = \{ \lambda_1, \ldots, \lambda_n \}$.
+
+\df Podprostorem generovaným vlastním číslem číslem $\lambda$ rozumíme $V_\lambda = \{u | Au = \lambda u \}$. Geometrická násobnost $\lambda$ je poté dimenze tohoto prostoru $V_\lambda$.
+
+\tv $V_\lambda$ je vektorový prostor.
+\dk Stačí dokázat uzavřenost. Pro $u,v\in V_\lambda$ počítejme:
+\begin{align}
+	A(u+v) = Au + Av = \lambda u + \lambda v = \lambda(u+v)
+\end{align}
+Tedy i $u+v\in V_\lambda$. \qed
+
+\tv Vlastní čísla matice $A$ lze vypočítat jako kořeny rovnice $\det(A - \lambda \cdot E) = 0$.
+\dk Z definice počítejme:
+\begin{align}
+	Au &= \lambda u \\
+	Au - \lambda u &= \vec0 \\
+	(A-\lambda) u &= \vec0 \\
+	\det(A - \lambda E) &= 0 
+\end{align}
+Přičemž v posledním kroku využíváme faktu, že pro součin netriviálního vektoru s maticí musí být matice singulární, aby mohl vyjít nulový vektor a tudíž můžeme přejít k determinantu. \qed
+
+\df Polynomu $P_A(\lambda) = \det(A - \lambda \cdot E)$ říkáme charakteristický polynom.
+
+\df Násobnosti kořene $\lambda$ v polynomu $P_A$ říkáme {\it algebraická násobnost}.
+
+\vt Nechť $GN(\lambda)$ a $AN(\lambda)$ značí geometrickou, resp. algebraickou násobnost $\lambda$. Potom platí:
+\begin{align}
+&GN(\lambda) \geq 1 \Leftrightarrow \lambda \in \Sp(A) \Leftrightarrow AN(\lambda) \geq 1\\
+\text{a}\qquad &GN(\lambda) \leq AN(\lambda)
+\end{align}
+\dk {\it (bez důkazu)}
+
+\df Hermitovská transpozice matice $A$ je matice $A^*$, taková, že $A_{ij}^* = \overline{A_{ji}}$.
+
+\df Matice $A \in \C^{n\times n}$ je {\it normální}, pokud $AA^* = A^*A$.
+
+\vt Matice $A$ má ortonormální bázi složenou z vlastních vektorů právě tehdy, když je $A$ normální.
+
+\dk \begin{description}
+	\item \uv{$\Rightarrow$} Nechť $x_i$ jsou vlastní vektory příslušející vlastním číslům $\lambda_i$ tvořící ortonormální bázi. Z ortonormality plyne, že $XX^*=E$, kde $X$ má ve sloupcích $x_i$. Podívejme se nyní jak vypadá matice $X^* A X$:
+	\begin{align}
+		X^* A X = 
+		\underbrace{
+		\left(\begin{array}{ccc} &\vdots &\\ \hline \hspace{1cm}& x_j^* & \hspace{1cm}\\ \hline&\vdots& \end{array}\right)}_{=X^*} 
+		\underbrace{\left(\begin{array}{c|c|c} \raisebox{5mm}{\ } & &\\ \dots& \lambda_i x_i & \dots\\\raisebox{5mm}{\ }  && \end{array}\right)}_{=AX}
+		= \left(\begin{array}{ccc}\lambda_1 &&\bigzero \\ &\ddots & \\ \bigzero&&\lambda_n\end{array}\right)
+	\end{align}
+	Přičemž druhá matice vznikla ze vztahu $Ax=\lambda x$, přičemž jsme vynásobili všechny vektory naráz díky tomu, že byly v matici. Poslední rovnost plyne z pozorování, že na pozici $ij$ nalezneme výraz $x_j^*\lambda_i x_i = x_j^* x_i \lambda_i$ a protože vektory $x_l$ tvoří ortonormální bázi, jsou nula pokud je $i\neq j$ a jedna jinak.
+
+	Nyní víme, že $X^*AX=D$, kde $D$ je nějaká (konkrétní) diagonální matice. Nyní již snadno vypočteme elementárními úpravami:
+	\begin{align*}
+		X^* A X = D \quad \Rightarrow \quad AX &= XD \quad \Rightarrow A = XDX^* \\
+		A\cdot A^* = XD\underbrace{X^*\cdot X}_ED^*X^* = XDD^*X^*
+		&= XD^*DX^* = XD^*\underbrace{X^*\cdot X}_EDX^* = A^*\cdot A
+	\end{align*}
+	Přičemž jediná finta, kterou jsme použili je, že $DD^* = D^*D$, což je zřejmě pravda, protože jsou to diagonální matice.
+
+	\item \uv{$\Leftarrow$} \todo{gavento} byl jen pochybny naznak
+\end{description}
+
+\vt Nechť $A_i \in \C^{n\times n}$ a $\forall i,j$ jsou $A_i$ a $A_j$ normální a $A_iA_j = A_j A_i$. Potom existuje společná ortonormální báze z vlastních vektorů.
+
+\dk \todo{Gavento}
+
+\vt Nechť $A$ je hermitovská matice, tedy $A = A^*$. Potom všechna její vlastní čísla jsou reálná.
+
+\dk Víme, že existuje nějaké $D$ diagonální s vlastními čísly na diagonále a $X$, že $X^*AX = D$. Dále počítáme:
+\begin{align}
+	D^* = (X^*(AX))^* = (AX)^*X = X^*A^*X = X^*AX = D
+\end{align}
+A komplexní sdružení tedy nesmí udělat žádnou operaci, tedy jsou vlastní čísla reálná. \qed
+
+
+\subsection{Moorovy grafy}
+Motivací nechť jsou r-regulární grafy bez krátkých cyklů (troj- a 
+čtyř-úhelníků). Triviální konstrukce nám dává odhad na počet vrcholů:
+\todo{obrázek konstrukce}
+\begin{align}
+\label{moorova-podminka}
+	|V| \geq 1 + r + r(r-1) = r^2 +1
+\end{align}
+
+\df Moorův graf je takový $r$-regulární graf bez troj- a čtyř-úhelníků, kde 
+platí v (\ref{moorova-podminka}) rovnost.
+
+\vt Moorův graf existuje pro $r=1,2,3,7$, pro $r=57$ se neví a pro žádné další 
+$r$ neexistuje.
+
+\dk (Idea) Mějme graf $G$ Moorův a $A$ jeho matici sousednosti. Zapišme druhou 
+mocninu $A$ jako stupeň na diagonále a prohozené 0 a 1 jinde a upravme:
+\begin{align}
+	&A^2 = rE + {\bf0} + {\bf1}(J- A-E) \\
+	&A^2 = rE - J - A - E \\
+	\label{moorova-matice}&A^2 + A + (1-r)E = J
+\end{align}
+Dále pro nějaké $\lambda\in \Sp(A)$:
+\begin{align}
+	\label{moorova-mocnina}A^2 x = AAx = A\lambda x = \lambda A x = \lambda 
+	\lambda x = \lambda^2 x
+\end{align}
+A dosadíme (\ref{moorova-matice}) za $A$:
+\begin{align}
+	Jx = (A^2 + A + (1-r)E)x = (\lambda^2 + \lambda + (1-r))x
+\end{align}
+A tedy $(\lambda^2 + \lambda + 1 -r) \in \Sp(J)$. Vlastní čísla matice $J$ 
+(matice samých jedniček) ale známe, jsou to $\{0^{(n-1)}, n^{(1)}\}$. Zjevně pro 
+$\lambda = r$ vyjde vlastní číslo $n$, je tedy potřeba vyřešit kvadratickou 
+rovnici s parametrem $r$:
+\begin{align}
+	\lambda^2 + \lambda + 1 - r = 0
+\end{align}
+Jak na to půjdeme? Vyjádříme si $\lambda$ známým vzorečkem pro kořeny:
+\begin{align}
+	\lambda_{1,2} = \frac{-1\pm \sqrt{1-4(1-r)}}{2} = \frac{-1\pm\sqrt{4r-3}}{2}
+\end{align}
+Násobnost označíme $m_1, m_2$. Protože stopa matice je suma vlastních čísel 
+včetně násobností, platí dále rovnice (protože matice sousednosti $A$ má na 
+diagonále vždy nuly):
+\begin{align}
+	\Tr(A) = r+m_1\lambda_1 + m_2\lambda_2 = 0
+\end{align}
+Pro další úravy označme odmocninu z diskriminantu jako $\sqrt{\cdot}$. Nejdříve 
+upravíme do formy (násobení dvěma a přeskupení):
+\begin{align}
+	2r - r^2 + \sqrt{.}(m_1 - m_2) = 0
+\end{align}
+Všimneme si, že $r\in\N$, tedy máme dvě možnosti:
+\begin{enumerate}
+	\item $\sqrt{.} \in \Q$: potom $m_1 = m_2$ a tedy $r = 2$.
+	\item $\sqrt{.} = s^2 \in \Q$ a $s \in \N$. Po menších úpravách lze zjistit, 
+	že $s\in \{1, 3, 5, 15\}$, což dává $r\in\{1, 3,7,57\}$.
+\end{enumerate}
+\qed
+
+\subsection{Silně regulární grafy}
+
+\df Silně regulární graf je d-regulární, $\forall$ hranu $xy\in E$ $\exists!e$
+vrcholů $u: ux,uy\in E$ a $\forall$ nehranu $xy\not\in E$ $\exists!f$ vrcholů
+$u: ux,uy\in E$.
+
+Abychom mohli zanedbat triviální případy, dodáváme $f>0$ a $G\neq K_n$.
+Příkladem silně regulárního grafu je úplný bipartitní graf se stejně velkými
+partitami ($e=0$). Nejmenším nebipartitním silně regulárním grafem je
+pětiúhelník ($e=0$, $f=1$).
+
+\vt $G$ je silně regulární graf s parametry $d$, $e$, $f$ a $n$ vrcholy. Potom:
+\begin{enumerate}
+	\item[(a)] Zafixujeme $f$: $e = f-1$; $d = 2f$; $n = 4f+1$
+	\item[] {\it nebo}
+	\item[(b)] $\exists s \in \Z$, že platí $(e-f)^2-4(f-d) = s^2$ \\
+	a výraz \ ${d\over 2fs}((d-1+f-e)(s+f-e)-2f)$ je přirozené číslo
+\end{enumerate}
+
+\dk Nechť G je silně regulární, $A$ je jeho matice sousednosti. $(A^2)_{ij} =
+e$, pokud $A_{ij} = 1$. Na ostatních souřadnících bude $f$, na diagonále $d$
+(to plyne z jednoduchého pozorování počtu sledů délky 2).
+
+$$
+A^2 = \left(
+	\begin{matrix}
+		d & & f & \\
+		& d & & e \\
+		f & & \ddots & \\
+		& e & & d\\
+	\end{matrix}\right)
+$$
+
+\begin{align}
+	A^2 = dI + eA + f(J-I-A) &= fJ + (d-f)I + (e-f)A \\
+	A^2 + (f-e)A + (f-d)I &= fJ \\
+	\lambda^2 + (f-e)\lambda + (f-d) &\rightarrow \Sp(fJ)\qquad \lambda\in\Sp A
+\end{align}
+
+Víme, že vlastní čísla jedničkové matice $J$ jsou $\Sp(J) = \{n, 0^{n-1}\}$.
+Proto $\Sp(fJ) = \{fn, 0^{n-1}\}$. Dále víme, že $d$ je vlastním číslem matice
+$A$, neboť graf $G$ je $d$-regulární.
+
+\begin{align}
+	&d^2 + (f-e)d + (f-d) \in \Sp(fJ) \\
+	&d^2 + (f-e)d + (f-d) = fn \\
+\end{align}
+\begin{align}
+	&\lambda \in \Sp(A) - \{d\} \Rightarrow \lambda^2 + (f-e)\lambda + (f-d) = 0 \\
+	&\lambda_{1,2} = {e-f \pm \sqrt{(f-e)^2-4(f-d)} \over 2} \qquad \sqrt{(f-e)^2-4(f-d)} = s
+\end{align}
+
+$$\lambda_1 = {e-f+s\over 2}\qquad\qquad \lambda_2 = {e-f-s\over 2}$$
+
+Matice $A$ má vlastní čísla $d$ (1-násobné), $\lambda_1$ ($p$-násobné) a
+$\lambda_2$ ($q$-násobné).
+
+\begin{enumerate}
+	\item[(1)] $1 + p + q = n$ (celkový počet vlastních čísel)
+
+	\item[(2)] $d + p\lambda_1 + q\lambda_2 = \Tr A = 0$ (stopa\footnote{Stopou (čtvercové) matice rozumíme součet čísel na diagonále. Je známo, že součet vlastních čísel (včetně násobností) je roven stopě matice. Značíme ji $\Tr A$.} matice $A$ je 0) \\
+	$d + p\left({e-f+s\over 2}\right) + q\left({e-f-s\over 2}\right) = 0$ \\
+	$d + \left({p+q\over 2}\right)(e-f) + \left({s\over 2}\right)(p-q) = 0$
+
+	\item[(3)] $d^2 + p\lambda_1^2 + q\lambda_2^2 = \Tr A^2 = nd$ (vlastní čísla matice $A^2$ jsou druhé mocniny vlastních čísel matice $A$).
+\end{enumerate}
+
+\begin{enumerate}
+	\item[(a)] $s\not\in Q \Rightarrow p = q$ \quad $d + p(e-f) = 0 \Rightarrow p = {d\over f-e} \Rightarrow (f-e)|d$ \\
+	$f-e > 0$ \quad $n = 1 + 2p = 1 + {2d\over f-e}$ \quad (z rovnice (1))
+
+	Pokud $f-e = 1$, pak $e = f-1$ (což chceme). \\
+	Pokud $f-e = 2$, pak $n = 1+d$ a $G = K_{d+1}$, ale úplné grafy jsme si zakázali. \\
+	Pokud $f-e > 2$, pak $n < 1+d$, což je nesmysl.
+
+	$e = f-1 \quad\Rightarrow\quad n = 2d+1$ \\
+	$d^2 + d + (f-d) = f(2d+1) \quad\Rightarrow\quad d = 2f \quad\Rightarrow\quad n = 4f+1$
+
+	\item[(b)] $s\in\Q\Rightarrow s\in\N$ \\
+	\todo Prý pokračování na cvičení, nemůžu ho ale najít. Já taky ne. \\
+	$$p = {d\over 2fs}\left((d-1+f-e)(s+f-e)-2f\right) \in \N$$
+\end{enumerate}
+\qed
+
+
+\vt (Friendship theorem) Nechť $G=(V,E)$ je graf, že každé dva vrcholy $u,v$ mají právě jednoho společného souseda. Pak existuje $u$, že $\deg(u) = n-1$.
+
+Neboli Friendship theorem tvrdí, že takový silně regulární graf musí vypadat jako
+mlýn (hromádka trojúhelníků, které se stýkají v jednom centrálním vrcholu). \todo{obrázek}
+
+\dk Nejprve si připomeňme, co jsou to konečné projektivní roviny.
+
+\df Konečná projektivní rovina je množina bodů a přímek, že:
+\begin{enumerate}
+	\item Každé dvě přímky sdílejí právě jeden bod.
+	\item Každé dva body spojuje právě jedna přímka.
+	\item Existují 4 body a žádná přímka neprotíná více než dva z nich.
+\end{enumerate}
+
+Nyní si označme symbolem $N(v)$ množinu sousedů vrcholu $v$. Všimneme si, že
+sousedství pro náš graf přesně odpovídají přímkám v KPR a body jsou body. Protože ale třetí
+podmínka by znamenala, že naše věta neplatí, budeme si přát, aby to KPR nebyla
+-- pak snadno najdeme vrchol, který je spojený s každým dalším.
+
+Pro spor tedy předpokládejme, že graf KPR je. Protože v KPR mají všechny přímky stejnou mohutnost, je také $d$-regulární. Navíc každé $u,v$ má právě jednoho společného souseda, což znamená, že $G$ je silně regulární s parametry  $e=f=1$.
+
+Podle předchozí věty to ověříme: možnost (a) nastat nemůže, protože $e=f$.
+Počítejme tedy, že nastala možnost (b). Protože je to KPR řádu $m$, tak $d=m+1$ a $n=m^2 + m + 1$.
+\begin{align}
+	(e-f)^2 - 4(f-d) = 0^2 - 4 - 4(m+1))= s^2 \\
+	4m = s^2 \\
+	s=2\sqrt m 
+\end{align}
+A ověříme celočíselnost polynomu $p$ s tím, že $t:=s/2=\sqrt m$, tedy $s=2t$ a $m=t^2$:
+\begin{align}
+	p &= {d \over 2fs} ((d-1+f-e)(s+f-e)-2f) \\
+	&= {m+1 \over 4t} ((m+1+0)(2t+0)-2)\\
+	&= {(t^2 + 1)(t^3-1) \over 2t}
+\end{align}
+Což má být přirozené číslo. To je pravda zřejmě jenom pro $t=1$, tedy $n=3$ a pokud náš graf není trojúhelník, jde to spor. Pokud to trojúhelník je, splňuje žádanou vlastnost triviálně. \qed
+
+\subsection{Raileighův princip a proplétání}
+\vt (Raileighův princip) Nechť $A$ je matice s ortonormální bazí z vlastních 
+vektorů $x_i$ a vlastními čísly $\lambda_i \geq \lambda_k$. Potom:
+\begin{enumerate}
+\item $x \in\sk{x_1,\dots,x_k} \Rightarrow x^*Ax\ge \lambda_kx^*x$
+\item $x \in\sk{x_k,\dots,x_n} \Rightarrow x^*Ax\le \lambda_kx^*x$
+\end{enumerate}
+
+\dk $x \in\sk{x_1,\dots,x_k} \Rightarrow x = \sum_{i=1}^k \alpha_ix_i$
+\begin{align*}
+	x^*Ax &= x^*(Ax) = x^*\left(A\cdot\sum_{i=1}^k\alpha_ix_i\right) = x^*\left(\sum_{i=1}^k\alpha_iAx_i\right) = x^*\left(\sum_{i=1}^k\alpha_i\lambda_ix_i\right) = \\
+	&= \sum_{i=1}^k\alpha_i\lambda_ix^*x_i = \sum_{i=1}^k\alpha_i\lambda_i\left(\sum_{j=1}^k \alpha_jx_j\right)^*x_i = \sum_{i=1}^k \alpha_i\lambda_i(\alpha_ix_i)^*x_i = \\
+	&= \sum_{i=1}^k \lambda_i\underbrace{\alpha_i\overline{\alpha_i}}_{\ge 0} \ge \sum_{i=1}^k \lambda_k\alpha_i\overline{\alpha_i} = \lambda_k\sum_{i=1}^k \alpha_i\overline{\alpha_i} = \lambda_kx^*x
+\end{align*}
+
+Poslední rovnost plyne z následujícího:
+\begin{align*}
+	 \lambda_kx^*x = \left(\sum_{i=1}^k \alpha_ix_i\right)^*\left(\sum_{i=1}^k \alpha_ix_i\right) = \sum_{i=1}^k \alpha_i\overline{\alpha_i}
+\end{align*}
+
+Druhou nerovnost dokážeme analogicky. \qed
+
+
+\vt (Věta o proplétání) Nechť $A$ a $B$ jsou matice takové, že $B$ vznikla z $A$ 
+vymazáním nějakého řádku a sloupce. Potom pro vlastní čísla $\lambda_i,\mu_i$ 
+matic $A,B$ platí:
+\begin{align}
+	\lambda_1 \geq \mu_1 \geq \lambda_2 \geq \dots\geq \mu_{n-1} \geq \lambda_n
+\end{align}
+
+\dk Dokazujeme indukcí $\lambda_k \geq \mu_k \geq \lambda_{k+1}$. Označme $x_i$ 
+a $y_i$ vlastní vektory matic $A$ a $B$.  Zaveďme následující vektorové 
+podprostory $\C^n$ (ačkoli druhý z nich nemá dostatek složek, můžeme mu jednu 
+nulovou přidat a nic se nestane):
+\begin{align}
+S_1 := \L\{x_k, \dots, x_n\} \subseteq \C^n \\
+S_2 := \L\{y_1, \dots, y_k\} \subseteq \C^n
+\end{align}
+Zřejmě $\dim(S_1) + \dim(S_2) = (n-k+1) + k > n$, tedy $\exists x \in S_1\cap S_2$. Použijeme 
+Reileighův princip pro oba prostory a máme:
+\begin{align}
+	\mu_k \leq \frac{y^*By}{y^*y} = \frac{x^*Ax}{x^*x} \leq \lambda_k
+\end{align}
+Stačí ukázat, že $\mu_k \geq \lambda_{k+1}$ -- to je ale snadné, stačí vzít $-A$ 
+a $-B$, čímž se obrátí znaménka vlastních čísel a nerovnosti. \qed
+
+\vt (Věta o proplétání při násobení maticí) Nechť $A$ je symetrická čtvercová matice 
+s vlastními čísly a vektory $\lambda_i$ a $x_i$, $S$ reálná matice, že $S^TS=I$.  
+Definujeme $B := S^TAS$ a označíme vlastní čísla a vektory matice $B$ jako 
+$\mu_i$ a $y_i$. Potom $\mu_i$ proplétají $\lambda_i$ a pokud navíc $\mu_i = 
+\lambda_i$ pro nějaké $i$, tak $Sy_i$ je vlastní vektor $A$ příslušící vlastnímu 
+číslu $\lambda_i$.
+
+\dk Použijeme Raileighův princip podobně, jako v předchozím tvrzení. Všimneme 
+si, že:
+\begin{align}
+	x \in \L\{ S^Tx_k, \dots, S^Tx_{k-1}\}^\perp \Leftrightarrow
+	Sx \in \L\{ x_k, \dots, x_{k-1}\}^\perp
+\end{align}
+Stačí si opět vzít vhodný prvek $x$ z průniku:
+\begin{align}
+	x \in \L\{ S^Tx_k, \dots, S^Tx_{k-1}\}^\perp \cap \L\{y_1, \dots, y_k\}
+\end{align}
+A můžeme použít Reileighův princip:
+\begin{align}
+	\lambda_i \geq \frac{Sx^TASx}{Sx^TSx} = \frac{x^TBx}{x^Tx} \geq \mu_i \\
+\end{align}
+Na navíc platí pokud $\lambda_i = \mu_i$, potom:
+\begin{align}
+	\frac{x^TBx}{x^Tx} = \lambda_i \quad\Rightarrow\quad x^TBx=x^Tx\lambda_i 
+	\quad\Rightarrow\quad Bx = \lambda_i x
+\end{align}
+A $x$ je vlastní vektor příslušící $\lambda_i$, jak jsme chtěli dokázat.\qed
+
+\df $A$ je bloková matice s bloky velikosti $x_1, \dots, x_m$. Kvocient $A$ je matice $B^{m\times m}$, kde $b_{i,j} = $ průměr hodnot $A_{i,j}$.
+\begin{align*}
+	A = \left(\begin{matrix}
+		A_{1,1} & A_{1,2} & \dots \\
+		A_{2,1} & A_{2,2} & \dots \\
+		\vdots & \vdots & \ddots 
+		\end{matrix}\right)
+	\qquad
+	\qquad
+	B = \left(\begin{matrix}
+		b_{1,1} & b_{1,2} & \dots \\
+		b_{2,1} & b_{2,2} & \dots \\
+		\vdots & \vdots & \ddots 
+		\end{matrix}\right)
+\end{align*}
+
+\vt (Věta o proplétání kvocientu) Pokud $B$ je kvocient $A$, pak vlastní čísla
+$B$ proplétají vlastní čísla $A$.
+
+\dk Mějme $\widetilde S$ je matici incidence blokové $A$:
+\begin{align*}
+	\widetilde S = \left(\begin{array}{llll}
+		\framebox[3em][c]{1} & & & \hfil\bigzero \\
+		& \framebox[4em][c]{1} & & \\
+		\bigzero & & \framebox[2em][c]{1} & \\
+		& & & \framebox[1em][c]{1}
+		\end{array}\right)
+\end{align*}
+
+\begin{align*}
+	& \widetilde S\cdot\widetilde S^T = \text{diagonální matice } (x_1, x_2, \dots, x_m) = D \\
+	& S := \widetilde S \cdot D^{-{1\over2}} \\
+	& \widetilde B = S^TAS
+\end{align*}
+
+Kromě toho platí:
+\begin{align*}
+	& S^TS = I
+	& B = D^{-{1\over2}}\widetilde BD^{-{1\over2}}
+\end{align*}
+
+Tedy $B$ je matice podobná $\widetilde B$ a má stejná vlastní čísla. Matice
+$\widetilde B$ proplétá matici $A$, což plyne z věty o proplétání při násobení
+maticí. \qed
+
+
+
+\section{Náhodné procházky}
+\subsection{Markovovské řetězce}
+
+\df Markovovský řetězec je orientovaný graf s váženými hranami takový, že
+výstupní stupeň každého vrcholu je 1. Markovoský řetězec často reprezentujeme
+maticí přechodu $P$, kde $P_{ij}$ udává pravděpodobnost, že ze stavu $i$
+přejdeme do stavu $j$.
+
+\df Distribuce $\pi$ je vektor, jehož součet je 1 a kde $p_i$ určuje
+pravděpodobnost, že se nacházíme ve stavu $i$.
+
+\pzn Máme-li distribuci $\pi$ a provedeme jeden krok na Markovovském řetězci s
+maticí přechodu $P$, dostaneme novou distribuci $\pi\cdot P$.
+
+\df Markovovský řetězec je reversibilní, existuje-li distribuce $\pi$
+t. že $\pi_i\cdot P_{ij} = \pi_j\cdot P_{ji}$.
+
+\lm Markovovský řetězec je reversibilní $\Leftrightarrow$ je odvozen z váženého neorientovaného grafu.
+
+\dk 
+\begin{itemize}
+
+\item[\uv{$\Leftarrow$}]
+Zvolíme si $\pi$ následovně a ukážeme, že splňuje reversibilní podmínku:
+\begin{align*}
+& \pi_v = {\deg v\over \sum_{u\in V(G)} \deg u} & P_{ij} = {w_G(i,j)\over \deg i} \\ 
+\end{align*}
+\begin{align*}
+\pi_i P_{ij} &= \pi_i {w_G(i,j)\over \deg i} = {w_G(i,j)\over \sum_{u\in V(G)}\deg u} \\
+\pi_j P_{ji} &= \pi_j {w_G(j,i)\over \deg j} = {w_G(j,i)\over \sum_{u\in V(G)}\deg u}
+\end{align*}
+
+\item[\uv{$\Rightarrow$}]
+Zvolíme váhu $w(i,j) = P_{i,j}\pi_i = P_{j,i}\pi_j = w(j,i)$ a dostaneme vážený
+neorientovaný graf.
+\qed
+\end{itemize}
+
+\df $\pi$ je stabilní distribuce\footnote{Někdy též zvaná \uv{stacionární}.},
+je-li $\pi\cdot P = \pi$. Jinak řečeno, stabilní distribuce se po provedení
+kroku nezmění.
+
+\vt Pro $G$ neorientovaný souvislý platí: $\forall \rho$ počáteční distribuci $\{P_G^k\cdot \rho\}_k$ konverguje $\Leftrightarrow$ $G$ není bipartitní.
+
+\dk \begin{description}
+	\item \uv{$\Rightarrow$} Pokud je $G$ bipartitní, stačí jako protipříklad vzít distribuci, která začíná jenom v jedné partitě. Pak každým pronásobením matice se celá distribuce přesune do druhé partity, protože nemá kam jinam. Zjevně tedy nekonverguje k jedinému rozložení.
+	\item \uv{$\Leftarrow$} Prvně si vyjádříme distribuci jako lineární kombinaci vlastních vektorů matice $P_G$ (to lze, protože tvoří ortonormální bázi). Tedy $\rho = \sum_i a_ip_i$. Dále si vyjadřme distribuci po $k$ iteracích:
+	\begin{align}
+		P_G^k\rho = P_G^k\sum_ia_ip_i = \sum_iP_G^ka_ip_i
+	\end{align}
+	Protože $p_i$ je vlastní vektor $P_G$, tak $P_Gp_i = \lambda_ip_i$:
+	\begin{align}
+		\sum_i\lambda_i^ka_ip_i
+	\end{align}
+	Nyní si všimneme, že protože graf není bipartitní, tak $\lambda_1 \neq -\lambda_n$ a největší vlastní číslo distribuce je $1$, protože matice $P_G$ má řádkové i sloupcové součty konstantní $1$ a zároveň je $1$ má vlastní vektor samých jedniček. Tedy pro $i > 1$ platí $|\lambda_i| < 1$. Dejme nyní výraz do limity a všimneme si, že suma jde k nule díky tomu, že jediný člen závislý na $k$ je $\lambda_i$:
+	\begin{align}
+		\lim_{k\to \infty}\left(\lambda_1^ka_1p_1 + \sum_{i>1}\lambda_i^ka_ip_i\right) = a_1p_1 = \pi
+	\end{align}
+	Tedy máme stabilní distribuci, protože $a_1p_1$ jsou po celou dobu konstantní.
+\end{description}
+
+\vt Nechť $\rho$ je distribuce na vrcholech grafu a $\mu=\max\{\lambda_i,-\lambda_n\}$. Pak po $t$ krocích platí, že $\|P_G^t\rho - \pi\|_1 \leq \mu^t\sqrt{n}$, tedy distribuce konverguje relativně rychle.
+
+\dk Z předchozího důkazu víme, že $\rho = p_ia_i + \sum_{i>1} \lambda_i^ta_ip_i$ a \todo{vec}.
+
+Pusťme se do odhadu naší odchylky, prozatím však v $L_2$ normě.
+
+\begin{align}
+	\|P_G^t\rho - \pi\|_2^2 = \left\|\sum_{i > 1} \lambda_ia_ip_i\right\|_2^2 = \sum_{i>1}\lambda_i^{2t}\|a_ip_i\|_2^2
+\end{align}
+Nyní si zjednodušíme práci a do sumy zahrneme i první člen. Navíc odhadneme $\lambda_i$ největšším vlastním číslem $\mu$ (mocnina u $\lambda_i$ je sudá!).
+\begin{align}
+	\leq \mu^{2t}\sum_i\|a_ip_i\|_2^2 = \mu^{2t}\|\rho\|_2^2 \leq \mu^{2t}
+\end{align}
+Nyní stačí výraz odmocnit a vzpomenout si na analýzu, čímž víme, že $\|x\|_1 \leq \|x\|_2 \cdot \sqrt n$ a máme nerovnost:
+\begin{align}
+	\|P_G^t\rho - \pi\|_2 &\leq \mu^{t} \\
+	\|P_G^t\rho - \pi\|_1 &\leq \mu^{t} \sqrt n
+\end{align}
+Což jsme chtěli dokázat. \qed
+
+
+\subsection{Stabilní distribuce a konvergence}
+
+\section{Expandéry}
+
+\df
+\begin{itemize}
+	\item $E(S,T) = \{$ hrany mezi $S$ a $T$ $\}$
+	\item $e(S,T) = |E(S,T)|$
+	\item $e(S) = $ počet hran uvnitř $S$
+	\item vrcholová expanze $h_v(G) = \min\limits_{S\subseteq V, |S|\le {n\over 2}} {|N(S) \over |S|}$
+	\item hranová expanze $h(G) = \min\limits_{S\subseteq V, |S|\le {n\over 2}} {e(S,\bar S) \over |S|}$
+\end{itemize}
+
+\poz $h_v(G) \le h(G) \le d . h_v(G)$
+
+\df 
+\begin{itemize}
+	\item Rodina expanderů $\{G_i\}_\infty$\quad$2^i \ge |G_i| \ge i: h(G_i) \ge \varepsilon$, $G_i$ je $d$-regulární.
+	\item Spectral gap $= d - \max\{\lambda_2,-\lambda_n\}$
+	\item Spektrální expanze $= d - \lambda_2$
+	\item $\lambda = \max\{\lambda_2,-\lambda_n\}$
+\end{itemize}
+
+\vt ${1\over 2}(d-\lambda_2) \le h(G) \le \sqrt{d(d-\lambda_2)}$ (G je $d$-regulární graf).
+
+\dk (Jen první nerovnost, druhá je bez důkazu). Sporem: nechť $S$ je množina
+vrcholů s malou hranovou expanzí.
+
+Pro $x \bot (1,1,\dots,1)$ platí $\lambda_2 \ge {x^TAx\over x^Tx}$ (Raileighův
+princip). Zvolíme $x = (n-s)1_S - s1_{\bar S}$, kde $s = |S|$ a $1_S$ je
+charakteristický vektor množiny $S$.
+
+$$x^Tx = (n-s)^2s + s^2(n-s) = s(n-s)n$$
+$$x^TAx = \sum_{(a,b)\in E} 2x_ax_b = 2(n-s)^2e(S)-2s(n-s)e(S,\bar S) + 2s^2e(\bar S)$$
+
+Platí $ds = 2e(S) + e(S,\bar S)$, neboť $ds$ odpovídá počtu konců hran v $S$. Analogicky $d(n-s) = 2e(\bar S) + e(S,\bar S)$ pro $\bar S$. Z toho si vyjádříme $e(S)$ a $e(\bar S)$ a dosadíme do rovnice výše:
+
+$$x^TAx = -e(S,\bar S)n^2 + (n-s)ds(n-s+s) = (n-s)dsn - e(S,\bar S)n^2$$
+$$\lambda_2 \ge {(n-s)dsn - e(S,\bar S)n^2 \over s(n-s)n} = d - {n\over n-s}\cdot{e(S,\bar S)\over s}$$
+$$d-\lambda_2 \le {n\over n-s} \cdot {e(S,\bar S)\over s} \le 2\cdot{e(S,\bar S)\over s} = 2h(G)$$
+\qed
+
+\lm Pro náhodný d-regulární graf skoro jistě platí $\lambda \le 2\sqrt{d-1} + O(1)$. Bez důkazu.
+
+\subsection{Mixing lemma}
+\vt (Mixing lemma) $\forall G, \forall S,T \subseteq V, S\cap T = \emptyset: |e(S,T) - {d\cdot|S|\cdot|T|\over n}| \le \lambda\cdot\sqrt{|S|\cdot|T|}$
+
+\dk Buďte $\chi_S, \chi_T$ charakteristické vektory $S$ a $T$. $u = (1,1,\dots)$ je první vlastní vektor. $\chi_S^\bot$ značí vektor kolmý na $\chi_S$.
+
+$${\sk{\chi_S \cdot u} \over \|u\|^2} = {|S|\over n} \qquad\Rightarrow\qquad \chi_S = u\cdot {|S|\over n} + \chi_S^\bot \qquad\qquad \chi_T = u\cdot {|T|\over n} + \chi_T^\bot$$
+
+$$e(S,T) = \sum_{i\in S, j\in T} A_{ij} = \chi_T^TA\chi_S = \underbrace{{|S|\cdot |T| \over n^2} \underbrace{u^TAu}_{dn}}_{d\cdot |S|\cdot |T|\over n} + \xttt A\chi_s^\bot$$
+
+Zbývá dokázat, že $|\xttt A\chi_S^\bot| \le \lambda\cdot\sqrt{|S|\cdot |T|}$.
+
+$$|\xttt A\chi_S^\bot| \le \|\xttt \| \cdot \|A\chi_S^\bot\| \le \|\xttt\|\cdot\lambda\cdot\|\chi_S^\bot\|$$
+
+První nerovnost plyne z toho, že skalární součin dvou vektorů (tedy součin
+jejich délek a sinu úhlu, který svírají) je vždy nejvýš roven součinu jejich
+délek. Druhá nerovnost plyne z toho, že si $\chi_S^\bot$ můžu vyjádřit jako
+lineární kombinaci vlastních vektorů $A$:
+
+$$\chi_S^\bot = \sum_{i=2}^n y_i\alpha_i$$
+
+Pro každý vlastní vektor $y_i$ můžu nahradit matici $A$ vlastním číslem
+$\lambda_i$ (pak bude zachována rovnost) a tím spíš můžu nahradit matici $A$
+největším vlastním číslem, což je v našem případě $\lambda =
+\max\{\lambda_2,-\lambda_n\}$, abych zachoval nerovnost.
+
+$$\|\chi_S\|^2 = |S| \qquad\Rightarrow\qquad \|\xttt\| \le \sqrt S$$
+$$\|\chi_T\|^2 = |T| \qquad\Rightarrow\qquad \|\chi_S^\bot\| \le \sqrt T$$
+
+$$|\xttt A\chi_S^\bot| \le \lambda\cdot\sqrt{|S|\cdot |T|}$$
+\qed
+
+
+\subsection{Vzdálenostní mocniny a zig-zag součin}
+
+\section{Perfektní kódy}
+
+Perfektní kódy jsou v jistém smyslu ty nejlepší samoopravné kódy, konkrétně mají vlastnost, že žádná slova z abecedy nezůstávají nevyužita. Cílem našeho snažení bude ukázat větu, která tyto kódy charakterizuje ve smyslu při jakých parametrech může být kód perfektní. Začneme připomenutím základních pojmů, vyslovíme a dokážeme Lloydovu větu o nutné podmínce a z ní následně dokážeme (v současné podobně spíše nastíníme), kýženou charakterizaci.
+
+\subsection{Připomenutí pojmů}
+
+\df Samoopravný kód $C$ s parametry $(n,q)$ je pro nás systém množin $C \subseteq M = \{0, \ldots, q-1\}^n$ (prvkům této množiny říkáme kódová slova).
+
+\df Grafem kódu rozumíme graf $G=(V,E)$, že $V(G) = \{0, \ldots, q-1 \}^n$ a hrana mezi vrcholy $u,v$ vede právě tehdy, když $d(u,v) = 1$, tedy liší se právě v jedné souřadnici ($d$ je hammingovská vzdálenost). Kód v takovém grafu je pak podmnožina vrcholů, které odpovídají kódovým slovům.
+
+\df Kód opravuje $t$ chyb, pokud jsou $N_t(u)$ (okolí vrcholu $u$ do vzdálenosti $t$) disjunktní pro všechny dvojce kódových slov.
+
+\df Kód $C$ je $t$-perfektní, pokud opravuje $t$ chyb a navíc úplně pokrývá svou nosnou množinu $M$.
+
+\tv Pokud $C$ opravuje $t$ chyb, platí:
+\begin{align*}
+	|C| \leq { q^n \over \sum_{i=0}^t \binom{n}{i} (q-1)^i }
+\end{align*}
+
+\dk Okolíčka musí být disjunktní, stačí tedy spočítat, kolik může být kódových
+slov, což je daný výraz: V čitateli je počet všech slov. Jmenovatel počítá
+velikost každého $t$-okolí, tedy vybírá možné souřadnice ke změně a jejich
+potenciální nové hodnoty.
+
+
+\subsection{Lloydova věta}
+
+\vt Pokud existuje $t$-perfektní kód s parametry $(n,q)$, pak $L_t(x)$ (definice níže) má $t$ různých celočíselných kořenů mezi $0$ a $n$.
+
+\begin{align}
+	L_t(x) = \sum_{j=0}^t(-1)^j(q-1)^{t-j}\binom{x-1}{j}\binom{n-x}{t-j}
+\end{align}
+
+\dk Důkaz bude plynout touto sekcí a obsahuje spoustu pomocných lemmat a konceptů. Pro pochopení a reprodukci důkazu bude potřeba pochopit všechno mezi tímto místem a a sekcí označující samotný důkaz. Nechť práce započne.
+
+\subsection{Vzdálenostně regulární grafy}
+
+\df Vzdálenostně regulární graf: $\exists s_{hij}$ t. že $\forall u,v\in V(G), d_G(u,v) = j:$ $|\{w: d_G(u,w) = h, d_G(w,v) = i\}| = s_{hij}$.
+
+\poz $|h-j| > j \Rightarrow s_{hij} = 0$ (plyne z $\Delta$ nerovnosti), $k = s_{110}$ (počet sousedů vrcholu $u = v$ v $k$-regulárním grafu)
+
+\lm $Z_{mi} = Z_{m-1,i-1} \cdot s_{1,i-1,i} + Z_{m-1,i} \cdot s_{1,i,i} + Z_{m-1,i+1} \cdot s_{1,i+1,i}.$ $Z_{mi}$ značí počet sledů délky $m$ mezi vrcholy ve vzdálenosti $i$.
+
+\dk $Z_{00} = 1$, jinak $Z_{0i} = 0$. Dále dokážeme indukcí pro $m \ge 1$ a $i
+\ge 1$. $s_{1,i,j}$ je nenulové pouze pro $i \in \{j-1,j,j+1\}$ (z $\Delta$
+nerovnosti). V rovnici sčítáme vrcholy sousedící s $u$, které jsou ve
+vzdálenosti $i-1$, $i$ a $i+1$ od $v$.
+
+\df Matice sousednosti $A = A_G$. $\A(G) = \{p(A): p(x) \in \C[x]\}$. $\A(G)$ je
+vektorový prostor.
+
+\df Vzdálenostní matice $A_1, A_2, \dots, A_d$ grafu $G$: \\
+\indent $(A_i)_{uv} = \left\{\begin{matrix}
+1\quad & d_G(u,v) = i \hfill & \hspace{4cm} A_0 = I \\
+0\quad & \text{jinak} \hfill & \hspace{4cm} A_1 = A \\
+\end{matrix}\right.$
+
+\subsection{Reprezentace vzdálenostně regulárních grafů polynomy}
+
+\vt $\dim \A(G) = d+1$, kde $d$ je průměr $G$.\footnote{Průměr grafu je maximální nejkratší vzdálenost přes všechny dvojice vrcholů.}
+
+\dk $A^m = \sum_{i=0}^d Z_{mi}A_i$ \\
+$i > m \Rightarrow Z_{mi} = 0$ \\
+$A^0 = Z_{0,0} \cdot A_0 = A_0$\\
+$A^1 = Z_{1,0} \cdot A_0 + Z_{1,1} \cdot A_1 = A_1$\\
+$A^2 = Z_{2,0} \cdot A_0 + Z_{2,1} \cdot A_1 + Z_{2,2} \cdot A_2$\\
+$\vdots$\\
+$A^d = Z_{d,0} \cdot A_0 + Z_{d,1} + \dots + Z_{d,d}\cdot A_d$
+
+Generujeme celý vektorový prostor polynomů $A$ $\deg \le d$, tedy $\dim \A(G)
+\le d+1$. Zároveň ale $A_0, A_1, \dots, A_d$ jsou lineárně nezávislé a proto
+$\dim \A(G) = d+1$. 
+\qed
+
+\poz $\widetilde \A = \{A_0, A_1, \dots, A_d\}$ tvoří bázi $\A(G)$.
+
+\df Matice $B_h$ pro graf je velikosti $d\times d$, uchovávající parametry $s_{hij}$:
+\begin{align}
+	(B_h)_{ij} := s_{hij}
+\end{align}
+Maticí $B$ navíc rozumíme matici $B_1$.
+
+\lm Existuje funkce $f: \A \to \A$, že $f(A_h) = B_h$ a tuto operaci značíme $\widehat A = B$.
+
+\dk Z předchozího lemmatu již máme bázi $\widetilde{\A}$ prostoru $\A$. Ukážeme si tedy, že můžeme přejít k bázi z menších matic $B$. Nejdříve si všiměme, co se děje v následujícím součinu matic:
+
+\begin{align}
+	(A_hA_i)_{uv} = \sum_w(A_h)_{uw} \cdot (A_i)_{wv} = s_{hid(u,v)}
+\end{align}
+
+Kde zmíněná suma je rozpis maticového násobení pro jednu buňku součinu. Zřejmě přičtu $1$ pokaždé, když pro vrchol $w$ platí, že $d(u,w)=h$ a $d(w,v) = i$, což je přesně definice $s_{hij}$ pro $j = d(u,v)$. Jak takový prvek ještě můžeme vyjádřit (rozepsáním maticového násobení s použitím předchozího vzorce pro buňku)?
+
+\begin{align}
+	A_hA_i = \sum_{j=0}^d s_{hij} A_j
+\end{align}
+
+Což je vlastně lineární kombinace prvků z báze s koeficienty $s_{hij}$.
+Vytvořme tedy novou bázi, například takovou, která bude obsahovat právě tyto
+koeficienty. Do řádku $i$ matice $B'_h$ zapíšeme souřadnice součinu $A_hA_i$
+vůdči bázi $\widetilde{A}$, tedy $s_{hij}$. Tím získáme matice $B'_h$, které
+jsou bazí (vytvořili jsme je zapsáním souřadnic lineárně nezávislých prvků a
+tak jsou lineárně nezávislé), která navíc splňuje žádané vlastnosti a tedy
+$B'_h = B_h$. \qed
+
+
+
+\lm (O sousedech) $B1 = \left(\begin{matrix}
+& & & & & & & & \bigzero & \\
+& & & & & & & & & \\
+& \bigzero & & & & {\smash{\raisebox{.75\normalbaselineskip}{\diagdots{9em}{.5em}}}} & {\smash{\raisebox{1.2\normalbaselineskip}{\diagdots{6.5em}{.5em}}}} & \\
+& & & & {\smash{\raisebox{1.3\normalbaselineskip}{\diagdots{6.5em}{.5em}}}} & & \\
+\end{matrix}\right)$ je tridiagonální matice. Všechny sloupcové součty jsou stejné a jsou rovny $k$.
+
+\dk Matice je tridiagonální, protože $s_{1,i,j}$ dává smysl jen pro $i \in \{j-1,j,j+1\}$ (z $\Delta$ nerovnosti). Navíc v $j$-tém sloupci je $s_{1,j-1,j} + s_{1,j,j} + s_{1,j+1,j}$, což zahrnuje všechny sousedy $u$, kterých je $k$.
+\qed
+
+
+\lm $B1 = \left(\begin{matrix}
+& & & & & & & & \bigzero & \\
+& & & & & & & & & \\
+& \bigzero & & & & {\smash{\raisebox{.75\normalbaselineskip}{\diagdots{9em}{.5em}}}} & {\smash{\raisebox{1.2\normalbaselineskip}{\diagdots{6.5em}{.5em}}}} & \\
+& & & & {\smash{\raisebox{1.3\normalbaselineskip}{\diagdots{6.5em}{.5em}}}} & & \\
+\end{matrix}\right)$ je tridiagonální matice $\Rightarrow$ $\forall$ vlastní čísla jsou různá.
+
+\subsection{Charakteristické polynomy}
+
+\df Definujme polynomy $v_i \in \Q[\lambda]$ takové, že $\deg v_i(\lambda) = i$ a:
+\begin{enumerate} 
+	\item $v_0(\lambda) = 1$
+	\item $v_1(\lambda) = \lambda$
+	\item pro $i \in \{ 2, \dots, d-1\}$ induktivně, aby splňovaly rovnici 
+	\begin{align}
+		(s_{1,i,i-1} v_{i-1}(\lambda)) + (s_{1,i,i-\lambda}v_i(\lambda)) + (s_{1,i,i+1}v_{i+1}(\lambda)) = 0
+	\end{align}
+\end{enumerate}
+
+\lm (O charakteristickém polynomu) Nechť $\lambda_1,\ldots,\lambda_d \in \Sp(B_1)$. Potom pokud $\lambda_i \neq k$ platí:
+\begin{align}
+	v_o(\lambda) + \ldots + v_d(\lambda) = c \cdot (\lambda - \lambda_1) \cdot \ldots \cdot (\lambda - \lambda_d)
+\end{align}
+
+\dk Vytvořme vektor $\vec{v} = (v_1(\lambda), \ldots, v_d(\lambda))$ a uvažme systém rovnic $B\vec{v} = \lambda \vec{v}$. Ten umíme řešit po řádcích (známe první dva členy vektoru a celou matici obsahující potřebné koeficienty), známe tedy vlastní čísla (kořeny této rovnice) a jejich vlastní vektory (obsahují složky $v_i(\lambda)$.
+
+Nejprve si ukážeme, že jedno z vlastních čísel je $k$ (všimněte si, že v předpokladech používáme $d$ vlastních čísel, ale dimenze matice $B$ je $d+1$). Vezměme si výše používaný systém rovnic a sečtěme levé a pravé strany. Podle Lemma o sousedech jsou sloupcové součty matice $B$ rovny $k$, získáme tedy rovnici $k(v_0(\lambda) + \ldots + v_d(\lambda)) = \lambda (v_0(\lambda) + \ldots + v_d(\lambda))$, z čehož po úpravě plyne, že $\lambda = k$.
+
+\todo{Rovnost s char. polynomem}
+
+\lm Pro polynomy $v_i$ platí, že $v_i(A) = A_i$ a $v_i(B) = B_i$.
+
+\dk {\it(bez důkazu)}
+
+
+\df $z\in V(G)$, $T\in\{0,1\}^{d+1 \times n}$\\
+\indent $T_{i,u} = \left\{\begin{matrix}
+1\quad & d(u,z) = i\hfill \\
+0\quad & \text{jinak}\hfill
+\end{matrix}\right.$
+
+\lm (O zastřešování) $X\in\A(G), z\in V(G) \Rightarrow TX = \widehat XT$
+
+\dk 
+\begin{align*}
+(TA)_{iu} &= \sum_w T_{iw}A_{wu} = s_{1,i,d(u,z)} \\
+(BT)_{iu} &= \sum_j B_{ij}T_{ju} = s_{1,i,d(u,z)} \\
+TA = BT \quad&\Rightarrow\quad TA^2 = BTA = B^2T \quad\Rightarrow\quad TA^m = B^mT \\
+Tp(A) = p(B)T \quad&\Rightarrow\quad TX = \widehat XT
+\end{align*}
+\qed
+
+\df Definujme si pomocné polynomy: 
+	$x_i(\lambda) = v_0(\lambda) + \dots + v_i(\lambda)$ \hfil $S_t = x_t(A) = A_0 + A_1 + \dots + A_t$
+Kde $S_t$ je matice, která označuje dvojce vrcholů jedničkou, pokud jsou vzdálené nanejvýš $t$ (je to součet vzdálenostních matic do $t$).
+
+\lm $C$ je perfektní kód (množina vrcholů) v $G$ a $c$ je jeho charakteristický vektor. Pak $S_t\cdot c = \vec 1$.
+
+\dk $(S_t\cdot c)_u = |\{w: w\in C, d(w,u) \le t\}| = 1$, což plyne z definice perfektního kódu.
+\qed
+
+\lm $\exists$ $t$-perfektní kód $\Rightarrow$ $\dim \Ker \widehat S_t \ge t$
+
+\dk $z_0 = z \in C$
+
+$z_1,z_2,\dots,z_t \quad d(z,z_i) = i$ pro $i = 1,2,\dots,t$
+
+$(T_{z_i} \cdot c)_j = \delta_{ij}$ (Kroneckerovo delta $= 1$ pro $i=j$, $0$ jinak)
+
+Tedy vektory $T_{z_i} \cdot c$ pro $i = 0, 1, \dots, t$ jsou lineárně nezávislé.
+
+\begin{align*}
+	&\widehat S_t(T_{z_i}\cdot c) = (\widehat S_t \cdot T_{z_i}) \cdot c \overset{1}{=} T_{z_i} \cdot S_t \cdot c \overset{2}{=} T_{z_i}\cdot \vec 1 = \left(\begin{matrix}
+		k_0 \\ \vdots \\ k_d
+	\end{matrix}\right) \\
+\end{align*}
+
+$\overset{1}{=}$ plyne z lemma o zastřešování, $\overset{2}{=}$ plyne z předchozího lemmatu. Výsledný vektor je pro všechnyvolby $z_i$ stejný, protože jeho položky je počet sousedů s pevnými vzdálenostmi, a protože je to vzdálenostně regulární graf, jsou to nějaké hodnoty $s_{hij}$ se stejným $hij$ pro řádek.
+
+\begin{align*}
+	&u_i = T_{z_i}\cdot c - T_{z_0}\cdot c\qquad i = 1, 2, \dots, t \\
+	&\widehat S_t u_i = \widehat S_t T_{z_i}\cdot c - \widehat S_t T_{z_i}\cdot c = \left(\begin{matrix}k_0 \\ \vdots \\ k_d\end{matrix}\right) - \left(\begin{matrix}k_0 \\ \vdots \\ k_d\end{matrix}\right) = \vec 0 \quad\Rightarrow\quad u_i\in\Ker \widehat S_t\\
+\end{align*}
+
+Vektory $u_1,\dots, u_t$ tvoří $\Ker \widehat S_t$ a jsou lineárně nezávislé. Tedy $\dim\Ker\widehat S_t \ge t$.
+\qed
+
+\subsection{Důkaz Lloydovy věty}
+
+Zde začnou věci dávat větší smysl. Nejdříve dokážeme pomocí výše zmíněných lemat pomocné tvrzení, který dá podobný polynom, následně si s ním pohrajeme a získáme polynom Lloydův, tak jak byl zadefinován na začátku.
+
+\vt (Lloydův prototyp) Pokud existuje $t$-perfektní kód v $G$, potom $x_t(\lambda)\backslash x_d(\lambda)$.
+
+\dk Nejprve si všimněme, že $\widehat{S_t} = \widehat{X_t(A)} = \widehat{\sum_i^t A_i} = \sum_i^t B_i = X_t(B)$.
+Dále se podívejme na spektra $B$ a $\widehat{S_t}$:
+\begin{align}
+	&\Sp(B) = \{ k, \lambda_1, \ldots, \lambda_d \} \\
+	&\Sp(\widehat{S_t}) = \{ x_t(k), x_t(\lambda_1), \ldots, x_t(\lambda_d) \}
+\end{align}
+
+\todo{proc a zbytek...}
+
+
+\subsection{Charakterizace perfektních kódů}
+
+\vt Nechť $q=p^r$, a $p$ je prvočíslo. Pak existují právě následující netriviální perfektní kódy (tedy s $|C| \geq 2$ a pokud $|C| = 2$, tak to není kód $q=2$ a $n=2t+1$):
+\begin{description}
+	\item $1$-perfektní kód $n={q^k-1 \over q-1}$ pro libovolné $k$ (Hammingův)
+	\item $2$-perfektní kód $q=3$ a $n=11$ (Golayův)
+	\item $3$-perfektní kód $q=2$ a $n=23$ (Golayův)
+\end{description}
+Dál $q$ složené neexistují perfektní kódy pro $t \geq 3$ a pro $t = 1,2$ se to neví.
+
+\dk Důkaz je technicky náročný. Základ je v Lloydově větě, která dává relativně silný nástroj jak perfektní kód poznat. Společně se hrubým odhadem na velikost kódu ukázaným na začátku sekce, lze pomocí hrubé síly a netriviální teorie čísel získat výsledek. Ten však není v naší moci.
+
+
+\end{document}
