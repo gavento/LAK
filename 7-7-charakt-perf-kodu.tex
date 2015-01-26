@@ -1,14 +1,66 @@
 \subsection{Charakterizace perfektních kódů}
 
-
 \vt Nechť $q=p^r$, a $p$ je prvočíslo. Pak existují právě následující netriviální perfektní kódy (tedy s $|C| \geq 2$ a pokud $|C| = 2$, tak to není kód $q=2$ a $n=2t+1$):
 \begin{description}
-	\item $1$-perfektní kód $n={q^k-1 \over q-1}$ pro libovolné $k$ (Hammingův)
+	\item $1$-perfektní kód $n={q^k-1 \over q-1}$ pro libovolné $k$ a $q$ (Hammingův)
 	\item $2$-perfektní kód $q=3$ a $n=11$ (Golayův)
 	\item $3$-perfektní kód $q=2$ a $n=23$ (Golayův)
 \end{description}
 Dál $q$ složené neexistují perfektní kódy pro $t \geq 3$ a pro $t = 1,2$ se to neví.
 
-\dk Důkaz je technicky náročný. Základ je v Lloydově větě, která dává relativně silný nástroj jak perfektní kód poznat. Společně se hrubým odhadem na velikost kódu ukázaným na začátku sekce, lze pomocí hrubé síly a netriviální teorie čísel získat výsledek. Ten však není v naší moci.
+Důkaz je technicky náročný a budeme se jím zabývat po zbytek sekce. Základem je Lloydova věta a Sphere packing ukázaným na začátku sekce. Nejprve se pro malé hodnoty parametrů ukáže, zda pro dané hodnoty kódy existují či nikoli. Pak se pro obecný případ udělá horní odhad parametrů pomocí Lloydovy věty. A pro konečný počet případů, pro které by kódy mohly existovat, bylo dokázáno počítačem, že jiné perfektní kódy než Hammingovy a Golayovy neexistují.
+
+\vt Pro $q=3$ existuje jenom $2$-perfektní kód.
+
+\vt Pro $q=2$ neexistuje $2$-perfektní kód.
+
+\dk Ze Sphere packingu dostaneme:
+\begin{align}
+	1 + n + {n \choose 2} &= q^\alpha  \\
+	2 + 2n + n(n-1) &= q^{\alpha + 1} \label{eq:SpherePacking}\\
+	7 + (2n + 1)^2 &=q^{\alpha + 3} \label{eq:SpherePacking2}
+\end{align}
+
+A dále pak z Lloydovy věty dostaneme:
+\begin{align}
+L_2(x) &= {n - x \choose 2} - (x - 1)(n -x) + {x - 1 \choose 2} \\
+2L_2(x) &= n^2 + n + 2 + 4x^2 - 2(n + 1)2x
+\end{align}
+
+Provedeme substituci $y = 2x$ a za $n^2 + n + 2$ dosadíme $q^{\alpha + 1}$ (z rovnice~\ref{eq:SpherePacking}):
+\begin{align}
+p(y) = y^2 - 2(n+1)y + 2^{\alpha + 1}
+\end{align}
+Z Vietových vzorců dostaneme pro kořeny $y_1, y_2$ polynomu $p$:
+
+\begin{align}
+y_1y_2 &= 2^{\alpha + 1} \\
+y_1 + y_2 &= 2n + 2 \label{eq:Viet}
+\end{align}
+Tedy $y_1 = 2^a, y_2 = 2^b$ pro nějaké $a,b \geq 0$, bez újmy na obecnosti $a \leq b$. Nyní rozebereme několik případů pro různé hodnoty $a$.
+
+\begin{itemize}
+\item[$a = 1$]
+Tedy $y_1 = 2$ a $y_2 = 2n$. Po dosazení do polynomu $p$ dostaneme hodnoty $n = 1$ nebo $n = 2$, což jsou nesmyslné hodnoty pro kódy.
+\item[$a = 2$]
+Tedy $y_1 = 4$ a $y_2 = 2n -2$. Stejným způsobem jako v předchozím bodu dosadíme do $p$ a spočteme $n = 2$ nebo $n = 5$. Pro $n = 5$ dostaneme triviální opakovací kód.
+\item[$a \geq 3$]
+Z rovnice~\ref{eq:Viet} a faktu, že $a,b\geq 3$ dostaneme pro nějaké $k$:
+\begin{align}
+2n + 1 &= 2^a + 2^b - 1 \\
+&= 8k - 1 \\
+(2n + 1)^2 &= 64k^2 - 16k + 1 \label{eq:Mod1}
+\end{align}
+
+A dosadíme do rovnice~\ref{eq:SpherePacking2}:
+\begin{align}
+(2n + 1)^2 = 2^{\alpha + 3} - 7 \label{eq:Mod7}
+\end{align}
+
+Pravá strana rovnice~\ref{eq:Mod1} modulo 16 se rovná $1$, zatímco pravá strana rovnice~\ref{eq:Mod7} modulo 16 se rovná $-7$, což je spor, neboť by se pravé strany obou rovnic měly rovnat. Pro $a \geq 3$ tedy neexistuje žádný perfektní kód. \qed
+
+\end{itemize}
+
+\vt Pro $t \leq 3$ a $q > 2$ neexistuje $t$-perfektní kód nad abecedou s $q$ znaky.
 
 
