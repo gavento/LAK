@@ -22,15 +22,15 @@ Důkaz je technicky náročný a budeme se jím zabývat po zbytek sekce. Zákla
 \end{align}
 
 A dále pak z Lloydovy věty dostaneme:
-\begin{align}
+\begin{align*}
 L_2(x) &= {n - x \choose 2} - (x - 1)(n -x) + {x - 1 \choose 2} \\
 2L_2(x) &= n^2 + n + 2 + 4x^2 - 2(n + 1)2x
-\end{align}
+\end{align*}
 
 Provedeme substituci $y = 2x$ a za $n^2 + n + 2$ dosadíme $q^{\alpha + 1}$ (z rovnice~\ref{eq:SpherePacking}):
-\begin{align}
+\begin{align*}
 p(y) = y^2 - 2(n+1)y + 2^{\alpha + 1}
-\end{align}
+\end{align*}
 Z Vietových vzorců dostaneme pro kořeny $y_1, y_2$ polynomu $p$:
 
 \begin{align}
@@ -62,5 +62,116 @@ Pravá strana rovnice~\ref{eq:Mod1} modulo 16 se rovná $1$, zatímco pravá str
 \end{itemize}
 
 \vt Pro $t \leq 3$ a $q > 2$ neexistuje $t$-perfektní kód nad abecedou s $q$ znaky.
+
+Důkaz této části je nejnáročnější, proto ho rozdělíme do několika lemmátek. Hlavní roli budou mít kořeny Lloydova polynomu, které si označíme $\sigma_1, \dots, \sigma_t$ a pro které platí:
+
+\begin{align*}
+2 < \sigma_1 < \dots < \sigma_t < n
+\end{align*}
+
+Nerovnosti mezi kořeny máme z Lloydovy věty. Po dosazení čísel $0, 1$ a $2$ do Lloydova polynomu, zjistíme, že ani jedno z těchto čísel není kořenem, tedy $2 < \sigma_1$.
+
+\lm $\prod\limits_{i = 1}^{t} \sigma_i = t!q^{\alpha - t}$
+
+\dk Nejprve si vyjádříme součin kořenů pomocí koeficientů Lloydova polynomu.
+\begin{align*}
+L_t(x) &= a_t x^t + \dots + a_1x + a_0 \\
+&= a_t (x^t + \frac{a_{t-1}}{a_t}x^{t-1} + \dots + \frac{a_0}{a_t} \\
+&= a_t (x - \sigma_1)\dots(x - \sigma_t) \\
+&= a_t\Bigl(x^t - \Bigl(\sum \sigma_i\Bigr)x^{t-1} + \dots + (-1)^t \prod \sigma_i\Bigr)
+\end{align*}
+
+Tedy máme:
+\begin{align}
+\prod\limits_{i = 1}^{t} \sigma_i = (-1)^t \frac{a_0}{a_t} \label{eq:ProdRoot}
+\end{align}
+
+Nyní spočítáme koeficienty $a_0$ a $a_t$:
+\begin{align*}
+a_0 &= L_t(0) = \sum\limits_{i = 0}^{t} {n \choose i}(q - 1)^i = q^\alpha \\
+a_t &= \sum\limits_{i = 0}^{t} (-1)^i (q - 1)^{t - i} \frac{1}{i!}(-1)^{t-i} \frac{1}{(t-i)!} \\
+&= \frac{(-1)^t}{t!}\sum\limits_{i = 0}^{t}(q-1)^{t-i} \frac{t!}{i!(t-i)!} \\
+&= \frac{(-1)^t}{t!}\bigl((q - 1) + 1\bigr)^t
+\end{align*}
+
+Pro poslední rovnost jsme použili binomickou větu. Po dosazení do rovnice~\ref{eq:ProdRoot} dostaneme:
+\begin{align*}
+\prod\limits_{i = 1}^{t} \sigma_i = (-1)^t \frac{q^\alpha}{\frac{(-1)^t}{t!}q^t} = t!q^{\alpha-t}
+\end{align*}
+\qed
+
+\lm $2 \sigma_1 \leq \sigma_t$
+
+\dk Definujme si funkci $f(x) = k \Leftrightarrow x = p^hk$, kde pro $p$ platí $q = p^r$ a $p$ je nesoudělné s $k$. Aplikujme $f$ na součin kořenů:
+\begin{align*}
+f(\sigma_1)f(\sigma_2) \dots f(\sigma_t) &= f(\sigma_1\sigma_2 \dots \sigma_t) =\\
+&= f(t!q^{a-t}) = f(t!) \leq t!
+\end{align*}
+
+Uvažme nyní 2 možnosti:
+\begin{enumerate}
+\item Nechť existují $i \neq j$ takové, že $f(\sigma_i) = f(\sigma_j) = k$, pak:
+\begin{align*}
+\sigma_i &= p^{h_i}k \\
+\sigma_j &= p^{h_j}k \\
+\end{align*}
+Bez újmy na obecnosti platí $\sigma_i < \sigma_j$ a pak tedy $h_i < h_j$ a $p\sigma_i \leq \sigma_j$. Když všechny nerovnosti dáme dohromady:
+\begin{align*}
+\sigma_t \geq \sigma_j \geq p\sigma_i \geq 2\sigma_i \geq 2\sigma_1
+\end{align*}
+\item Nechť jsou tedy všechny $f(\sigma_i)$ různé. Jelikož je jejich součin menší než $t!$, pak se mezi $f(\sigma_1),\dots ,f(\sigma_t)$ vyskytují všechna čísla $1,\dots,t$. Jelikož $t \geq 3$ a $p$ je nesoudělné se všemi čísly $1,\dots,t$, tak $p > 3$. Evidentně musí existovat $i,j$ taková, že:
+\begin{align*}
+\sigma_i &= p^{h_i} \\
+\sigma_j &= 2p^{h_j}
+\end{align*}
+Rozebereme 2 možnosti:
+\begin{enumerate}
+\item Nechť $h_j \geq h_i$, pak: $\sigma_t \geq \sigma_j = 2p^{h_j} \geq 2p^{h_i} = 2\sigma_i \geq 2\sigma_1$
+\item Nechť $h_i > h_j$, pak: $\sigma_t \geq \sigma_i = p^{h_i} \geq p^{h_j + 1} = \frac{p}{2}\sigma_j \geq 2\sigma_j \geq 2\sigma_1$
+\end{enumerate}
+\end{enumerate}
+\qed
+
+\lm $\sigma_1\sigma_t \leq \frac{8}{9}(\frac{\sigma_1 + \sigma_t}{2})^2$
+
+\dk Celou nerovnost vynásobíme $\sigma^2_1$:
+\begin{align*}
+\frac{\sigma_t}{\sigma_1} \leq \frac{8}{9}\Bigl(\frac{1 + \frac{\sigma_1}{\sigma_t}}{2}\Bigr)^2
+\end{align*}
+Provedeme substituci $x = \frac{\sigma_t}{\sigma_1}$:
+\begin{align*}
+x \leq \frac{8}{9}\Bigl(\frac{1 + x}{2}\Bigr)^2
+\end{align*}
+Po elementárních úpravách dostaneme:
+\begin{align*}
+0 \leq \Bigl(x - \frac{1}{2}\Bigr)\Bigl(x - 2\Bigr)
+\end{align*}
+Což platí, protože z předchozího lemmatu víme, že $x \geq 2$. \qed
+
+
+\lm $\prod\limits_{i = 1}^t \sigma_i \geq \frac{n^t (q-1)^t}{q^t}\bigl(1 - \frac{t(t-1)}{2n}\bigr)$
+
+\dk Víme, že:
+\begin{align*}
+\prod\limits_{i = 1}^t \sigma_i = t!q^{\alpha-t}
+\end{align*}
+Pravou stranu následně budeme upravovat:
+\begin{align*}
+\frac{t!}{q^t}q^\alpha &= \sum\limits_{i = 0}^{t}(q - 1)^i{n \choose i} \\
+&\geq \frac{t!}{q^t} (q - 1)^t \frac{n(n-1)\dots(n-t+1)}{t!}  \\
+&= \frac{(q-1)^t}{q^t} n^t \Bigl(1 - \frac{1}{n}\Bigr)\Bigl(1 - \frac{2}{n}\Bigr)\dots\Bigl(1 - \frac{t-1}{n}\Bigr)
+\end{align*}
+Nyní použijeme vzoreček, který platí pro $x_1,\dots,x_k \in (0,1)$:
+\begin{align*}
+\prod\limits_{i=1}^{k} (1 - x_i) \geq 1 - \sum\limits_{i=1}^{k} x_i
+\end{align*}
+Po aplikaci na $(1 - \frac{1}{n})(1 - \frac{2}{n})\dots(1 - \frac{t-1}{n})$, dostaneme:
+\begin{align*}
+\frac{t!}{q^t}q^\alpha &\geq \frac{n^t (q-1)^t}{q^t}\Bigl(1 - \sum\limits_{i=1}^{t-1} \frac{i}{n}\Bigr) \\
+&\geq \frac{n^t (q-1)^t}{q^t}\Bigl(1 - \frac{t(t-1)}{2n}\Bigr) 
+\end{align*}
+\qed
+
+
 
 
