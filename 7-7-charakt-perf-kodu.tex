@@ -76,7 +76,7 @@ Nerovnosti mezi kořeny máme z Lloydovy věty. Po dosazení čísel $0, 1$ a $2
 \dk Nejprve si vyjádříme součin kořenů pomocí koeficientů Lloydova polynomu.
 \begin{align*}
 L_t(x) &= a_t x^t + \dots + a_1x + a_0 \\
-&= a_t (x^t + \frac{a_{t-1}}{a_t}x^{t-1} + \dots + \frac{a_0}{a_t} \\
+&= a_t \Bigl(x^t + \frac{a_{t-1}}{a_t}x^{t-1} + \dots + \frac{a_0}{a_t}\Bigr) \\
 &= a_t (x - \sigma_1)\dots(x - \sigma_t) \\
 &= a_t\Bigl(x^t - \Bigl(\sum \sigma_i\Bigr)x^{t-1} + \dots + (-1)^t \prod \sigma_i\Bigr)
 \end{align*}
@@ -171,6 +171,19 @@ Po aplikaci na $(1 - \frac{1}{n})(1 - \frac{2}{n})\dots(1 - \frac{t-1}{n})$, dos
 &\geq \frac{n^t (q-1)^t}{q^t}\Bigl(1 - \frac{t(t-1)}{2n}\Bigr) 
 \end{align*}
 \qed
+
+\lm $\prod\limits_{i = 1}^t \sigma_i \leq \frac{8}{9}\frac{n^t(q-1)^t}{q^t}$
+
+\dk Pro důkaz použijeme již dokázanou nerovnost $\sigma_1\sigma_t \leq \frac{8}{9}(\frac{\sigma_1+\sigma_t}{2})^2$ a nerovnost mezi aritmetickým a geometrickým průměrem:
+\begin{align*}
+\Bigl(\prod\limits_{i=1}^k x_i \Bigr)^{\frac{1}{k}} \leq \frac{\sum\limits_{i=1}^k x_i}{k}
+\end{align*}
+Odhadněme tedy součin kořenů:
+\begin{align*}
+(\sigma_1\sigma_t)(\sigma_2\sigma_3\dots\sigma_{t-1}) &\leq \frac{8}{9}\Bigl(\frac{\sigma_1+\sigma_t}{2}\Bigr)^2\Bigl(\frac{\sigma_2 + \dots + \sigma_{t-2}}{t-2}\Bigr)^{t-2} \\
+&\leq \frac{8}{9} \Bigl(\frac{2\frac{\sigma_1 + \sigma_t}{2} + (t-2)\frac{\sigma_2 + \dots + \sigma_{t-2}}{t-2}}{t}\Bigr)^t \\
+&=\frac{8}{9}\Bigl(\frac{\sigma_1 + \dots + \sigma_t}{t}\Bigr)^t
+\end{align*}
 
 
 
