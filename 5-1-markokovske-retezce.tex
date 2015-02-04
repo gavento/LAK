@@ -40,11 +40,14 @@ neorientovaný graf.
 je-li $\pi\cdot P = \pi$. Jinak řečeno, stabilní distribuce se po provedení
 kroku nezmění.
 
-\vt Pro $G$ neorientovaný souvislý platí: $\forall \rho$ počáteční distribuci $\{P_G^k\cdot \rho\}_k$ konverguje $\Leftrightarrow$ $G$ není bipartitní.
+\vt Pro $G$ neorientovaný souvislý platí: $\forall \rho$ počáteční distribuci
+$\set{ \rho P_G^k }_k$ konverguje $\Leftrightarrow$ $G$ není bipartitní.
 
 \dk \begin{description}
 	\item \uv{$\Rightarrow$} Pokud je $G$ bipartitní, stačí jako protipříklad vzít distribuci, která začíná jenom v jedné partitě. Pak každým pronásobením matice se celá distribuce přesune do druhé partity, protože nemá kam jinam. Zjevně tedy nekonverguje k jedinému rozložení.
-	\item \uv{$\Leftarrow$} Prvně si vyjádříme distribuci jako lineární kombinaci vlastních vektorů matice $P_G$ (to lze, protože tvoří ortonormální bázi). Tedy $\rho = \sum_i a_ip_i$. Dále si vyjadřme distribuci po $k$ iteracích:
+	\item \uv{$\Leftarrow$} Prvně si vyjádříme distribuci jako lineární kombinaci vlastních vektorů matice $P_G$ (to lze, protože tvoří ortonormální bázi). Tedy $\rho = \sum_i a_ip_i$. Dále si vyjádříme distribuci po $k$ iteracích:
+  \todo{distribucí násobíme zleva, dále (levým) vlastním vektorem 1 není vektor jedniček,
+        ale stabilní distribuce $\pi$ \dots}
 	\begin{align}
 		P_G^k\rho = P_G^k\sum_ia_ip_i = \sum_iP_G^ka_ip_i
 	\end{align}
@@ -52,6 +55,7 @@ kroku nezmění.
 	\begin{align}
 		\sum_i\lambda_i^ka_ip_i
 	\end{align}
+  \todo{$P$ není matice sousednosti\dots}
 	Nyní si všimneme, že protože graf není bipartitní, tak $\lambda_1 \neq -\lambda_n$ a největší vlastní číslo distribuce je $1$, protože matice $P_G$ má řádkové i sloupcové součty konstantní $1$ a zároveň je $1$ má vlastní vektor samých jedniček. Tedy pro $i > 1$ platí $|\lambda_i| < 1$. Dejme nyní výraz do limity a všimneme si, že suma jde k nule díky tomu, že jediný člen závislý na $k$ je $\lambda_i$:
 	\begin{align}
 		\lim_{k\to \infty}\left(\lambda_1^ka_1p_1 + \sum_{i>1}\lambda_i^ka_ip_i\right) = a_1p_1 = \pi
