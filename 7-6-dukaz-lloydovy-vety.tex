@@ -1,17 +1,139 @@
 \subsection{Důkaz Lloydovy věty}
 
 
-Zde začnou věci dávat větší smysl. Nejdříve dokážeme pomocí výše zmíněných lemat pomocné tvrzení, který dá podobný polynom, následně si s ním pohrajeme a získáme polynom Lloydův, tak jak byl zadefinován na začátku.
+Zde začnou věci dávat větší smysl. Nejdříve dokážeme pomocí výše zmíněných lemmat
+pomocné tvrzení, který dá podobný polynom, následně si s ním pohrajeme a získáme
+polynom Lloydův, tak jak byl zadefinován na začátku.
 
-\vt (Lloydův prototyp) Pokud existuje $t$-perfektní kód v $G$, potom $x_t(\lambda)\backslash x_d(\lambda)$.
+\vt (Lloydův prototyp) Pokud existuje $t$-perfektní kód v $G$, potom
+$x_t(\lambda)\backslash x_d(\lambda)$.
 
-\dk Nejprve si všimněme, že $\widehat{S_t} = \widehat{X_t(A)} = \widehat{\sum_i^t A_i} = \sum_i^t B_i = X_t(B)$.
+\dk Nejprve si všimněme, že
+$\widehat{S_t} = \widehat{x_t(A)} = \widehat{\sum_i^t A_i} = \sum_i^t B_i = x_t(B)$.
 Dále se podívejme na spektra $B$ a $\widehat{S_t}$:
 \begin{align}
-	&\Sp(B) = \{ k, \lambda_1, \ldots, \lambda_d \} \\
-	&\Sp(\widehat{S_t}) = \{ x_t(k), x_t(\lambda_1), \ldots, x_t(\lambda_d) \}
+	\Sp(B) &= \{ k, \lambda_1, \ldots, \lambda_d \} \\
+	\Sp(\widehat{S_t}) &= \{ x_t(k), x_t(\lambda_1), \ldots, x_t(\lambda_d) \}
+\end{align}
+Z povídání o $B$ (je tridiagonální) víme, že její vlastní čísla jsou různá.
+Dle pomocného lemmatu výše má $\widehat{S_t}$ dimenzi jádra alespoň $t$,
+a tedy 0 je její alespoň $t$-násobné vlastní číslo -- tj. alespoň $t$ hodnot
+z $\lambda_1, \ldots, \lambda_d$ jsou kořeny $x_t$ ($k$ není kořen $x_t$ \todo{proč?}).
+Stupeň $x_t$ je nejvýše $t$ (z definice), takže toto jsou všechny jeho kořeny
+\todo{proč není identicky nulový}.
+
+Dohromady tedy kořeny $x_t$ jsou podmnožinou kořenů $x_d$ (a žádné kořeny nejsou
+více\-ná\-so\-bné), takže $x_t$ dělí $x_d$. \qed
+
+
+\vt (Lloyd) Pokud existuje $t$-perfektní kód s parametry $(n,q)$, pak $L_t(x)$
+(definice níže) má $t$ různých celočíselných kořenů mezi $1$ a $n$.
+\begin{align}
+	L_t(x) = \sum_{j=0}^t(-1)^j(q-1)^{t-j}\binom{x-1}{j}\binom{n-x}{t-j}
 \end{align}
 
-\todo{proc a zbytek...}
+\dk Nejprve definujme graf $\Gamma$: Jeho vrcholy jsou slova délky $n$ nad abecedou
+velikosti $q$ a hrany spojují právě slova lišící se v jednom znaku. Tento graf
+je vzdálenostně regulární s průměrem $d = n$.
+Speciálně budou užitečné následující jeho parametry\footnote{
+Hodnoty těchto parametrů lze odvodit rozebráním, které pozice ve slově odpovídajícím
+vrcholu $u$ mohu změnit a jak, abych získal $w$.
+}:
+\begin{align}
+  s_{1,i,i-1} &= (q-1)(n + 1 - i) \\
+  s_{1,i,i}   &= (q-2)i \\
+  s_{1,i,i+1} &= i + 1
+\end{align}
 
+Nyní bude naším cílem upočítat polynomy $x_i$. K tomu začneme od rekurzivního vzorce
+pro polynomy $v_i$, z něj spočteme jejich vytvořující funkci\footnote{
+Zde je dobré vědět, jak se to dělá, ale samotný výpočet je asi možné přeskočit.
+}
+$V(t) = \sum_{i = 0}^\infty v_i(\lambda) t^i$ a od té dojdeme
+k vytvořující funkci $X(t) = \sum_{i = 0}^\infty x_i(\lambda) t^i$ pro $x_i$.
+Začneme z definice $v_i$:
+\begin{align}
+	v_0(\lambda) &= 1 \\
+	v_1(\lambda) &= \lambda \\
+	s_{1,i,i-1}v_{i-1}(\lambda) + (s_{1,i,i} -\lambda) v_i(\lambda) +
+    &s_{1,i,i+1}v_{i+1}(\lambda) = 0 \ \ \forall i \in \{1, \ldots, d\}
+\end{align}
+Dosadíme za $s_{1,i,*}$:
+\begin{align}
+  (q-1)(n + 1 - i)v_{i-1}(\lambda) + ((q-2)i - \lambda)v_i(\lambda) +
+    (i+1) v_{i+1} = 0
+\end{align}
+
+Nyní bychom rádi dosadili $V$ za $v_i$, abychom $V$ upočítali, ale k tomu
+se potřebujeme zbavit $i$. Z vlastností vytvořujících funkcí víme:
+\begin{align}
+  \sum_{i=0}^\infty v_{i+1}(\lambda) t^i &= \frac{V(t) - 1}{t} \\
+  \sum_{i=0}^\infty i v_i(\lambda) t^i     &= t \frac{\d V(t)}{\d t} \\
+  \sum_{i=0}^\infty (i+1) v_{i+1}(\lambda) t^i &= \frac{\d V(t)}{\d t} \\
+  \sum_{i=0}^\infty (i+2) v_{i+2}(\lambda) t^i &=
+    \frac{1}{t}\br{ \frac{\d V(t)}{\d t} - \lambda }
+\end{align}
+Přepíšeme vztah pro $v_i$, aby platil od $i = 0$, dosadíme a upravíme:
+\begin{align}
+  (q - 1)n v_i - (q - 1) i v_i + (q-2)(i+1)v_{i+1}
+    - \lambda v_{i+1} +(i+2)v_{i+2} &= 0 \\
+  (q - 1)n V(t) - (q - 1)t \frac{\d V(t)}{\d t}
+    + (q-2)\frac{\d V(t)}{\d t} - \lambda \frac{V(t) - \lambda}{t}
+    + \frac{1}{t}\br{\frac{\d V(t)}{\d t} - \lambda } &= 0 \\
+  V(t) \br{ (q - 1)n - \frac{\lambda}{t} } -
+    \frac{\d V(t)}{\d t} \br{ (1 - q)t + (q-2) + \frac{1}{t} }
+    + \frac{\lambda}{t} - \frac{\lambda}{t} &= 0 \\
+  V(t)\br{ (1 - q)nt - \lambda } - \frac{\d V(t)}{\d t} \br{
+    (q - 1)t^2 + (q-2)t + 1
+    } &= 0
+\end{align}
+Nyní přeskupíme a zintegrujeme pomocí rozkladu na parciální zlomky:
+\begin{align}
+  \int \frac{\d V}{V} &=
+    \int \frac{(q - 1)nt - \lambda}{(1 - q)t^2 + (q-2)t + 1} \d t \\
+  \ln V + c &= \int \frac{(n+\lambda)(q-1)}{q(1 + t(q-1))} \d t +
+               \int \frac{\lambda - n(q - 1)}{q(1 - t)} \d t \\
+   &= \frac{(n+\lambda)(q-1)}{q} \int \frac{1}{1 + t(q-1)} \d t +
+               \frac{\lambda - n(q - 1)}{q} \int \frac{1}{1 - t} \d t \\
+   &= \frac{(n+\lambda)(q-1)}{q} \frac{\ln (1 + t(q-1))}{q-1} +
+               \frac{\lambda - n(q - 1)}{q} (-1) \ln (1 - t) \\
+   &= \frac{n+\lambda}{q} \ln (1 + t(q-1)) -
+               \frac{\lambda - n(q - 1)}{q} \ln (1 - t)
+\end{align}
+Nyní se zbavíme $c$ -- víme, že $V(t = 0) = 1$, takže $c = 0$ -- a logaritmů.
+\begin{align}
+  V = (1 + t(q-1))^{\frac{n + \lambda}{q}} (1 - t)^{\frac{n(q-1) - \lambda}{q}}
+\end{align}
+Hurá máme $V$, nyní chceme $X$ -- $x_i$ je posloupnost částečných součtů
+$v_i$ a jak si všichni dobře pamatujeme posloupnost částečných součtů získáme
+z vytvořující funkce jejím vynásobením vytvořující funkcí posloupnosti samých jedniček
+$J(t) = \sum_{i=0}^\infty t^i = \frac{1}{1-t}$:
+\begin{align}
+  X = VJ =  (1 + t(q-1))^{\frac{n + \lambda}{q}} (1 - t)^{\frac{n(q-1) - \lambda}{q} - 1}
+\end{align}
+Provedeme substituci $y = n - \frac{n + \lambda}{q}$, nahradíme $t$ za $x$
+a rozvineme dle zobecněné binomické věty, abychom měli explicitně vyjádřený
+polynom $x_t$:
+\begin{align}
+  X(x) &= (1 + x(q-1))^{n - y} (1 - x)^{y - 1} \\
+       &= \br{\sum_{i=0}^\infty {n - y \choose i} (q-1)^i x^i}
+          \br{\sum_{i=0}^\infty {y - 1 \choose i} (-x)^i } \\
+       &= \sum_{i=0}^\infty \br{\sum_{j=0}^i {n - y \choose j} (q-1)^j
+                                {y - 1 \choose i - j} (-1)^{i-j}} x^i \\
+%
+  x_t(\lambda) &= \sum_{j=0}^t {n - y(\lambda) \choose j} (q-1)^j
+                                {y(\lambda) - 1 \choose t - j} (-1)^{t-j}
+\end{align}
+Nyní zásadní trik: všimneme si, že když $y \in \set{1, \ldots, n}$, tak
+$X$ (v uzavřeném tvaru) je polynom v $t$ stupně $\leq n - 1$ --
+tedy koeficient před $x^t$ je 0
+a $\lambda = n(q-1) - qy$ je kořenem $x_n$. Takto máme $n$ různých kořenů
+$x_n$, a protože je to polynom stupně nejvýše $n$, jsou to všechny jeho kořeny.
+Z toho a aplikace Lloydovy věty pro vzdálenostně regulární grafy plyne,
+že $L_t(y)$ musí mít $t$ různých kořenů mezi čísly 1 až $n$.
+\begin{align}
+  L_t(y) &= \sum_{j=0}^t {n - y \choose j} (q-1)^j
+                                {y - 1 \choose t - j} (-1)^{t-j}
+\end{align}
+\qed
 
