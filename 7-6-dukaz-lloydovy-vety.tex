@@ -67,51 +67,51 @@ Dosadíme za $s_{1,i,*}$:
 Nyní bychom rádi dosadili $V$ za $v_i$, abychom $V$ upočítali, ale k tomu
 se potřebujeme zbavit $i$. Z vlastností vytvořujících funkcí víme:
 \begin{align}
-  \sum_{i=0}^\infty v_{i+1}(\lambda) t^i &= \frac{V(t) - 1}{t} \\
-  \sum_{i=0}^\infty i v_i(\lambda) t^i     &= t \frac{\d V(t)}{\d t} \\
-  \sum_{i=0}^\infty (i+1) v_{i+1}(\lambda) t^i &= \frac{\d V(t)}{\d t} \\
-  \sum_{i=0}^\infty (i+2) v_{i+2}(\lambda) t^i &=
-    \frac{1}{t}\br{ \frac{\d V(t)}{\d t} - \lambda }
+  \sum_{i=0}^\infty v_{i+1}(\lambda) x^i &= \frac{V(x) - 1}{x} \\
+  \sum_{i=0}^\infty i v_i(\lambda) x^i     &= x \frac{\d V(x)}{\d x} \\
+  \sum_{i=0}^\infty (i+1) v_{i+1}(\lambda) x^i &= \frac{\d V(x)}{\d x} \\
+  \sum_{i=0}^\infty (i+2) v_{i+2}(\lambda) x^i &=
+    \frac{1}{x}\br{ \frac{\d V(x)}{\d x} - \lambda }
 \end{align}
 Přepíšeme vztah pro $v_i$, aby platil od $i = 0$, dosadíme a upravíme:
 \begin{align}
   (q - 1)n v_i - (q - 1) i v_i + (q-2)(i+1)v_{i+1}
     - \lambda v_{i+1} +(i+2)v_{i+2} &= 0 \\
-  (q - 1)n V(t) - (q - 1)t \frac{\d V(t)}{\d t}
-    + (q-2)\frac{\d V(t)}{\d t} - \lambda \frac{V(t) - \lambda}{t}
-    + \frac{1}{t}\br{\frac{\d V(t)}{\d t} - \lambda } &= 0 \\
-  V(t) \br{ (q - 1)n - \frac{\lambda}{t} } -
-    \frac{\d V(t)}{\d t} \br{ (1 - q)t + (q-2) + \frac{1}{t} }
-    + \frac{\lambda}{t} - \frac{\lambda}{t} &= 0 \\
-  V(t)\br{ (1 - q)nt - \lambda } - \frac{\d V(t)}{\d t} \br{
-    (q - 1)t^2 + (q-2)t + 1
+  (q - 1)n V(x) - (q - 1)x \frac{\d V(x)}{\d x}
+    + (q-2)\frac{\d V(x)}{\d x} - \lambda \frac{V(x) - \lambda}{x}
+    + \frac{1}{x}\br{\frac{\d V(x)}{\d x} - \lambda } &= 0 \\
+  V(x) \br{ (q - 1)n - \frac{\lambda}{x} } -
+    \frac{\d V(x)}{\d x} \br{ (1 - q)x + (q-2) + \frac{1}{x} }
+    + \frac{\lambda}{x} - \frac{\lambda}{x} &= 0 \\
+  V(x)\br{ (1 - q)nx - \lambda } - \frac{\d V(x)}{\d x} \br{
+    (q - 1)x^2 + (q-2)x + 1
     } &= 0
 \end{align}
 Nyní přeskupíme a zintegrujeme pomocí rozkladu na parciální zlomky:
 \begin{align}
   \int \frac{\d V}{V} &=
-    \int \frac{(q - 1)nt - \lambda}{(1 - q)t^2 + (q-2)t + 1} \d t \\
-  \ln V + c &= \int \frac{(n+\lambda)(q-1)}{q(1 + t(q-1))} \d t +
-               \int \frac{\lambda - n(q - 1)}{q(1 - t)} \d t \\
-   &= \frac{(n+\lambda)(q-1)}{q} \int \frac{1}{1 + t(q-1)} \d t +
-               \frac{\lambda - n(q - 1)}{q} \int \frac{1}{1 - t} \d t \\
-   &= \frac{(n+\lambda)(q-1)}{q} \frac{\ln (1 + t(q-1))}{q-1} +
-               \frac{\lambda - n(q - 1)}{q} (-1) \ln (1 - t) \\
-   &= \frac{n+\lambda}{q} \ln (1 + t(q-1)) -
-               \frac{\lambda - n(q - 1)}{q} \ln (1 - t)
+    \int \frac{(q - 1)nx - \lambda}{(1 - q)x^2 + (q-2)x + 1} \d x \\
+  \ln V + c &= \int \frac{(n+\lambda)(q-1)}{q(1 + x(q-1))} \d x +
+               \int \frac{\lambda - n(q - 1)}{q(1 - x)} \d x \\
+   &= \frac{(n+\lambda)(q-1)}{q} \int \frac{1}{1 + x(q-1)} \d x +
+               \frac{\lambda - n(q - 1)}{q} \int \frac{1}{1 - x} \d x \\
+   &= \frac{(n+\lambda)(q-1)}{q} \frac{\ln (1 + x(q-1))}{q-1} +
+               \frac{\lambda - n(q - 1)}{q} (-1) \ln (1 - x) \\
+   &= \frac{n+\lambda}{q} \ln (1 + x(q-1)) -
+               \frac{\lambda - n(q - 1)}{q} \ln (1 - x)
 \end{align}
-Nyní se zbavíme $c$ -- víme, že $V(t = 0) = 1$, takže $c = 0$ -- a logaritmů.
+Nyní se zbavíme $c$ -- víme, že $V(x = 0) = 1$, takže $c = 0$ -- a logaritmů.
 \begin{align}
-  V = (1 + t(q-1))^{\frac{n + \lambda}{q}} (1 - t)^{\frac{n(q-1) - \lambda}{q}}
+  V = (1 + x(q-1))^{\frac{n + \lambda}{q}} (1 - x)^{\frac{n(q-1) - \lambda}{q}}
 \end{align}
 Hurá máme $V$, nyní chceme $X$ -- $x_i$ je posloupnost částečných součtů
 $v_i$ a jak si všichni dobře pamatujeme posloupnost částečných součtů získáme
 z vytvořující funkce jejím vynásobením vytvořující funkcí posloupnosti samých jedniček
-$J(t) = \sum_{i=0}^\infty t^i = \frac{1}{1-t}$:
+$J(x) = \sum_{i=0}^\infty x^i = \frac{1}{1-x}$:
 \begin{align}
-  X = VJ =  (1 + t(q-1))^{\frac{n + \lambda}{q}} (1 - t)^{\frac{n(q-1) - \lambda}{q} - 1}
+  X = VJ =  (1 + x(q-1))^{\frac{n + \lambda}{q}} (1 - x)^{\frac{n(q-1) - \lambda}{q} - 1}
 \end{align}
-Provedeme substituci $y = n - \frac{n + \lambda}{q}$, nahradíme $t$ za $x$
+Provedeme substituci $y = n - \frac{n + \lambda}{q}$
 a rozvineme dle zobecněné binomické věty, abychom měli explicitně vyjádřený
 polynom $x_t$:
 \begin{align}
@@ -125,7 +125,7 @@ polynom $x_t$:
                                 {y(\lambda) - 1 \choose t - j} (-1)^{t-j}
 \end{align}
 Nyní zásadní trik: všimneme si, že když $y \in \set{1, \ldots, n}$, tak
-$X$ (v uzavřeném tvaru) je polynom v $t$ stupně $\leq n - 1$ --
+$X$ (v uzavřeném tvaru) je polynom v $x$ stupně $\leq n - 1$ --
 tedy koeficient před $x^t$ je 0
 a $\lambda = n(q-1) - qy$ je kořenem $x_n$. Takto máme $n$ různých kořenů
 $x_n$, a protože je to polynom stupně nejvýše $n$, jsou to všechny jeho kořeny.
