@@ -6,7 +6,8 @@
 	\item $E(S,T) = \{$ hrany mezi $S$ a $T$ $\}$
 	\item $e(S,T) = |E(S,T)|$
 	\item $e(S) = $ počet hran uvnitř $S$
-	\item vrcholová expanze $h_v(G) = \min\limits_{S\subseteq V, |S|\le {n\over 2}} {|N(S) \over |S|}$
+	\item vrcholová expanze $h_v(G) = \min\limits_{S\subseteq V, |S|\le {n\over 2}}
+                                        {|N(S) \setminus S| \over |S|}$
 	\item hranová expanze $h(G) = \min\limits_{S\subseteq V, |S|\le {n\over 2}} {e(S,\bar S) \over |S|}$
 \end{itemize}
 

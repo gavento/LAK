@@ -27,7 +27,7 @@ Nejprve si ukážeme, že jedno z vlastních čísel je $k$ (všimněte si, že 
 \dk {\it(bez důkazu)}
 
 
-\df $z\in V(G)$, $T\in\{0,1\}^{d+1 \times n}$\\
+\df $z\in V(G)$, $T\in\{0,1\}^{(d+1) \times n}$\\
 \indent $T_{i,u} = \left\{\begin{matrix}
 1\quad & d(u,z) = i\hfill \\
 0\quad & \text{jinak}\hfill
@@ -45,7 +45,10 @@ Tp(A) = p(B)T \quad&\Rightarrow\quad TX = \widehat XT
 \qed
 
 \df Definujme si pomocné polynomy: 
-	$x_i(\lambda) = v_0(\lambda) + \dots + v_i(\lambda)$ \hfil $S_t = x_t(A) = A_0 + A_1 + \dots + A_t$
+\begin{align}
+	x_i(\lambda) &= v_0(\lambda) + \dots + v_i(\lambda) \\
+  S_t &= x_t(A) = A_0 + A_1 + \dots + A_t
+\end{align}
 Kde $S_t$ je matice, která označuje dvojce vrcholů jedničkou, pokud jsou vzdálené nanejvýš $t$ (je to součet vzdálenostních matic do $t$).
 
 \lm $C$ je perfektní kód (množina vrcholů) v $G$ a $c$ je jeho charakteristický vektor. Pak $S_t\cdot c = \vec 1$.
