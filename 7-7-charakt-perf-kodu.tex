@@ -71,7 +71,12 @@ Důkaz této části je nejnáročnější, proto ho rozdělíme do několika le
 
 Nerovnosti mezi kořeny máme z Lloydovy věty. Po dosazení čísel $0, 1$ a $2$ do Lloydova polynomu, zjistíme, že ani jedno z těchto čísel není kořenem, tedy $2 < \sigma_1$.
 
-\lm $\prod\limits_{i = 1}^{t} \sigma_i = t!q^{\alpha - t}$
+\lm Pro kořeny Lloyodova polynomu $\sigma_1, \dots, \sigma_t$ platí:
+\begin{enumerate}
+\item $\prod\limits_{i = 1}^{t} \sigma_i = t!q^{\alpha - t}$
+\item $\sum\limits_{i = 1}^{t} \sigma_i = \frac{t(n-t)(q-1)}{q} + \frac{t(t+1)}{2}$
+\end{enumerate}
+
 
 \dk Nejprve si vyjádříme součin kořenů pomocí koeficientů Lloydova polynomu.
 \begin{align*}
@@ -80,12 +85,11 @@ L_t(x) &= a_t x^t + \dots + a_1x + a_0 \\
 &= a_t (x - \sigma_1)\dots(x - \sigma_t) \\
 &= a_t\Bigl(x^t - \Bigl(\sum \sigma_i\Bigr)x^{t-1} + \dots + (-1)^t \prod \sigma_i\Bigr)
 \end{align*}
-
 Tedy máme:
 \begin{align}
-\prod\limits_{i = 1}^{t} \sigma_i = (-1)^t \frac{a_0}{a_t} \label{eq:ProdRoot}
+\prod\limits_{i = 1}^{t} \sigma_i = (-1)^t \frac{a_0}{a_t} \label{eq:ProdRoot} \\
+\sum\limits_{i = 1}^{t} \sigma_i = -1 \frac{a_{t-1}}{a_t} \label{eq:ProdSum}
 \end{align}
-
 Nyní spočítáme koeficienty $a_0$ a $a_t$:
 \begin{align*}
 a_0 &= L_t(0) = \sum\limits_{i = 0}^{t} {n \choose i}(q - 1)^i = q^\alpha \\
@@ -93,11 +97,15 @@ a_t &= \sum\limits_{i = 0}^{t} (-1)^i (q - 1)^{t - i} \frac{1}{i!}(-1)^{t-i} \fr
 &= \frac{(-1)^t}{t!}\sum\limits_{i = 0}^{t}(q-1)^{t-i} \frac{t!}{i!(t-i)!} \\
 &= \frac{(-1)^t}{t!}\bigl((q - 1) + 1\bigr)^t
 \end{align*}
-
 Pro poslední rovnost jsme použili binomickou větu. Po dosazení do rovnice~\ref{eq:ProdRoot} dostaneme:
 \begin{align*}
 \prod\limits_{i = 1}^{t} \sigma_i = (-1)^t \frac{q^\alpha}{\frac{(-1)^t}{t!}q^t} = t!q^{\alpha-t}
 \end{align*}
+Bez důkazu uvádíme:
+\begin{align*}
+a_{t-1} = - \frac{(-q)^t}{t!}\Bigl(\frac{t(t+1)}{2} + \frac{t(n-t)(q - 1)}{q}\Bigr) 
+\end{align*}
+Po dosazení do rovnice~\ref{eq:ProdSum} dostaneme dokazovanou rovnost pro součet kořenů.
 \qed
 
 \lm $2 \sigma_1 \leq \sigma_t$
@@ -184,6 +192,61 @@ Odhadněme tedy součin kořenů:
 &\leq \frac{8}{9} \Bigl(\frac{2\frac{\sigma_1 + \sigma_t}{2} + (t-2)\frac{\sigma_2 + \dots + \sigma_{t-2}}{t-2}}{t}\Bigr)^t \\
 &=\frac{8}{9}\Bigl(\frac{\sigma_1 + \dots + \sigma_t}{t}\Bigr)^t
 \end{align*}
+Po dosazení již dokázaného vzorečku pro součet kořenů dostaneme odhad:
+\begin{align*}
+\prod\limits_{i = 1}^{t} \sigma_i \leq \Bigl(\frac{(n-t)(q-1)}{q} + \frac{t+1}{2}\Bigr)^t
+\end{align*}
+Abychom dokázali lemma, potřebujeme tedy dokázat:
+\begin{align*}
+\frac{(n-t)(q-1)}{q} + \frac{t+1}{2} \leq \frac{n(q-1)}{q}
+\end{align*}
+Po několika elementárních úpravách dostaneme:
+\begin{align*}
+6t + 3q \leq 3tq
+\end{align*}
+Což platí protože $6t \leq 2tq$ (kvůli předpokladu $q \geq 3$) a $3q \leq tq$ (kvůli předpokladu $t \geq 3$).
+\qed
+
+\lm $n \leq \frac{9}{2} t(t-1)$
+
+\dk Nerovnost vyplývá okamžitě z předchozích 2 lemmat.\qed
+
+\lm $n \geq q^{\lfloor \frac{t}{2} \rfloor}$
+
+\dk
+\begin{align*}
+\prod\limits_{i = 1}^t (\sigma_i - 1) &= (-1)^t \frac{a_t}{a_t} \prod\limits_{i = 1}^t (1 - \sigma_i) \\
+&= (-1)^t \frac{L_t(1)}{a_t} \\
+&= \Bigl(\frac{q-1}{q}\Bigr)^t (n-1)(n-2)\dots(n-t)
+\end{align*}
+
+Jelikož jsou kořeny Lloydova polynomu celá čísla, celý součin je také celé číslo a tedy $p^{rt} = q^t$ musí dělit součin $\pi = (n-1)(n-2)\dots(n-t)$. Pokud bychom vyjádřili číslo $\pi$ pomocí prvočíselného rozkladu, tak $rt$ vyjadřuje počet výskytů prvočísla $p$ v tomto rozkladu. Pokusme se tedy $rt$ nějak odhadnout. Nechť $ N_t = \{n-1,\dots,n-t\}$ a $h$ je takové číslo, že $p^h$ dělí nějaké číslo z $N_t$ a $p^{h+1}$ nedělí žádné z čísel z $N_t$. Nechť $k$ je takové, že $k = fp^h \in N_t$. Když k číslo $k$ budeme přičítat či odčítat číslo $p$ dostaneme čísla dělitelné $p$, tedy $k + p, k - p, k + 2p, k - 2p$ atd. Takovýchto čísel z $N_t$ je tedy $\lfloor \frac{t}{p} \rfloor$. Obecně když budeme přičítat odčítat mocninu $p^i$, dostaneme čísla dělitelné $p^i$ a těch je $\lfloor \frac{t}{p^i} \rfloor$ v množině $N_t$. Počet výskytů $p$ v rozkladu čísla $\pi$ můžeme tedy odhadnout
+\[
+rt \leq h + \Bigl\lfloor \frac{t}{p} \Bigr\rfloor + \Bigl\lfloor \frac{t}{p^2} \Bigr\rfloor + \Bigl\lfloor \frac{t}{p^3} \Bigr\rfloor + \dots
+\]
+To dále můžeme upravit
+\begin{align*}
+h &\geq rt - \sum\limits_{i=0}^\infty \Bigl\lfloor \frac{t}{p^i} \Bigr\rfloor 
+ \geq rt - \frac{t}{p} \Bigl(\sum\limits_{i=0}^\infty  \frac{1}{p^i} \Bigr) \\
+& = rt - \frac{t}{p}\Bigl(\frac{1}{1-\frac{1}{p}}\Bigr) 
+= t \Bigl(r - \frac{1}{p-1} \Bigr) \\
+& \geq \frac{rt}{2}.
+\end{align*}
+Poslední nerovnost vychází z toho, že $r - \frac{1}{p-1} \geq \frac{r}{2}$, což se dá snadno ověřit rozborem případů pro $p > 2$ a $p = 2$. Nyní již můžeme odhadnou $n$ a dokázat tak lemma
+\[
+n > p^h \geq p^{\frac{rt}{2}} = q^{\lfloor\frac{t}{2}\rfloor}
+\]
+\qed
+
+\lm $t \leq 11, q \leq 27$ a $n \leq 495$.
+
+\dk Když složíme předchozí 2 lemmata dohromady dostaneme nerovnost
+\[
+\frac{9}{2}t(t-1) \geq n \geq q^{\lfloor\frac{t}{2}\rfloor} \geq 3^{\lfloor\frac{t}{2}\rfloor}
+\]
+Z nerovnosti $\frac{9}{2}t(t-1) \geq 3^{\lfloor\frac{t}{2}\rfloor}$ dostaneme odhad $t \leq 11$. Následně pak dosadíme za $t$ a dostaneme, že $n \leq 495$. Při dosazení $t=3$ (nejmenší možná hodnota $t$) dostaneme odhad $q \leq 27$. \qed
+
+Počítačem bylo ověřeno, že pro hodnoty $3 \leq t \leq 11, 3 \leq q \leq 27$ a $n \leq 495$ neexistují žádné perfektní kódy, kdy $q$ je mocnina prvočísla. Charakterizace perfektních kódů nad abecedou, která má velikost mocninu prvočísla, je tedy hotová.
 
 
 
