@@ -1,4 +1,29 @@
 \subsection{Charakterizace perfektních kódů}
+Pro každý kód $C$ opravující $t$ chyb platí nerovnost
+\[
+|C| \leq { q^n \over \sum\limits_{i=0}^t \binom{n}{i} (q-1)^i },
+\]
+označována také jako Sphere packing (dokázaná na začátku sekce). Pro perfektní kódy pak platí rovnost. Než se pustíme do charakterizace perfektních kódů nad abecedou velikosti mocniny prvočísla, dokážeme nutnou podmínku pro existenci takovýchto kódů.
+
+\vt Nechť $q=p^r$, kde $p$ je prvočíslo. Pak existuje $\alpha \in \N$ takové, že
+\[
+\sum\limits_{i=0}^t \binom{n}{i} (q-1)^i = q^\alpha.
+\]
+
+\dk Ze Sphere packingu dostaneme
+\begin{align}
+\sum\limits_{i=0}^t \binom{n}{i} (q-1)^i = { q^n \over |C| }. \label{eq:PrimeCodeSize}
+\end{align}
+Tedy, $|C|$ musí dělit $q^n = p^{rn}$ a $|C| = p^\beta$ pro nějaké $\beta \in \N$. Dále použijeme následující rovnost (lze jednoduše dokázat indukcí)
+\begin{align}
+\sum\limits_{i=0}^n \binom{n}{i} (q-1)^i = q^n. \label{eq:PowerOfq}
+\end{align}
+Když od sebe odečteme rovnice~\ref{eq:PowerOfq} a~\ref{eq:PrimeCodeSize}, dostaneme
+\[
+q^n - p^\beta \equiv 0 \text{ (mod } q - 1),
+\]
+z čehož vyplývá $|C| = p^\beta = q^k$ pro nějaké $k \in \N$ a věta je dokázána. \qed
+
 
 \vt Nechť $q=p^r$, a $p$ je prvočíslo. Pak existují právě následující netriviální perfektní kódy (tedy s $|C| \geq 2$ a pokud $|C| = 2$, tak to není kód $q=2$ a $n=2t+1$):
 \begin{description}
@@ -6,15 +31,17 @@
 	\item $2$-perfektní kód $q=3$ a $n=11$ (Golayův)
 	\item $3$-perfektní kód $q=2$ a $n=23$ (Golayův)
 \end{description}
-Dál $q$ složené neexistují perfektní kódy pro $t \geq 3$ a pro $t = 1,2$ se to neví.
 
-Důkaz je technicky náročný a budeme se jím zabývat po zbytek sekce. Základem je Lloydova věta a Sphere packing ukázaným na začátku sekce. Nejprve se pro malé hodnoty parametrů ukáže, zda pro dané hodnoty kódy existují či nikoli. Pak se pro obecný případ udělá horní odhad parametrů pomocí Lloydovy věty. A pro konečný počet případů, pro které by kódy mohly existovat, bylo dokázáno počítačem, že jiné perfektní kódy než Hammingovy a Golayovy neexistují.
 
-\vt Pro $q=3$ existuje jenom $2$-perfektní kód.
+Důkaz je technicky náročný a budeme se jím zabývat po zbytek sekce. Základem je Lloydova věta a právě dokázanou nutnou podmínkou pro existenci těchto kódů. Nejprve se pro malé hodnoty parametrů ukáže, zda pro dané hodnoty kódy existují či nikoli. Pak se pro obecný případ udělá horní odhad parametrů pomocí Lloydovy věty. A pro konečný počet případů, pro které by kódy mohly existovat, bylo dokázáno počítačem, že neexistují.  Pro $t = 1$ ze Sphere packingu dostaneme $1 + n(q - 1) = q^\alpha$, tedy $n = \frac{q^\alpha - 1}{q - 1}$, což jsou přesně velikosti Hammingových kódů. Dále budeme předpokládat, že $t \geq 2$.
+
+\vt $2$-perfektní kód existuje jen pro $q = 3$ (Golayův kód).
+
+Důkaz neexistence $2$-perfektního kódu nad jinou než tří prvkovou abecedou uvedeme jen pro $q = 2$.
 
 \vt Pro $q=2$ neexistuje $2$-perfektní kód.
 
-\dk Ze Sphere packingu dostaneme:
+\dk Z předchozí věty dostaneme:
 \begin{align}
 	1 + n + {n \choose 2} &= q^\alpha  \\
 	2 + 2n + n(n-1) &= q^{\alpha + 1} \label{eq:SpherePacking}\\
@@ -61,7 +88,7 @@ Pravá strana rovnice~\ref{eq:Mod1} modulo 16 se rovná $1$, zatímco pravá str
 
 \end{itemize}
 
-\vt Pro $t \leq 3$ a $q > 2$ neexistuje $t$-perfektní kód nad abecedou s $q$ znaky.
+\vt Pro $t \geq 3$ a $q > 2$ neexistuje $t$-perfektní kód nad abecedou s $q$ znaky.
 
 Důkaz této části je nejnáročnější, proto ho rozdělíme do několika lemmátek. Hlavní roli budou mít kořeny Lloydova polynomu, které si označíme $\sigma_1, \dots, \sigma_t$ a pro které platí:
 
@@ -165,7 +192,7 @@ Což platí, protože z předchozího lemmatu víme, že $x \geq 2$. \qed
 \end{align*}
 Pravou stranu následně budeme upravovat:
 \begin{align*}
-\frac{t!}{q^t}q^\alpha &= \sum\limits_{i = 0}^{t}(q - 1)^i{n \choose i} \\
+\frac{t!}{q^t}q^\alpha &= \frac{t!}{q^t}\sum\limits_{i = 0}^{t}(q - 1)^i{n \choose i} \\
 &\geq \frac{t!}{q^t} (q - 1)^t \frac{n(n-1)\dots(n-t+1)}{t!}  \\
 &= \frac{(q-1)^t}{q^t} n^t \Bigl(1 - \frac{1}{n}\Bigr)\Bigl(1 - \frac{2}{n}\Bigr)\dots\Bigl(1 - \frac{t-1}{n}\Bigr)
 \end{align*}
@@ -234,7 +261,7 @@ h &\geq rt - \sum\limits_{i=0}^\infty \Bigl\lfloor \frac{t}{p^i} \Bigr\rfloor
 \end{align*}
 Poslední nerovnost vychází z toho, že $r - \frac{1}{p-1} \geq \frac{r}{2}$, což se dá snadno ověřit rozborem případů pro $p > 2$ a $p = 2$. Nyní již můžeme odhadnou $n$ a dokázat tak lemma
 \[
-n > p^h \geq p^{\frac{rt}{2}} = q^{\lfloor\frac{t}{2}\rfloor}
+n > p^h \geq p^{\frac{rt}{2}} \geq q^{\lfloor\frac{t}{2}\rfloor}
 \]
 \qed
 
@@ -247,3 +274,5 @@ n > p^h \geq p^{\frac{rt}{2}} = q^{\lfloor\frac{t}{2}\rfloor}
 Z nerovnosti $\frac{9}{2}t(t-1) \geq 3^{\lfloor\frac{t}{2}\rfloor}$ dostaneme odhad $t \leq 11$. Následně pak dosadíme za $t$ a dostaneme, že $n \leq 495$. Při dosazení $t=3$ (nejmenší možná hodnota $t$) dostaneme odhad $q \leq 27$. \qed
 
 Počítačem bylo ověřeno, že pro hodnoty $3 \leq t \leq 11, 3 \leq q \leq 27$ a $n \leq 495$ neexistují žádné perfektní kódy, kdy $q$ je mocnina prvočísla. Charakterizace perfektních kódů nad abecedou, která má velikost mocninu prvočísla, je tedy hotová.
+
+Pro zajímavost uvedeme, že pro $q$, které není mocninou prvočísla, neexistují perfektní kódy pro $t \geq 3$ a pro $t = 1,2$ se to neví. Pro parametry, pro které existují perfektní kódy, existují i jiné perfektní kódy než Hammingovy a Golayovi.
