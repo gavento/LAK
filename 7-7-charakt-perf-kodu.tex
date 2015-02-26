@@ -14,7 +14,7 @@ označována také jako Sphere packing (dokázaná na začátku sekce). Pro perf
 \begin{align}
 \sum\limits_{i=0}^t \binom{n}{i} (q-1)^i = { q^n \over |C| }. \label{eq:PrimeCodeSize}
 \end{align}
-Tedy, $|C|$ musí dělit $q^n = p^{rn}$ a $|C| = p^\beta$ pro nějaké $\beta \in \N$. Dále použijeme následující rovnost (lze jednoduše dokázat indukcí)
+Tedy, $|C|$ musí dělit $q^n = p^{rn}$ a ${ q^n \over |C| } = p^\beta$ pro nějaké $\beta \in \N$. Dále použijeme následující rovnost (jednoduše dokazatelnou indukcí)
 \begin{align}
 \sum\limits_{i=0}^n \binom{n}{i} (q-1)^i = q^n. \label{eq:PowerOfq}
 \end{align}
@@ -22,7 +22,7 @@ Když od sebe odečteme rovnice~\ref{eq:PowerOfq} a~\ref{eq:PrimeCodeSize}, dost
 \[
 q^n - p^\beta \equiv 0 \text{ (mod } q - 1),
 \]
-z čehož vyplývá $|C| = p^\beta = q^k$ pro nějaké $k \in \N$ a věta je dokázána. \qed
+z čehož vyplývá $p^\beta = q^\alpha$ pro nějaké $\alpha \in \N$. \qed
 
 
 \vt Nechť $q=p^r$, a $p$ je prvočíslo. Pak existují právě následující netriviální perfektní kódy (tedy s $|C| \geq 2$ a pokud $|C| = 2$, tak to není kód $q=2$ a $n=2t+1$):
@@ -33,7 +33,7 @@ z čehož vyplývá $|C| = p^\beta = q^k$ pro nějaké $k \in \N$ a věta je dok
 \end{description}
 
 
-Důkaz je technicky náročný a budeme se jím zabývat po zbytek sekce. Základem je Lloydova věta a právě dokázanou nutnou podmínkou pro existenci těchto kódů. Nejprve se pro malé hodnoty parametrů ukáže, zda pro dané hodnoty kódy existují či nikoli. Pak se pro obecný případ udělá horní odhad parametrů pomocí Lloydovy věty. A pro konečný počet případů, pro které by kódy mohly existovat, bylo dokázáno počítačem, že neexistují.  Pro $t = 1$ ze Sphere packingu dostaneme $1 + n(q - 1) = q^\alpha$, tedy $n = \frac{q^\alpha - 1}{q - 1}$, což jsou přesně velikosti Hammingových kódů. Dále budeme předpokládat, že $t \geq 2$.
+Důkaz je technicky náročný a budeme se jím zabývat po zbytek sekce. Po celou dobu budeme předpokládat, že $q$ je mocnina nějakého prvočísla. Základem je Lloydova věta a právě dokázaná nutná podmínka pro existenci těchto kódů. Nejprve se pro malé hodnoty parametrů ukáže, zda pro dané hodnoty kódy existují či nikoli. Pak se pro obecný případ udělá horní odhad parametrů pomocí Lloydovy věty. A pro konečný počet případů, pro které by kódy mohly existovat, bylo dokázáno počítačem, že neexistují.  Pro $t = 1$ ze Sphere packingu dostaneme $1 + n(q - 1) = q^\alpha$, tedy $n = \frac{q^\alpha - 1}{q - 1}$, což jsou přesně velikosti Hammingových kódů. Dále budeme předpokládat, že $t \geq 2$.
 
 \vt $2$-perfektní kód existuje jen pro $q = 3$ (Golayův kód).
 
@@ -41,7 +41,7 @@ Důkaz neexistence $2$-perfektního kódu nad jinou než tří prvkovou abecedou
 
 \vt Pro $q=2$ neexistuje $2$-perfektní kód.
 
-\dk Z předchozí věty dostaneme:
+\dk Z dokázané nutné podmínky pro existenci perfektního kódu dostaneme:
 \begin{align}
 	1 + n + {n \choose 2} &= q^\alpha  \\
 	2 + 2n + n(n-1) &= q^{\alpha + 1} \label{eq:SpherePacking}\\
@@ -90,10 +90,10 @@ Pravá strana rovnice~\ref{eq:Mod1} modulo 16 se rovná $1$, zatímco pravá str
 
 \vt Pro $t \geq 3$ a $q > 2$ neexistuje $t$-perfektní kód nad abecedou s $q$ znaky.
 
-Důkaz této části je nejnáročnější, proto ho rozdělíme do několika lemmátek. Hlavní roli budou mít kořeny Lloydova polynomu, které si označíme $\sigma_1, \dots, \sigma_t$ a pro které platí:
+Důkaz této části je nejnáročnější, proto ho rozdělíme do několika lemmátek. Hlavní roli budou mít kořeny Lloydova polynomu, které si označíme $\sigma_1, \dots, \sigma_t$ a pro které platí
 
 \begin{align*}
-2 < \sigma_1 < \dots < \sigma_t < n
+2 < \sigma_1 < \dots < \sigma_t < n.
 \end{align*}
 
 Nerovnosti mezi kořeny máme z Lloydovy věty. Po dosazení čísel $0, 1$ a $2$ do Lloydova polynomu, zjistíme, že ani jedno z těchto čísel není kořenem, tedy $2 < \sigma_1$.
@@ -124,13 +124,13 @@ a_t &= \sum\limits_{i = 0}^{t} (-1)^i (q - 1)^{t - i} \frac{1}{i!}(-1)^{t-i} \fr
 &= \frac{(-1)^t}{t!}\sum\limits_{i = 0}^{t}(q-1)^{t-i} \frac{t!}{i!(t-i)!} \\
 &= \frac{(-1)^t}{t!}\bigl((q - 1) + 1\bigr)^t
 \end{align*}
-Pro poslední rovnost jsme použili binomickou větu. Po dosazení do rovnice~\ref{eq:ProdRoot} dostaneme:
+Pro poslední rovnost jsme použili binomickou větu. Po dosazení do rovnice~\ref{eq:ProdRoot} dostaneme rovnost pro součin kořenů Lloydova polynomu
 \begin{align*}
-\prod\limits_{i = 1}^{t} \sigma_i = (-1)^t \frac{q^\alpha}{\frac{(-1)^t}{t!}q^t} = t!q^{\alpha-t}
+\prod\limits_{i = 1}^{t} \sigma_i = (-1)^t \frac{q^\alpha}{\frac{(-1)^t}{t!}q^t} = t!q^{\alpha-t}.
 \end{align*}
-Bez důkazu uvádíme:
+Bez důkazu uvádíme
 \begin{align*}
-a_{t-1} = - \frac{(-q)^t}{t!}\Bigl(\frac{t(t+1)}{2} + \frac{t(n-t)(q - 1)}{q}\Bigr) 
+a_{t-1} = - \frac{(-q)^t}{t!}\Bigl(\frac{t(t+1)}{2} + \frac{t(n-t)(q - 1)}{q}\Bigr).
 \end{align*}
 Po dosazení do rovnice~\ref{eq:ProdSum} dostaneme dokazovanou rovnost pro součet kořenů.
 \qed
@@ -150,9 +150,9 @@ Uvažme nyní 2 možnosti:
 \sigma_i &= p^{h_i}k \\
 \sigma_j &= p^{h_j}k \\
 \end{align*}
-Bez újmy na obecnosti platí $\sigma_i < \sigma_j$ a pak tedy $h_i < h_j$ a $p\sigma_i \leq \sigma_j$. Když všechny nerovnosti dáme dohromady:
+Bez újmy na obecnosti platí $\sigma_i < \sigma_j$ a pak tedy $h_i < h_j$ a $p\sigma_i \leq \sigma_j$. Když všechny nerovnosti dáme dohromady, dostaneme požadovaný výsledek
 \begin{align*}
-\sigma_t \geq \sigma_j \geq p\sigma_i \geq 2\sigma_i \geq 2\sigma_1
+\sigma_t \geq \sigma_j \geq p\sigma_i \geq 2\sigma_i \geq 2\sigma_1.
 \end{align*}
 \item Nechť jsou tedy všechny $f(\sigma_i)$ různé. Jelikož je jejich součin menší než $t!$, pak se mezi $f(\sigma_1),\dots ,f(\sigma_t)$ vyskytují všechna čísla $1,\dots,t$. Jelikož $t \geq 3$ a $p$ je nesoudělné se všemi čísly $1,\dots,t$, tak $p > 3$. Evidentně musí existovat $i,j$ taková, že:
 \begin{align*}
@@ -161,46 +161,46 @@ Bez újmy na obecnosti platí $\sigma_i < \sigma_j$ a pak tedy $h_i < h_j$ a $p\
 \end{align*}
 Rozebereme 2 možnosti:
 \begin{enumerate}
-\item Nechť $h_j \geq h_i$, pak: $\sigma_t \geq \sigma_j = 2p^{h_j} \geq 2p^{h_i} = 2\sigma_i \geq 2\sigma_1$
-\item Nechť $h_i > h_j$, pak: $\sigma_t \geq \sigma_i = p^{h_i} \geq p^{h_j + 1} = \frac{p}{2}\sigma_j \geq 2\sigma_j \geq 2\sigma_1$
+\item Nechť $h_j \geq h_i$, pak $\sigma_t \geq \sigma_j = 2p^{h_j} \geq 2p^{h_i} = 2\sigma_i \geq 2\sigma_1$
+\item Nechť $h_i > h_j$, pak $\sigma_t \geq \sigma_i = p^{h_i} \geq p^{h_j + 1} = \frac{p}{2}\sigma_j \geq 2\sigma_j \geq 2\sigma_1$
 \end{enumerate}
 \end{enumerate}
 \qed
 
 \lm $\sigma_1\sigma_t \leq \frac{8}{9}(\frac{\sigma_1 + \sigma_t}{2})^2$
 
-\dk Celou nerovnost vynásobíme $\sigma^2_1$:
+\dk Celou nerovnost vynásobíme $\sigma^2_1$,
 \begin{align*}
-\frac{\sigma_t}{\sigma_1} \leq \frac{8}{9}\Bigl(\frac{1 + \frac{\sigma_1}{\sigma_t}}{2}\Bigr)^2
+\frac{\sigma_t}{\sigma_1} \leq \frac{8}{9}\Bigl(\frac{1 + \frac{\sigma_1}{\sigma_t}}{2}\Bigr)^2.
 \end{align*}
-Provedeme substituci $x = \frac{\sigma_t}{\sigma_1}$:
+Provedeme substituci $x = \frac{\sigma_t}{\sigma_1}$,
 \begin{align*}
-x \leq \frac{8}{9}\Bigl(\frac{1 + x}{2}\Bigr)^2
+x \leq \frac{8}{9}\Bigl(\frac{1 + x}{2}\Bigr)^2.
 \end{align*}
-Po elementárních úpravách dostaneme:
+Po elementárních úpravách dostaneme
 \begin{align*}
-0 \leq \Bigl(x - \frac{1}{2}\Bigr)\Bigl(x - 2\Bigr)
+0 \leq \Bigl(x - \frac{1}{2}\Bigr)\Bigl(x - 2\Bigr).
 \end{align*}
 Což platí, protože z předchozího lemmatu víme, že $x \geq 2$. \qed
 
 
 \lm $\prod\limits_{i = 1}^t \sigma_i \geq \frac{n^t (q-1)^t}{q^t}\bigl(1 - \frac{t(t-1)}{2n}\bigr)$
 
-\dk Víme, že:
+\dk Víme, že
 \begin{align*}
-\prod\limits_{i = 1}^t \sigma_i = t!q^{\alpha-t}
+\prod\limits_{i = 1}^t \sigma_i = t!q^{\alpha-t}.
 \end{align*}
-Pravou stranu následně budeme upravovat:
+Pravou stranu následně upravíme:
 \begin{align*}
 \frac{t!}{q^t}q^\alpha &= \frac{t!}{q^t}\sum\limits_{i = 0}^{t}(q - 1)^i{n \choose i} \\
 &\geq \frac{t!}{q^t} (q - 1)^t \frac{n(n-1)\dots(n-t+1)}{t!}  \\
 &= \frac{(q-1)^t}{q^t} n^t \Bigl(1 - \frac{1}{n}\Bigr)\Bigl(1 - \frac{2}{n}\Bigr)\dots\Bigl(1 - \frac{t-1}{n}\Bigr)
 \end{align*}
-Nyní použijeme vzoreček, který platí pro $x_1,\dots,x_k \in (0,1)$:
+Nyní použijeme vzoreček, který platí pro $x_1,\dots,x_k \in (0,1)$
 \begin{align*}
-\prod\limits_{i=1}^{k} (1 - x_i) \geq 1 - \sum\limits_{i=1}^{k} x_i
+\prod\limits_{i=1}^{k} (1 - x_i) \geq 1 - \sum\limits_{i=1}^{k} x_i.
 \end{align*}
-Po aplikaci na $(1 - \frac{1}{n})(1 - \frac{2}{n})\dots(1 - \frac{t-1}{n})$, dostaneme:
+Po aplikaci na $(1 - \frac{1}{n})(1 - \frac{2}{n})\dots(1 - \frac{t-1}{n})$, dostaneme dokazovaný odhad:
 \begin{align*}
 \frac{t!}{q^t}q^\alpha &\geq \frac{n^t (q-1)^t}{q^t}\Bigl(1 - \sum\limits_{i=1}^{t-1} \frac{i}{n}\Bigr) \\
 &\geq \frac{n^t (q-1)^t}{q^t}\Bigl(1 - \frac{t(t-1)}{2n}\Bigr) 
@@ -209,29 +209,25 @@ Po aplikaci na $(1 - \frac{1}{n})(1 - \frac{2}{n})\dots(1 - \frac{t-1}{n})$, dos
 
 \lm $\prod\limits_{i = 1}^t \sigma_i \leq \frac{8}{9}\frac{n^t(q-1)^t}{q^t}$
 
-\dk Pro důkaz použijeme již dokázanou nerovnost $\sigma_1\sigma_t \leq \frac{8}{9}(\frac{\sigma_1+\sigma_t}{2})^2$ a nerovnost mezi aritmetickým a geometrickým průměrem:
+\dk Pro důkaz použijeme již dokázanou nerovnost $\sigma_1\sigma_t \leq \frac{8}{9}(\frac{\sigma_1+\sigma_t}{2})^2$ a nerovnost mezi aritmetickým a geometrickým průměrem
 \begin{align*}
-\Bigl(\prod\limits_{i=1}^k x_i \Bigr)^{\frac{1}{k}} \leq \frac{\sum\limits_{i=1}^k x_i}{k}
+\Bigl(\prod\limits_{i=1}^k x_i \Bigr)^{\frac{1}{k}} \leq \frac{\sum\limits_{i=1}^k x_i}{k}.
 \end{align*}
 Odhadněme tedy součin kořenů:
 \begin{align*}
-(\sigma_1\sigma_t)(\sigma_2\sigma_3\dots\sigma_{t-1}) &\leq \frac{8}{9}\Bigl(\frac{\sigma_1+\sigma_t}{2}\Bigr)^2\Bigl(\frac{\sigma_2 + \dots + \sigma_{t-2}}{t-2}\Bigr)^{t-2} \\
-&\leq \frac{8}{9} \Bigl(\frac{2\frac{\sigma_1 + \sigma_t}{2} + (t-2)\frac{\sigma_2 + \dots + \sigma_{t-2}}{t-2}}{t}\Bigr)^t \\
+(\sigma_1\sigma_t)(\sigma_2\sigma_3\dots\sigma_{t-1}) &\leq \frac{8}{9}\Bigl(\frac{\sigma_1+\sigma_t}{2}\Bigr)^2\Bigl(\frac{\sigma_2 + \dots + \sigma_{t-1}}{t-2}\Bigr)^{t-2} \\
+&\leq \frac{8}{9} \Bigl(\frac{2\frac{\sigma_1 + \sigma_t}{2} + (t-2)\frac{\sigma_2 + \dots + \sigma_{t-1}}{t-2}}{t}\Bigr)^t \\
 &=\frac{8}{9}\Bigl(\frac{\sigma_1 + \dots + \sigma_t}{t}\Bigr)^t
 \end{align*}
-Po dosazení již dokázaného vzorečku pro součet kořenů dostaneme odhad:
+Po dosazení již dokázaného vzorečku pro součet kořenů dostaneme odhad
 \begin{align*}
-\prod\limits_{i = 1}^{t} \sigma_i \leq \Bigl(\frac{(n-t)(q-1)}{q} + \frac{t+1}{2}\Bigr)^t
+\prod\limits_{i = 1}^{t} \sigma_i \leq \Bigl(\frac{(n-t)(q-1)}{q} + \frac{t+1}{2}\Bigr)^t.
 \end{align*}
-Abychom dokázali lemma, potřebujeme tedy dokázat:
+Abychom dokázali lemma, potřebujeme tedy dokázat, že
 \begin{align*}
-\frac{(n-t)(q-1)}{q} + \frac{t+1}{2} \leq \frac{n(q-1)}{q}
+\frac{(n-t)(q-1)}{q} + \frac{t+1}{2} \leq \frac{n(q-1)}{q}.
 \end{align*}
-Po několika elementárních úpravách dostaneme:
-\begin{align*}
-6t + 3q \leq 3tq
-\end{align*}
-Což platí protože $6t \leq 2tq$ (kvůli předpokladu $q \geq 3$) a $3q \leq tq$ (kvůli předpokladu $t \geq 3$).
+Po několika elementárních úpravách dostaneme nerovnost $6t + 3q \leq 3tq$, která platí, protože $6t \leq 2tq$ (kvůli předpokladu $q \geq 3$) a $3q \leq tq$ (kvůli předpokladu $t \geq 3$).
 \qed
 
 \lm $n \leq \frac{9}{2} t(t-1)$
@@ -240,7 +236,7 @@ Což platí protože $6t \leq 2tq$ (kvůli předpokladu $q \geq 3$) a $3q \leq t
 
 \lm $n \geq q^{\lfloor \frac{t}{2} \rfloor}$
 
-\dk
+\dk Nejprve trochu počítání:
 \begin{align*}
 \prod\limits_{i = 1}^t (\sigma_i - 1) &= (-1)^t \frac{a_t}{a_t} \prod\limits_{i = 1}^t (1 - \sigma_i) \\
 &= (-1)^t \frac{L_t(1)}{a_t} \\
@@ -251,17 +247,17 @@ Jelikož jsou kořeny Lloydova polynomu celá čísla, celý součin je také ce
 \[
 rt \leq h + \Bigl\lfloor \frac{t}{p} \Bigr\rfloor + \Bigl\lfloor \frac{t}{p^2} \Bigr\rfloor + \Bigl\lfloor \frac{t}{p^3} \Bigr\rfloor + \dots
 \]
-To dále můžeme upravit
+To dále můžeme upravit:
 \begin{align*}
-h &\geq rt - \sum\limits_{i=0}^\infty \Bigl\lfloor \frac{t}{p^i} \Bigr\rfloor 
+h &\geq rt - \sum\limits_{i=1}^\infty \Bigl\lfloor \frac{t}{p^i} \Bigr\rfloor 
  \geq rt - \frac{t}{p} \Bigl(\sum\limits_{i=0}^\infty  \frac{1}{p^i} \Bigr) \\
 & = rt - \frac{t}{p}\Bigl(\frac{1}{1-\frac{1}{p}}\Bigr) 
 = t \Bigl(r - \frac{1}{p-1} \Bigr) \\
-& \geq \frac{rt}{2}.
+& \geq \frac{rt}{2}
 \end{align*}
 Poslední nerovnost vychází z toho, že $r - \frac{1}{p-1} \geq \frac{r}{2}$, což se dá snadno ověřit rozborem případů pro $p > 2$ a $p = 2$. Nyní již můžeme odhadnou $n$ a dokázat tak lemma
 \[
-n > p^h \geq p^{\frac{rt}{2}} \geq q^{\lfloor\frac{t}{2}\rfloor}
+n > p^h \geq p^{\frac{rt}{2}} \geq q^{\lfloor\frac{t}{2}\rfloor}.
 \]
 \qed
 
@@ -269,9 +265,9 @@ n > p^h \geq p^{\frac{rt}{2}} \geq q^{\lfloor\frac{t}{2}\rfloor}
 
 \dk Když složíme předchozí 2 lemmata dohromady dostaneme nerovnost
 \[
-\frac{9}{2}t(t-1) \geq n \geq q^{\lfloor\frac{t}{2}\rfloor} \geq 3^{\lfloor\frac{t}{2}\rfloor}
+\frac{9}{2}t(t-1) \geq n \geq q^{\lfloor\frac{t}{2}\rfloor} \geq 3^{\lfloor\frac{t}{2}\rfloor}.
 \]
-Z nerovnosti $\frac{9}{2}t(t-1) \geq 3^{\lfloor\frac{t}{2}\rfloor}$ dostaneme odhad $t \leq 11$. Následně pak dosadíme za $t$ a dostaneme, že $n \leq 495$. Při dosazení $t=3$ (nejmenší možná hodnota $t$) dostaneme odhad $q \leq 27$. \qed
+Z nerovnosti $\frac{9}{2}t(t-1) \geq 3^{\lfloor\frac{t}{2}\rfloor}$ dostaneme odhad $t \leq 11$. Následně pak dosadíme za $t$ a dostaneme, že $n \leq 495$. Při dosazení $t=3$ (nejmenší možná hodnota $t$, kdy $q$ dosahuje nejvyšší hodnoty) dostaneme odhad $q \leq 27$. \qed
 
 Počítačem bylo ověřeno, že pro hodnoty $3 \leq t \leq 11, 3 \leq q \leq 27$ a $n \leq 495$ neexistují žádné perfektní kódy, kdy $q$ je mocnina prvočísla. Charakterizace perfektních kódů nad abecedou, která má velikost mocninu prvočísla, je tedy hotová.
 
