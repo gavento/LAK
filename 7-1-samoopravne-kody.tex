@@ -1,23 +1,166 @@
-\subsection{Připomenutí pojmů}
+\subsection{Samoopravné kódy}
 
 
-\df Samoopravný kód $C$ s parametry $(n,q)$ je pro nás systém množin $C \subseteq M = \{0, \ldots, q-1\}^n$ (prvkům této množiny říkáme kódová slova).
 
-\df Grafem kódu rozumíme graf $G=(V,E)$, že $V(G) = \{0, \ldots, q-1 \}^n$ a hrana mezi vrcholy $u,v$ vede právě tehdy, když $d(u,v) = 1$, tedy liší se právě v jedné souřadnici ($d$ je hammingovská vzdálenost). Kód v takovém grafu je pak podmnožina vrcholů, které odpovídají kódovým slovům.
+\df Samoopravný kód $C$ s parametry $(n, M)_q$ nad abecedou $A$ je podmnožina $A^n$, kde $|A|=q$ a $|C|=M$. Prvkům množiny $C$ říkáme kódová slova.
 
-\df Kód opravuje $t$ chyb, pokud jsou $N_t(u)$ (okolí vrcholu $u$ do vzdálenosti $t$) disjunktní pro všechny dvojce kódových slov.
+Nejčastěji $A$ je konečné těleso $GF(q)$ o $q$ prvcích nebo $A=\{0, \dots, q-1\}$. Pokud $C$ je vektorový podprostor nad tělesem $A$, pak $C$ nazýváme lineárním kódem. Množinu $A^n$ navíc vybavíme Hammingovou metrikou $d(~,~)$. Pro dvě slova $x, y \in A^n$ se složkami $x_i$ resp. $y_i$ platí $$d(x, y)=|\{i~|~x_i\neq y_i\}|.$$ Minimální vzdálenost kódu je pak definována jako $d=\min_{x \neq y \in C} d(x, y)$. Mluvíme pak o $(n, M, d)_q$ kódu. 
 
-\df Kód $C$ je $t$-perfektní, pokud opravuje $t$ chyb a navíc úplně pokrývá svou nosnou množinu $M$.
+Chceme, aby kód měl co největší minimální vzdálenost (při co největší mohutnosti). To souvisí s tím, že pokud vysíláme kódové slovo $c \in C$, může během přenosu dojít k chybám (uvažujeme pouze změnu složky nikoliv zkrácení délky) a druhá strana přijme slovo $y= c + e$, kde $e$ je chybové slovo. Příjemce se pak snaží chybu detekovat a případně opravit $y$ na nejbližší kódové slovo $c' \in C$ (vše je měřeno Hammingovou metrikou). Pokud kódová slova budou co nejdále od sebe, je detekce a oprava $y$ na správné kódové slovo $c$ (tj. $c=c'$) více pravděpodobná. Přesněji pokud počet chyb (což je počet nenulových složek chybového slova $e$) je $\leq d-1$ je možné chybu detekovat (přijmeme-li nekódové slovo, víme, že nastala chyba). Pokud pokud počet chyb je $\leq \lfloor\frac{d-1}{2}\rfloor=:t$ je možné chybu opravit. Označme $N_t(c)=\{x\in A^n~|~d(c, x)\leq t\}$ okolí slova $c$ do vzdálenosti $t$. Vidíme, že okolí $N_t(c)$ pro všechna $c\in C$ jsou disjunktní, kde $C$ má minimální vzdálenost $d$ a $t$ je definováno výše. 
 
-\tv Pokud $C$ opravuje $t$ chyb, platí:
+
+
+
+
+%\df Kód $C$ je $t$-perfektní, pokud opravuje $t$ chyb a navíc úplně pokrývá svou nosnou množinu $M$.
+
+\tv(Hammingův odhad) Mějme $(n, M, d)_q$ kód $C$. Označme $t=\lfloor\frac{d-1}{2}\rfloor$. Pak
 \begin{align*}
 	|C| \leq { q^n \over \sum_{i=0}^t \binom{n}{i} (q-1)^i }
 \end{align*}
 
-\dk Okolíčka musí být disjunktní, stačí tedy spočítat, kolik může být kódových
-slov, což je daný výraz: V čitateli je počet všech slov. Jmenovatel počítá
-velikost každého $t$-okolí, tedy vybírá možné souřadnice ke změně a jejich
-potenciální nové hodnoty.
+\dk Stačí si uvědomit, že okolí jsou disjunktní a obsahují všechny stejně slov (zde nezáleží na středu okolí). Dostáváme tak: 
+$$q^n\geq \sum_{c\in C} |N_t(c)|=M\cdot \sum^{t}_{i=0} \binom{n}{i}(q-1)^i.$$
+\qed
+
+\df Kódy, která nabývají rovnosti v Hammingově odhadu nazýváme perfektními.
+
+Nyní si ukážeme základní příklady perfektních kódů. Mezi ty triviální patří totální $(n, q^n, 1)$ kód obsahující všechna slova z $A^n$, opakovací $(n, 2, n )$ kód pro lichou délku $n$ a jednoprvkový kód. 
+
+Každý lineární kód můžeme popsat jeho bází. Generující matice $G$ o rozměrech $k \times n$ lineárního $(n, q^k)$ kódů $C$ nad $GF(q)$ má v řádcích zapsanou jeho bázi. Kontrolní matice lineárního kódu $C$ je taková matice $H$ o rozměrech $(n-k) \times n$, že $c\in C \Leftrightarrow Hc^T=0$. Platí $HG^T=0$. Lineární kód můžeme jednoznačně popsat jeho generující nebo kontrolní maticí.
+
+\df Hammingův kód $\mathcal{H}(r, q)$ je určen svojí kontrolní matici o rozměrech $r \times \frac{q^r-1}{q-1}$, která obsahuje ve sloupcích všechny po dvou lineárně nezávislé vektory nad $GF(q)$ délky $r$. Kód $\mathcal{H}(r, q)$ je $1$-perfektní $(\frac{q^r-1}{q-1}, \frac{q^r-1}{q-1}-r, 3)_q$ lineární kód.
+
+\df Uvažme matici $G'=(I_{12}~|~Q)$, kde $Q$ je doplněk matice sousednosti dvacetistěnu. Matice $G'$ generuje $(24, 12, 8)_2$ kód $\mathcal{G}_{24}$ nad $GF(2)$. Vynecháním libovolné fixní souřadnice kódových slov v $\mathcal{G}_{24}$ obdržíme $(23, 12, 7)_2$ kód $\mathcal{G}_{23}$. Kód $\mathcal{G}_{23}$ se nazývá binární Golayův $3$-perfektní kód.
+
+\df Uvažme matici $G=(I_6~|~Q)$, kde 
+\begin{displaymath}
+Q= \left(
+\begin{array}{ccccc}
+1& 1 & 1 & 1 &  1\\
+0& 1 & 2 & 2 &  1\\
+1& 0 & 1 & 2 &  2\\
+2& 1 & 0 & 1 &  2\\
+2& 2 & 1 & 0 &  1\\
+1& 2 & 2 & 1 &  0\\
+\end{array}
+\right).
+\end{displaymath}
+
+Matice $G$ generuje $(11, 6, 5)_3$ kód $\mathcal{G}_{11}$ nad $GF(3)$. Kód $\mathcal{G}_{11}$ se nazývá ternární Golayův $2$-perfektní kód. 
+
+\subsection{Lloydova věta}
+Nyní směřujeme k charakterizující větě, která říká, že ve skutečnosti žádné jiné perfektní kódy než výše uvedené nad abecedou mohutnosti mocniny prvočísla neexistují. Důkaz, který uvedeme je kombinatorický. Jádro důkazu spočívá v důkazu Lloydovy věty, která dává silné omezení na existenci perfektních kódů. 
 
 
+
+\vt Definujme Lloydův polynom v proměnné $x$ stupně $t$
+
+\begin{displaymath}
+	L_t(x) = \sum_{j=0}^t(-1)^j(q-1)^{t-j}\binom{x-1}{j}\binom{n-x}{t-j}
+\end{displaymath}
+Pokud existuje $t$-perfektní kód délky $n$ nad abecedou mohutnosti $q$, pak $L_t(x)$  má $t$ různých celočíselných kořenů mezi $1$ a $n$.
+
+K důkazu Lloydovy věty budeme potřebovat vlastnosti vzdálenostně regulárních grafů. 
+
+\subsection{Vzdálenostně regulární grafy}
+
+
+\df Uvažme graf $\Gamma=(V,E)$, že $V(G) = A^n$ a hrana mezi vrcholy $u,v$ vede právě tehdy, když $d(u, v) = 1$, tedy liší se právě v jedné souřadnici. Kód v grafu $\Gamma$ příslušející kódu $C$ je pak podmnožina vrcholů, které odpovídají kódovým slovům $C$.
+
+Graf $\Gamma$ je speciálním případem vzdálenostně regulárního grafu. Poznatky z této sekce na závěr aplikujeme právě na $\Gamma$. Po celou dobu této podkapitoly pracujeme pouze s vzdálenostně regulárními grafy.
+
+\df Graf $G$ je vzdálenostně regulární, pokud existují konstanty $s_{hij}$ tak, že  pro $\forall u,v\in V(G), d(u,v) = j$ je $$|\{w: d(u,w) = h, d(w,v) = i\}| = s_{hij}.$$
+
+\poz $|i-j| > h \Rightarrow s_{hij} = 0$ (plyne z trojúhelníkové nerovnosti), $k = s_{110}$ je počet sousedů libovolného vrcholu v $k$-regulárním grafu. 
+
+\lm Platí $$z_{mi} = z_{m-1,i-1} \cdot s_{1,i-1,i} + z_{m-1,i} \cdot s_{1,i,i} + z_{m-1,i+1} \cdot s_{1,i+1,i},$$ kde $z_{mi}$ značí počet sledů délky $m$ mezi vrcholy ve vzdálenosti $i$.
+
+\dk $z_{00} = 1$, jinak $z_{0i} = 0$. Dále dokážeme indukcí pro $m \ge 1$ a $i
+\ge 1$. $s_{1,i,j}$ je nenulové pouze pro $i \in \{j-1,j,j+1\}$ (z trojúhelníkové
+nerovnosti). V rovnici sčítáme vrcholy sousedící s $u$, které jsou ve
+vzdálenosti $i-1$, $i$ a $i+1$ od $v$.
+
+\df Mějme matici sousednosti $A = A_G$. Označme $\A(G) = \{p(A): p(x) \in \C[x]\}$. $\A(G)$ je
+vektorový prostor nad $\C$.
+
+
+
+\df Definujme vzdálenostní matice $A_0=I, A_1=A, A_2, \dots, A_d$ grafu $G$. Sloupce a řádky jsou číslovány vrcholy grafu. \\
+$$(A_i)_{uv} = \left\{\begin{matrix}
+1\quad & d(u,v) = i  \\
+0\quad & \text{jinak} \\
+\end{matrix}\right.$$
+
+
+\vt $\dim \A(G) = d+1$, kde $d$ je průměr $G$.\footnote{Průměr grafu je maximální nejkratší vzdálenost přes všechny dvojice vrcholů.} Bází $\A(G)$ jsou výše definované matice $A_0, A_1, A_2, \dots, A_d$. 
+
+\dk Platí $A^m = \sum_{i=0}^d z_{mi}A_i$ pro libovolné $m\in \mathbb{N}$. Matice $A_0, A_1, A_2, \dots, A_d$ tedy generují celý prostor $\A(G)$ a zároveň jsou lineárně nezávislé a proto $\dim \A(G) = d+1$.
+%$i > m \Rightarrow Z_{mi} = 0$ \\
+%$A^0 = Z_{0,0} \cdot A_0 = A_0$\\
+%$A^1 = Z_{1,0} \cdot A_0 + Z_{1,1} \cdot A_1 = A_1$\\
+%$A^2 = Z_{2,0} \cdot A_0 + Z_{2,1} \cdot A_1 + Z_{2,2} \cdot A_2$\\
+%$\vdots$\\
+%$A^d = Z_{d,0} \cdot A_0 + Z_{d,1} + \dots + Z_{d,d}\cdot A_d$
+ 
+\qed
+
+%\poz $\widetilde \A = \{A_0, A_1, \dots, A_d\}$ tvoří bázi $\A(G)$.
+
+
+\df Matice $B_h$ je velikosti $(d+1)\times (d+1)$ a definujme ji předpisem
+$$
+	(B_h)_{ij} := s_{hij}
+$$
+Navíc označme $B=B_1$.
+
+\lm Existuje homomorfismus vektorových prostorů $\widehat{~~}: \A(G) \to \widehat{\A(G)}$ takový, že $\widehat{A_h} = B_h$ pro $h=0, \dots, d$.
+
+\dk %Z předchozího lemmatu již máme bázi $\widetilde{\A}$ prostoru $\A$. Ukážeme si tedy, že můžeme přejít k bázi z menších matic $B$. 
+Nejdříve si všimněme, co se děje v následujícím součinu matic:
+
+$$
+	(A_hA_i)_{uv} = \sum_w(A_h)_{uw} \cdot (A_i)_{wv} = s_{hid(u,v)}
+$$
+
+V sumě je přičtena $1$ pokaždé, když pro vrchol $w$ platí, že $d(u,w)=h$ a $d(w,v) = i$, což je přesně definice $s_{hij}$ pro $j = d(u,v)$. Máme tedy:
+
+$$
+	A_hA_i = \sum_{j=0}^d s_{hij} A_j
+$$
+
+Což je vlastně lineární kombinace prvků z báze s koeficienty $s_{hij}$.
+Matici $B_h$ obsahuje v $i$-tém řádku souřadnice $A_hA_i$ vzhledem k bázi $\{A_0, A_1, \dots, A_d\}$, čili vektor $(s_{hi0}, \dots, s_{hid})$. Hledaný homomorfismus je tedy transpozice regulární reprezentace levého násobení v $\A(G)$ vzhledem k $\{A_0, A_1, \dots, A_d\}$.
+\qed
+
+
+
+\lm $B=B_1$ je tridiagonální matice. Všechny sloupcové součty jsou stejné a jsou rovny $k=s_{110}$. Navíc $s_{100}=0$ a $s_{101}=1$.
+$$
+B= \left(\begin{matrix}
+& & & & & & & & \bigzero & \\
+& & & & & & & & & \\
+& \bigzero & & & & {\smash{\raisebox{.75\normalbaselineskip}{\diagdots{9em}{.5em}}}} & {\smash{\raisebox{1.2\normalbaselineskip}{\diagdots{6.5em}{.5em}}}} & \\
+& & & & {\smash{\raisebox{1.3\normalbaselineskip}{\diagdots{6.5em}{.5em}}}} & & \\
+\end{matrix}\right)$$
+
+\dk Matice je tridiagonální, protože $s_{1,i,j}$ dává smysl jen pro $i \in \{j-1,j,j+1\}$ (z trojúhelníkové nerovnosti). Navíc v $j$-tém sloupci je $s_{1,j-1,j} + s_{1,j,j} + s_{1,j+1,j}$, což zahrnuje všechny sousedy $u$, kterých je $k$.
+\qed
+
+Následující známy výsledek z teorie matic uvádíme bez důkazu.
+
+\pzn $B$ je tridiagonální matice $\Rightarrow$ $\forall$ její vlastní čísla jsou různá.
+
+\subsection{Charakteristické polynomy}
+
+
+\df Definujme polynomy $v_i \in \Q[\lambda]$ takové, že $\deg v_i(\lambda) = i$ tak, že
+\begin{enumerate} 
+	\item $v_0(\lambda) = 1$
+	\item $v_1(\lambda) = \lambda$
+	\item pro $i \in \{ 2, \dots, d-1\}$ induktivně, aby splňovaly rovnici 
+	$$
+		s_{1,i,i-1} v_{i-1}(\lambda) + s_{1,i,i}v_i(\lambda) + s_{1,i,i+1}v_{i+1}(\lambda) = \lambda v_i(\lambda)
+	$$
+\end{enumerate}
 
