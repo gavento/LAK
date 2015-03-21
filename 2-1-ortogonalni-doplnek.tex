@@ -1,20 +1,40 @@
+\df (Skalární součin) Dvěma vektorům $x,y$ z~vektorového prostoru $V = \mathbb{F}^n$
+přiřadíme skalární součin $\sk{x,y} = \sum x_iy_i$ \quad(případně $\sk{x,y} = \sum
+x_i\overline{y_i}$ pro $\mathbb{F} = \C$).
+
 \subsection{Ortogonální doplněk}
 
+\df $M \subseteq \mathbb{F}^n$ \quad $M^\bot = \{x\ |\ \forall a\in M: \sk{x,a} = 0\}$ je
+ortogonální doplněk $M$.
 
-\df $M \subseteq T^n$ \quad $M^\bot = \{x\ |\ \forall a\in M: \sk{x,a} = 0\}$ je ortogonální doplněk $M$.
+\poz $\dim M^\bot = n - \dim \L M$
 
-\poz $\dim M^\bot = n - \dim \sk M$
+\df (Součet podprostorů) $\L M + \L N = \left\{ u + v \mid u \in \L M, v \in \L N \right\} = \L{(M\cup N)}$
+
+\poz $(A \cap B)^\bot = A^\bot + B^\bot$
+
+\poz $(A + B)^\bot = A^\bot \cap B^\bot$
+
+\poz $\dim(M+M^\bot) = n \wedge M + M^\bot = \mathbb{F}^n$
 
 \poz ${(M^\bot)}^\bot = \L M$
 
-\dk \uv{$\supseteq$} jednuduché \uv{$\subseteq$} přes dimenze\quad $n-(n-k) = k = \dim M$ \qed
+\dk \uv{$\supseteq$} jednuduché, \uv{$\subseteq$} přes dimenze\quad $n-(n-k) = k =
+\dim \L M$ \qed
 
-\df (Součet podprostorů) $\L M + \L N = \L{(M\cup N)}$
+\poz $\dim\left(\L M + \L N\right) + \dim\left(\L M \cap \L N\right) = \dim \L M + \dim \L N$
 
-\poz $$\dim\left(\L M + \L N\right) + \dim\left(\L M \cap \L N\right) = \dim \L M + \dim \L N$$
+Pozor, pro tři podprostory už předchozí pozorování neplatí! Například v~rovině tři
+přímky $U,V,W$ procházející počátkem, pak $\dim(U + V + W) \neq \dim(U) + \dim(V) +
+\dim(W) - \dim(U \cap V) - \dim(U \cap W) - \dim(V \cap W) + \dim(U \cap V \cap W)$
+(čísly $2 \neq 1 + 1 + 1 - 0 - 0 - 0 + 0$).
 
-\dsl Podprostory $M,N << T^n: \dim M + \dim N > n \Rightarrow \dim M \cap N \ge 1$ $\Rightarrow$ $\exists u \neq 0, u \in M\cap N$.
+\dsl Mějme podprostory $M,N \ll \mathbb{F}^n$, ve kterých platí $\dim M + \dim N > n$,
+pak $\dim M \cap N \ge 1$, tedy $\exists u \neq 0, u \in M\cap N$.
 
-\dsl Pro tělesa, ve kterých platí $\sk{x,x} \neq 0$ pro $x\neq 0$ platí:
-$$M << T^n \Rightarrow M\cap M^\bot = \{0\} \Rightarrow \dim(M+M^\bot) = n \Rightarrow M + M^\bot = T^n$$
+\dsl Navíc pro tělesa, ve kterých platí $\sk{x,x} \neq 0$ pro $x\neq 0$ máme:  $M\cap
+M^\bot = \{0\}$.
+
+Například $\GF(2)^2$ předchozí podmínku nesplňuje a dokonce platí $\sk{(1,1), (1,1)} =
+0$, tedy vektor $(1,1)$ je kolmý sám na sebe v~$\GF(2)^2$.
 
