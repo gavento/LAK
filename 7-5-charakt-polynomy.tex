@@ -1,20 +1,21 @@
 \subsection{Charakteristické polynomy}
 
 
-\df Definujme polynomy $v_i \in \Q[\lambda]$ takové, že $\deg v_i(\lambda) = i$ a:
+
+\df Definujme polynomy $v_i \in \Q[\lambda]$ takové, že $\deg v_i(\lambda) = i$ tak, že
 \begin{enumerate} 
 	\item $v_0(\lambda) = 1$
 	\item $v_1(\lambda) = \lambda$
 	\item pro $i \in \{ 2, \dots, d-1\}$ induktivně, aby splňovaly rovnici 
-	\begin{align}
-		(s_{1,i,i-1} v_{i-1}(\lambda)) + (s_{1,i,i-\lambda}v_i(\lambda)) + (s_{1,i,i+1}v_{i+1}(\lambda)) = 0
-	\end{align}
+	$$
+		s_{1,i,i-1} v_{i-1}(\lambda) + s_{1,i,i}v_i(\lambda) + s_{1,i,i+1}v_{i+1}(\lambda) = \lambda v_i(\lambda)
+	$$
 \end{enumerate}
 
-\lm (O charakteristickém polynomu) Nechť $\lambda_1,\ldots,\lambda_d \in \Sp(B_1)$. Potom pokud $\lambda_i \neq k$ platí:
-\begin{align}
-	v_o(\lambda) + \ldots + v_d(\lambda) = c \cdot (\lambda - \lambda_1) \cdot \ldots \cdot (\lambda - \lambda_d)
-\end{align}
+\lm (O charakteristickém polynomu) Nechť $\lambda_1,\ldots,\lambda_d \in \Sp(B_1)$ takové, že jsou různá od $k$ . Potom pro $i=1, \dots, d$ platí:
+$$
+v_o(\lambda_i) + \ldots + v_d(\lambda_i)=0
+$$ neboli $v_o(\lambda) + \ldots + v_d(\lambda) = c \cdot (\lambda - \lambda_1) \cdot \ldots \cdot (\lambda - \lambda_d)$.
 
 \dk Vytvořme vektor $\vec{v} = (v_1(\lambda), \ldots, v_d(\lambda))$ a uvažme systém rovnic $B\vec{v} = \lambda \vec{v}$. Ten umíme řešit po řádcích (známe první dva členy vektoru a celou matici obsahující potřebné koeficienty), známe tedy vlastní čísla (kořeny této rovnice) a jejich vlastní vektory (obsahují složky $v_i(\lambda)$.
 
@@ -24,44 +25,44 @@ Nejprve si ukážeme, že jedno z vlastních čísel je $k$ (všimněte si, že 
 
 \lm Pro polynomy $v_i$ platí, že $v_i(A) = A_i$ a $v_i(B) = B_i$.
 
-\dk {\it(bez důkazu)}
+\dk $$AA_i=\sum^{d}_{j=0}s_{1ij}A_j=s_{1,i,i-1} A_{i-1} + s_{1,i,i}A_i + s_{1,i,i+1}A_{i+1}$$
+Tj. $v_i(A)=A_i$. Po aplikaci homomorfismu $\widehat{~~}$ dostáváme $v_i(B)=B_i$.
 
 
-\df $z\in V(G)$, $T\in\{0,1\}^{d+1 \times n}$\\
-\indent $T_{i,u} = \left\{\begin{matrix}
+\df Zafixujme $z\in V(G)$. Definujme $T\in\{0,1\}^{(d+1) \times n}$ předpisem
+$$ T_{i,u} = \left\{\begin{matrix}
 1\quad & d(u,z) = i\hfill \\
 0\quad & \text{jinak}\hfill
-\end{matrix}\right.$
+\end{matrix}\right.$$
 
 \lm (O zastřešování) $X\in\A(G), z\in V(G) \Rightarrow TX = \widehat XT$
 
 \dk 
 \begin{align*}
-(TA)_{iu} &= \sum_w T_{iw}A_{wu} = s_{1,i,d(u,z)} \\
-(BT)_{iu} &= \sum_j B_{ij}T_{ju} = s_{1,i,d(u,z)} \\
+(TA)_{iu} &= \sum_w T_{iw}A_{wu} = s_{i,1,d(u,z)} \\
+(BT)_{iu} &= \sum_j B_{ij}T_{ju} = s_{1,i,d(u,z)}=s_{i,1,d(u,z)} \\
 TA = BT \quad&\Rightarrow\quad TA^2 = BTA = B^2T \quad\Rightarrow\quad TA^m = B^mT \\
 Tp(A) = p(B)T \quad&\Rightarrow\quad TX = \widehat XT
 \end{align*}
 \qed
 
 \df Definujme si pomocné polynomy: 
-	$x_i(\lambda) = v_0(\lambda) + \dots + v_i(\lambda)$ \hfil $S_t = x_t(A) = A_0 + A_1 + \dots + A_t$
+\begin{align*}
+	x_i(\lambda) &= v_0(\lambda) + \dots + v_i(\lambda) \\
+  S_t &= x_t(A) = A_0 + A_1 + \dots + A_t
+\end{align*}
 Kde $S_t$ je matice, která označuje dvojce vrcholů jedničkou, pokud jsou vzdálené nanejvýš $t$ (je to součet vzdálenostních matic do $t$).
 
-\lm $C$ je perfektní kód (množina vrcholů) v $G$ a $c$ je jeho charakteristický vektor. Pak $S_t\cdot c = \vec 1$.
+\lm Nechť $C$ je perfektní kód v grafu $G$. Ať $c$ je jeho charakteristický vektor $C$. Pak $S_t\cdot c = \vec 1$.
 
-\dk $(S_t\cdot c)_u = |\{w: w\in C, d(w,u) \le t\}| = 1$, což plyne z definice perfektního kódu.
+\dk $(S_t\cdot c)_u = |\{w: w\in C, d(w,u) \le t\}| = 1$, což plyne přímo z definice perfektního kódu.
 \qed
 
-\lm $\exists$ $t$-perfektní kód $\Rightarrow$ $\dim \Ker \widehat S_t \ge t$
+\lm $G$ obsahuje $t$-perfektní kód $C$ $\Rightarrow$ $\dim \Ker \widehat S_t \ge t$
 
-\dk $z_0 = z \in C$
-
-$z_1,z_2,\dots,z_t \quad d(z,z_i) = i$ pro $i = 1,2,\dots,t$
-
-$(T_{z_i} \cdot c)_j = \delta_{ij}$ (Kroneckerovo delta $= 1$ pro $i=j$, $0$ jinak)
-
-Tedy vektory $T_{z_i} \cdot c$ pro $i = 0, 1, \dots, t$ jsou lineárně nezávislé.
+\dk Mějme $z_0 = z \in C$ a $z_1,z_2,\dots,z_t\in C$ takové, že $d(z,z_i) = i$ pro $i = 1, 2, \dots, t$.
+Platí
+$(T_{z_i} \cdot c)_j = \delta_{ij}$ (Kroneckerovo delta $= 1$ pro $i=j$, $0$ jinak). Tedy vektory $T_{z_i} \cdot c$ pro $i = 0, 1, \dots, t$ jsou lineárně nezávislé. Navíc dostáváme, že
 
 \begin{align*}
 	&\widehat S_t(T_{z_i}\cdot c) = (\widehat S_t \cdot T_{z_i}) \cdot c \overset{1}{=} T_{z_i} \cdot S_t \cdot c \overset{2}{=} T_{z_i}\cdot \vec 1 = \left(\begin{matrix}
@@ -69,7 +70,7 @@ Tedy vektory $T_{z_i} \cdot c$ pro $i = 0, 1, \dots, t$ jsou lineárně nezávis
 	\end{matrix}\right) \\
 \end{align*}
 
-$\overset{1}{=}$ plyne z lemma o zastřešování, $\overset{2}{=}$ plyne z předchozího lemmatu. Výsledný vektor je pro všechnyvolby $z_i$ stejný, protože jeho položky je počet sousedů s pevnými vzdálenostmi, a protože je to vzdálenostně regulární graf, jsou to nějaké hodnoty $s_{hij}$ se stejným $hij$ pro řádek.
+$\overset{1}{=}$ plyne z lemma o zastřešování, $\overset{2}{=}$ plyne z předchozího lemmatu. Výsledný vektor je pro všechny volby $z_i$ stejný, protože jeho položky je počet sousedů s pevnými vzdálenostmi, a protože je to vzdálenostně regulární graf, jsou to nějaké hodnoty $s_{hij}$ se stejným $hij$ pro řádek. Pišme
 
 \begin{align*}
 	&u_i = T_{z_i}\cdot c - T_{z_0}\cdot c\qquad i = 1, 2, \dots, t \\
@@ -78,5 +79,3 @@ $\overset{1}{=}$ plyne z lemma o zastřešování, $\overset{2}{=}$ plyne z pře
 
 Vektory $u_1,\dots, u_t$ tvoří $\Ker \widehat S_t$ a jsou lineárně nezávislé. Tedy $\dim\Ker\widehat S_t \ge t$.
 \qed
-
-
