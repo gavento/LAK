@@ -1,31 +1,32 @@
 \subsection{Eulerovské a úplné bipartitní podgrafy}
 
 
-$G = (V,E)$ je souvislý graf. $V_G = \{$ spanning\footnote{Česky též \uv{napnuté} --
+$G = (V,E)$ je souvislý graf. $V_G = \{$spanning\footnote{Česky též \uv{napnuté} --
 podgrafy obsahující všechny vrcholy grafu $G$ (i kdyby některé z~nich byly
-izolované).} podgrafy $G$ $\}$
+izolované).} podgrafy $G\}$
 
-\tv $V_G$ je vektorový prostor nad $\GF(2)$, místo sčítání vektorů je symetrická
-diference. $V_H \in \GF(2)^E$.
+\tv $V_G$ je vektorový prostor nad $\GF(2)$, tedy místo sčítání podgrafů bereme jejich
+symetrickou diferenci.
 
 \bigskip
 \todo Obrázek se symetrickou diferencí podgrafů.
 \bigskip
 
-\df $\varepsilon_G = \{ $ eulerovské podgrafy $\equiv
-\forall $ stupně sudé $ \}$. Součtem dvou eulerovských podgrafů je eulerovský
-podgraf, tvoří tedy podprostor $V_G$.
+\df $\varepsilon_G = \{$eulerovské podgrafy $\equiv \forall $ stupně sudé$\}$. Součtem
+dvou eulerovských podgrafů je eulerovský podgraf, tvoří tedy podprostor $V_G$.
 
 \lm $\dim \varepsilon_G = |E| - n + 1$
 
-\dk Vybereme si libovolnou kostru $T$ grafu $G$. Pro každou hranu, která není
-v~kostře existuje právě jedna elementární kružnice $K_e$ určená touto hranou. $\{
-K_e\ |\ e \in E(G) - E(T) \}$ tvoří lineárně nezávislé vektory. Lze dokázat,
-že tvoří bázi $\varepsilon_G$.
+\dk Vybereme si libovolnou kostru $T$ grafu $G$. Pro každou hranu, která není v~kostře
+existuje právě jedna elementární kružnice $K_e$ určená touto hranou. $\{ K_e\ |\ e \in
+E(G) - E(T) \}$ tvoří lineárně nezávislé vektory. Navíc tvoří bázi $\varepsilon_G$ ($H
+= \oplus \left\{ K_e \mid e \in E(L) \setminus E(T) \right\}$ pro daný eulerovský graf
+$L$, $H \oplus L$ je mimo kostru nulová a navíc víme, že je eulerovským podgrafem
+kostry, tedy prázdným podgrafem a tudíž máme jejich rovnost).
 
 Z~toho $\dim \varepsilon_G = |E| - n + 1$, což je počet hran mimo kostru. \qed
 
-\df $\beta_G = \{$ úplné bipartitní spanning podgrafy $G$ $\}$. $\beta_G$ je
+\df $\beta_G = \{$úplné bipartitní spanning podgrafy $G\}$. $\beta_G$ je
 prostor všech řezů v~$G$.
 
 \lm $\beta_G \ll V_G$, $\beta_G = \langle\{$ hvězdy $\}\rangle$
