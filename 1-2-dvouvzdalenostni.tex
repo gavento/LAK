@@ -1,7 +1,7 @@
 \subsection{Dvouvzdálenostní množiny}
 
 
-\vt Nechť $a,b\in\R^+$ a $P_1, P_2, \dots, P_m$ jsou body v~$\R^n$ takové, že platí $|P_iP_j| \in\{a,b\}$, $i\neq j$. Pak $m \leq {(n+1)(n+4)\over 2}$.
+\vt Nechť $a,b\in\R^+$ a $P_1, P_2, \dots, P_m$ jsou body v~$\R^n$ takové, že platí $|P_iP_j| \in\{a,b\}$, $i\neq j$. Pak $m \leq \frac{(n+1)(n+4)}2$.
 
 \dk Pro každé $P_i$ definujme polynom $f_i\colon\R^n\rightarrow\R$ předpisem
 \begin{align}
@@ -23,7 +23,7 @@ f_i(x)&= \left(\smash{\underbrace{(x_1-p_{i1})^2+\dots+(x_n-p_{in})}_{\sum_{j=1}
 \end{align}
 Generátory prostoru $\langle f_1,\dots,f_m\rangle$ jsou tedy také polynomy $(x_1^2+\dots+x_n^2)^2$, $(x_1^2+\dots+x_n^2)x_i$, $x_i^2$, $x_ix_j$, $x_i$ a $1$. Těchto polynomů je celkem
 \begin{align}
-1+n+n+{n\choose2}+n+1=\frac{(n+1)(n+4)}2,
+1+n+n+\binom n2+n+1=\frac{(n+1)(n+4)}2,
 \end{align}
 tedy $m=\dim\langle f_1,\dots,f_m\rangle\leq\frac{(n+1)(n+4)}2$.\qed
 
@@ -35,12 +35,12 @@ Množina $\{P_1,\dots,P_m\}$ z~předchozí věty se nazývá {\it dvouvzdálenos
 \frac{n(n+1)}2 \leq m_{\max} \leq \frac{n(n+3)}2.
 \end{align}
 
-\dk Nejprve ukážeme horní odhad. Definujme $f_i$ stejně jako v~důkazu předchozí věty. Opět platí $\dim\langle f_1,\dots,f_m\rangle=m$, ale za generující polynomy stačí vzít $x_i^2$, $x_ix_j$ a $x_i$, neboť na sféře je $x_1^2+\dots+x_n^2$ konstantní. Generujících polynomů je $n+{n \choose 2}+n=\frac{n(n+3)}2$, tedy $m\leq\frac{n(n+3)}2$.
+\dk Nejprve ukážeme horní odhad. Definujme $f_i$ stejně jako v~důkazu předchozí věty. Opět platí $\dim\langle f_1,\dots,f_m\rangle=m$, ale za generující polynomy stačí vzít $x_i^2$, $x_ix_j$ a $x_i$, neboť na sféře je $x_1^2+\dots+x_n^2$ konstantní. Generujících polynomů je $n+\binom n2+n=\frac{n(n+3)}2$, tedy $m\leq\frac{n(n+3)}2$.
 
-Nyní ukážeme vhodnou konstrukcí dolní odhad. Vezmeme ty body v~$\R^{n+1}$, které mají dvě souřadnice jedničkové a všechny ostatní nulové. Vzdálenost dvou takových bodů s~jedničkami na různých pozicích je $2$ a vzdálenost dvou bodů s~jednou jedničkou společnou je $\sqrt 2$. Skutečně se tedy jedná o~dvouvzdálenostní množinu.
+Nyní ukážeme vhodnou konstrukcí dolní odhad. Vezmeme ty body v~$\R^{n+1}$, které mají dvě souřadnice jedničkové a všechny ostatní nulové. Vzdálenost dvou bodů s~jedničkami na různých pozicích je $2$ a vzdálenost dvou bodů s~jednou jedničkou společnou je $\sqrt 2$. Skutečně se tedy jedná o~dvouvzdálenostní množinu.
 
 Pro všechna $P_i$ platí
 \begin{align}
 \sum_{j=1}^{n+1}p_{ij}^2=2\quad\text{a}\quad\sum_{j=1}^{n+1}p_{ij}=2,
 \end{align}
-tedy body $P_1,\dots,P_m$ ($m={n+1\choose2}=\frac{n(n+1)}2$) leží na jedné sféře v~$\R^{n+1}$ a zároveň v~jedné nadrovině dimenze $n$. Průnikem této sféry a této nadroviny je zřejmě hledaná sféra v~$\R^n$.\qed
+tedy body $P_1,\dots,P_m$ ($m=\binom{n+1}2=\frac{n(n+1)}2$) leží na jedné sféře v~$\R^{n+1}$ a zároveň v~jedné nadrovině dimenze $n$. Průnikem této sféry a této nadroviny je zřejmě hledaná sféra v~$\R^n$.\qed

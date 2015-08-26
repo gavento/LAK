@@ -1,4 +1,4 @@
-\df Vektory $v_1,\dots,v_n$ jsou lineárně nezávislé, jestliže neexistuje netriviální řešení 
+\df Vektory $v_1,\dots,v_n$ jsou {\it lineárně nezávislé}, jestliže neexistuje netriviální řešení 
 rovnice $\sum_{i=1}^n \alpha_iv_i=0$.
 
 \medskip
@@ -58,12 +58,12 @@ Soubor podmnožin z~předchozí věty se nazývá {\it skorodisjunktní systém 
 \vt (Ramsey) Pro každé $n\in\N$ existuje $N\in\N$ takové, že každý graf $G$ na aspoň $N$ vrcholech splňuje $\omega(G)\geq n$ nebo $\alpha(G)\geq n$.
 
 \medskip
-Víme, že $R_2(n) = N_{\min} \leq{2n-2\choose n-1}$. Ukážeme nerovnost $R_2(n)\geq{n-1\choose3}$.
+Víme, že $R_2(n) = N_{\min} \leq\binom{2n-2}{n-1}$. Ukážeme nerovnost $R_2(n)\geq\binom{n-1}3$.
 
-\vt (Dolní odhad Ramseyova čísla) Existuje graf na ${n-1\choose3}$ vrcholech, který má kliku i nezávislou množinu velikosti nejvýše $n-1$.
+\vt (Dolní odhad Ramseyova čísla) Existuje graf na $\binom{n-1}3$ vrcholech, který má kliku i nezávislou množinu velikosti nejvýše $n-1$.
 
 \dk Buď $X$ množina, $|X|=n-1$. Sestrojíme graf
 \begin{align}
-G=\left(V={X\choose 3}, E=\{uv; |u\cap v|=1, u,v\in V\}\right).
+G=\left(V=\binom X3, E=\{uv; |u\cap v|=1, u,v\in V\}\right).
 \end{align}
 Klika v~$G$ je skorodisjunktní systém podmnožin $X$, tedy $\omega(G) \le |X| = n-1$. Vrcholy jsou nezávislé, pokud $|a\cap b| \in \{0,2\}$, tedy nezávislá množina v~$G$ je sudo-licho město a $\alpha(G) \le |X| = n-1$.\qed
