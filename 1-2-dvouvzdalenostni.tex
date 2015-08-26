@@ -1,72 +1,46 @@
 \subsection{Dvouvzdálenostní množiny}
 
 
-\vt $P_1, P_2, \dots, P_m$ jsou body v $\R^n$ a $\exists \alpha, \beta \in \R$ t. že $\|P_iP_j\| \in {\alpha, \beta}$. Pak $m(n) \leq {(n+1)(n+4)\over 2}$.
+\vt Nechť $a,b\in\R^+$ a $P_1, P_2, \dots, P_m$ jsou body v~$\R^n$ takové, že platí $|P_iP_j| \in\{a,b\}$, $i\neq j$. Pak $m \leq {(n+1)(n+4)\over 2}$.
 
-\dk
+\dk Pro každé $P_i$ definujme polynom $f_i\colon\R^n\rightarrow\R$ předpisem
 \begin{align}
-F(x,y) = (\|x,y\|^2-\alpha^2)(\|x,y\|)-\beta^2)&\qquad F: (\R^n \rightarrow \R) \\
-f_i(x) = F(x, P_i)&\qquad f_i: \R^n \rightarrow \R
+f_i(x) = (\|P_i-x\|^2-a^2)(\|P_i-x\|^2-b^2).
+\end{align}
+Platí
+\begin{align}
+f_i(P_j)=\begin{cases}a^2b^2,&\text{pokud }i=j,\\0&\text{jinak,}\end{cases}
+\end{align}
+a pro každé $j=1,\dots,m$ je
+\begin{align}
+\sum_{i=1}^m\alpha_if_i(P_j)=\alpha_ja^2b^2=0,\quad\text{právě když}\quad\alpha_j=0.
+\end{align}
+Polynomy $f_1,\dots,f_m$ jsou tedy lineárně nezávislé a $\dim \langle f_1,\dots,f_m\rangle=m$.
+
+Je-li $x=(x_1,\dots,x_n)$ a $P_i=(p_{i1},\dots,p_{in})$, můžeme $f_i$ rozepsat jako
+\begin{align}
+f_i(x)&= \left(\smash{\underbrace{(x_1-p_{i1})^2+\dots+(x_n-p_{in})}_{\sum_{j=1}^nx_j^2-2\sum_{j=1}^np_{ij}x_j+\sum_{j=1}^np_{ij}^2}}^2-a^2\right)\left((x_1-p_{i1})^2+\dots+(x_n-p_{in})^2-b^2\right)\vphantom{\underbrace{x}_{\sum_{i=1}^n}}.
+\end{align}
+Generátory prostoru $\langle f_1,\dots,f_m\rangle$ jsou tedy také polynomy $(x_1^2+\dots+x_n^2)^2$, $(x_1^2+\dots+x_n^2)x_i$, $x_i^2$, $x_ix_j$, $x_i$ a $1$. Těchto polynomů je celkem
+\begin{align}
+1+n+n+{n\choose2}+n+1=\frac{(n+1)(n+4)}2,
+\end{align}
+tedy $m=\dim\langle f_1,\dots,f_m\rangle\leq\frac{(n+1)(n+4)}2$.\qed
+
+\smallskip
+Množina $\{P_1,\dots,P_m\}$ z~předchozí věty se nazývá {\it dvouvzdálenostní množina}.
+
+\vt Nechť $\{P_1,\dots,P_m\}$ je dvouvzdálenostní množina v~$\R^n$ taková, že všechna $P_i$ leží na jedné sféře. Pak platí
+\begin{align}
+\frac{n(n+1)}2 \leq m_{\max} \leq \frac{n(n+3)}2.
 \end{align}
 
-Když jsou $f_1, f_2, \dots, f_m$ lineárně nezávislé, pak $m \leq \dim($prostor funkcí $\R^n \rightarrow \R)$. Lineární kombinace $\sum_{i=1}^m \gamma_if_i(x) = 0$.
+\dk Nejprve ukážeme horní odhad. Definujme $f_i$ stejně jako v~důkazu předchozí věty. Opět platí $\dim\langle f_1,\dots,f_m\rangle=m$, ale za generující polynomy stačí vzít $x_i^2$, $x_ix_j$ a $x_i$, neboť na sféře je $x_1^2+\dots+x_n^2$ konstantní. Generujících polynomů je $n+{n \choose 2}+n=\frac{n(n+3)}2$, tedy $m\leq\frac{n(n+3)}2$.
 
+Nyní ukážeme vhodnou konstrukcí dolní odhad. Vezmeme ty body v~$\R^{n+1}$, které mají dvě souřadnice jedničkové a všechny ostatní nulové. Vzdálenost dvou takových bodů s~jedničkami na různých pozicích je $2$ a vzdálenost dvou bodů s~jednou jedničkou společnou je $\sqrt 2$. Skutečně se tedy jedná o~dvouvzdálenostní množinu.
+
+Pro všechna $P_i$ platí
 \begin{align}
-f_i(P_j) &= \alpha^2\beta^2&\qquad {\rm pro}\ i=j\\
-f_i(P_j) &= 0&\qquad {\rm pro}\ i\neq j
+\sum_{j=1}^{n+1}p_{ij}^2=2\quad\text{a}\quad\sum_{j=1}^{n+1}p_{ij}=2,
 \end{align}
-
-\begin{align}
-\forall j: \sum_{i=1}^m \gamma_if_i(P_j) = \alpha^2\beta^2\gamma_j = 0 \qquad\Rightarrow\qquad \forall j: \gamma_j = 0
-\end{align}
-
-Z toho plyne, že funkce $f_1, f_2, \dots f_m$ jsou lineárně nezávislé.
-
-\begin{align}
-f_i(x) &= ((x_1-p_1)^2+\dots+(x_n-p_n)^2-\alpha^2) ((x_1-p_1)^2+\dots+(x_n-p_n)^2-\beta^2) \\
-&= (x_1^2+\dots+x_n^2-2p_1x_1-\dots-2p_nx_n-\alpha^2) (x_1^2+\dots-2p_1x_1-\dots-\beta^2)
-\end{align}
-
-$p_i^2$ se ztratí do $\alpha$ a $\beta$. Následuj rozbor případů po roznásobení:
-
-\begin{align}
-	&(x_1^2+\dots+x_n^2)(x_1^2+\dots+x_n^2) &\qquad 1\\
-	&(x_1^2+\dots+x_n^2)x_i &\qquad n\\
-	&x_i^2 &\qquad n\\
-	&x_ix_j &\qquad {n \choose 2}\\
-	&x_i &\qquad n\\
-	&1 &\qquad 1\\
-\end{align}
-
-Případ $(x_1^2+\dots+x_n^2)$ není potřeba, vyjádříme ho jako kombinaci $x_i^2$. Velikost lineárního obalu:
-
-$${n\choose 2} + 3n + 2 = {n(n-1) \over 2} + {6n\over 2} + {4\over 2} = {n^2-5nn+4 \over 2} = {(n+1)(n+4)\over 2}$$ \qed
-
-
-\vt Pro dvouvzdálenostní množinu na kouli platí: $${n(n+1)\over 2} \leq m_{sf}(n) \leq {n(n+3)\over 2}$$
-
-\dk
-
-{\bf Horní odhad} (ostatní řádky nepotřebujeme, $(x_1^2 + \dots + x_n^2)$ se na kouli posčítá na konstantu):
-\begin{align}
-	&x_i^2 &\qquad n\\
-	&x_ix_j &\qquad {n \choose 2}\\
-	&x_i &\qquad n\\
-\end{align}
-
-$${n\choose 2} + 2n = {n(n-1)\over 2} + {4n\over 2} = {n^2+3n\over 2} = {n(n+3) \over 2}$$
-
-{\bf Dolní odhad} (konstrukce 2-vzdálenostní množiny v $\R^n$):
-
-Body budou všechny vektory délky $n$ s dvěma jedničkovými souřadnicemi. Vzdálenost dvou bodů s $1$ na různých souřadnicích je $2$, zatímco vzdálenost bodů které se v jedné souřadnici shodují je $\sqrt 2$.
-
-Uvažujme nyní body v $\R^{n+1}$ místo v $\R^n$. Takových je $n+1 \choose 2$. 
-
-\bigskip
-$\sum x_i^2 = 2 \Rightarrow$ všechny body leží na sféře\footnote{$x_i$ je $i$-tá souřadnice bodu $x$}\\
-\indent$\sum x_i = 2 \Rightarrow$ všechny body leží v nadrovině \\
-
-$$\left\{x | \sum x_i = 2 \right\} \cap \R^{n+1} \simeq \R^n$$
-
-Tedy máme 2-vzdálenostní množinu $n+1 \choose 2$ bodů na kouli v $\R^n$.
-
+tedy body $P_1,\dots,P_m$ ($m={n+1\choose2}=\frac{n(n+1)}2$) leží na jedné sféře v~$\R^{n+1}$ a zároveň v~jedné nadrovině dimenze $n$. Průnikem této sféry a této nadroviny je zřejmě hledaná sféra v~$\R^n$.\qed

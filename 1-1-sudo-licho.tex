@@ -1,60 +1,69 @@
-\subsection{Sudo-licho města}
+\df Vektory $v_1,\dots,v_n$ jsou lineárně nezávislé, jestliže neexistuje netriviální řešení 
+rovnice $\sum_{i=1}^n \alpha_iv_i=0$.
+
+\medskip
+\subsection{Sudo-licho města a skorodisjunktní systémy podmnožin}
 
 
-\df Nechť $|X|=n$ a $A_1, \dots, A_m \subseteq X$ $A_i \ne A_j$  jsou neprázdné podmnožiny.  
-Úloha A-B město se ptá, jak velké může být $m$, pokud $|A_i| \sim B$ a $|A_i\cap 
-A_j|\sim A$ (tedy pro sudo-licho město máme omezení na liché velikosti a sudé 
-průniky).
+\df Buď $X$ $n$-prvková množina a $A_1,\dots,A_m$ systém jejích neprázdných podmnožin takový, že $A_i \ne A_j$ pro $i\neq j$. Úloha {\it A-B město} se ptá, jak velké může být $m$, je-li $|A_i|\sim B$ a $|A_i\cap A_j|\sim A$ pro všechna $i,j=1,\dots,m$, $i\neq j$.
 
-\vt Pro úlohu sudo-licho město platí $m \leq n$.
+\medskip
+V~případě sudo-licho města tedy máme omezení na sudé průniky a liché velikosti.
 
-\dk Počítejme nad $GF(2)$. Matice $A$ nechť je charakteristická matice dimenze 
-$n \times m$. Podívejme se na součin $AA^T$, tedy na matici skalárních součinů:
+\vt Pro sudo-licho město platí $m \leq n$.
+
+\dk Podmnožinu množiny $X$ ztotožněme s~jejím charakteristickým vektorem délky $n$ a označme $A$ matici o~rozměrech $m\times n$, která má v~$i$-tém řádku vektor $A_i^T$. Platí
 \begin{align}
-	AA^T = \left(\begin{matrix}A_1\\ A_2 \\ \vdots \\ A_m \end{matrix}\right) 
-	\cdot \left(\begin{matrix}A_1, A_2, \dots, A_m\end{matrix}\right) =
-	\left(\begin{matrix}
-	1 & &\bigzero & \\
-	& \ddots && \\
-	&\bigzero& \ddots & \\
-	&&  &1
-	\end{matrix}\right)
+A_i^TA_j\!\mod2=\begin{cases}1,&\text{je-li }i=j,\\0,&\text{je-li }i\neq j,\end{cases}
 \end{align}
-Tedy víme, že $\rank(AA^T) = m$ a $\rank(A) \leq n$. Z vlastností ranku již 
-snadno získáme nerovnost $m=\rank(AA^T) \leq \rank(A) \leq n$. \todo{důkaz 
-rankové nerovnosti obrázkem pomocí zobrazení} \qed
+tedy nad $GF(2)$ máme
+\begin{align}
+	AA^T = \left(\begin{matrix}A_1^T\\ A_2^T \\ \vdots \\ A_m^T \end{matrix}\right) 
+	\cdot \left(\begin{matrix}A_1, A_2, \dots, A_m\end{matrix}\right) = I,
+\end{align}
+speciálně $\rank(AA^T) = m$. Jelikož každý sloupec matice $AA^T$ je lineární kombinací sloupců matice $A$, je $\rank(AA^T)\leq\rank(A)\leq n$. Tedy $m\leq n$.\qed
 
-\vt Nechť $|X|=n$ a $A_1, \dots, A_m \subseteq X$ že platí $|A_i \cap A_j| = 1 $ 
-a $A_i \neq A_j$. Potom $m \leq n$.
-\dk Podobně jako v předchozím příkladě vezměme matici charakteristických vektorů 
-$A$ a podívejme se na součit $AA^T$, tentokrát již nad $Q$:
+\vt Nechť pro $A_1,\dots,A_m\subseteq X$ platí $|A_i \cap A_j| = 1 $ a $A_i \neq A_j$, $i\neq j$. Potom $m \leq n$.
+
+\dk Stejně jako v~předchozím důkazu označme $A$ matici charakteristických vektorů a podívejme se na součin $AA^T$, tentokrát však nad $\Q$:
 \begin{align}
 	AA^T = \left(\begin{matrix}
-	|A_1| & &\bigone & \\
-	& \ddots && \\
-	&\bigone& \ddots & \\
-	&&  &|A_m|
-	\end{matrix}\right)
+	a_1&&\smash{\bigone\quad}\\
+	&\ddots&\\
+	\smash{\quad\raisebox{5pt}{\bigone}}&&a_m
+	\end{matrix}\right),\quad\text{kde }a_i=|A_i|. 
 \end{align}
-Dále označme $a_i := |A_i|$. Můžeme předpokládat, že $a_1 \leq a_2 \leq \dots 
-\leq a_m$. Zřejmě také $a_2 > 1$ (jinak $A_1 = A_2$). Nyní bychom chtěli 
-dokázat, že je matice regulární -- proto se podíváme na determinant této matice:
-\begin{align}
-	|AA^T| = \left|\left(\begin{matrix}
-	a_1 & &\bigone & \\
-	& \ddots && \\
-	&\bigone& \ddots & \\
-	&&  &a_m
-	\end{matrix}\right)\right|
-	%= \left|\begin{matrix}\text{{\fontsize{120}{120}\selectfont 1}}\end{matrix}
-	= \left|\begin{matrix}\text{\bf\Huge 1}\end{matrix}
-	+\left(\begin{matrix}
-	a_1-1 & &\bigzero & \\
-	& \ddots && \\
-	&\bigzero& \ddots & \\
-	&&  &a_m-1
-	\end{matrix}\right)\right|
-\end{align}
-Zatímco matice jedniček je singulární \todo{Pochopit proč se to dá spočítat, ale 
-determinant vyjde kladně}.  \qed
+Dokážeme-li, že tato matice je regulární, získáme kýženou nerovnost $m\leq n$.
 
+Všimněme si, že pro všechna $i$ je $a_i\geq1$, přičemž rovnost nastává nejvýše pro jedno z~nich. Můžeme tedy předpokládat, že pro $i\geq2$ platí $a_i\geq a_1\geq1$ (tedy $a_i\geq2$). Odečtením prvního řádku od všech ostatních získáme matici
+\renewcommand{\arraystretch}{1.2}
+\begin{align}
+	B=\left(\begin{matrix}
+	a_1 & 1 &1&\hdots &1 \\
+	1-a_1& a_2-a_1 &&&\smash{\raisebox{-10pt}{\bigzero}\quad} \\
+	1-a_1&&a_3-a_1&&\\
+	\vdots&&&\ddots&\\
+	1-a_1&\smash{\quad\raisebox{15pt}{\bigzero}}&&&a_m-a_1
+	\end{matrix}\right),
+\end{align}
+jejíž determinant spočteme z~definice jako
+\begin{align}
+  \det(B)=a_1\cdot\prod_{i=2}^m(a_i-a_1)-(1-a_1)\cdot\sum_{i=2}^m\prod_{\substack{j=2\\j\neq i}}^m(a_j-a_1).
+\end{align}
+Protože $1-a_1\leq0$ a pro $i\geq2$ je $a_i-a_1>0$, dostáváme $\det(B)>0$. Tedy $B$ je regulární. Přičtení prvního řádku k~ostatním na regularitě zřejmě nic nezmění, a proto je i $AA^T$ regulární, což jsme chtěli dokázat.\qed
+
+\medskip
+Soubor podmnožin z~předchozí věty se nazývá {\it skorodisjunktní systém podmnožin}. Sudo-licho města a skorodisjunktní systémy podmnožin nyní využijeme ke konstrukci dolního odhadu Ramseyova čísla.
+
+\vt (Ramsey) Pro každé $n\in\N$ existuje $N\in\N$ takové, že každý graf $G$ na aspoň $N$ vrcholech splňuje $\omega(G)\geq n$ nebo $\alpha(G)\geq n$.
+
+\medskip
+Víme, že $R_2(n) = N_{\min} \leq{2n-2\choose n-1}$. Ukážeme nerovnost $R_2(n)\geq{n-1\choose3}$.
+
+\vt (Dolní odhad Ramseyova čísla) Existuje graf na ${n-1\choose3}$ vrcholech, který má kliku i nezávislou množinu velikosti nejvýše $n-1$.
+
+\dk Buď $X$ množina, $|X|=n-1$. Sestrojíme graf
+\begin{align}
+G=\left(V={X\choose 3}, E=\{uv; |u\cap v|=1, u,v\in V\}\right).
+\end{align}
+Klika v~$G$ je skorodisjunktní systém podmnožin $X$, tedy $\omega(G) \le |X| = n-1$. Vrcholy jsou nezávislé, pokud $|a\cap b| \in \{0,2\}$, tedy nezávislá množina v~$G$ je sudo-licho město a $\alpha(G) \le |X| = n-1$.\qed

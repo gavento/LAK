@@ -1,43 +1,24 @@
-\subsection{Fišerova nerovnost}
+\subsection{Fisherova nerovnost}
 
 
-\vt Nechť máme graf $K_n$ a jeho hranově disjunktní rozklad na $m$ úplných 
-bipartitních grafů. Potom $m \geq n-1$.
+\vt (Fisherova nerovnost) Mějme hranově disjunktní rozklad úplného grafu $K_n$ na $m$ úplných 
+bipartitních grafů. Pak $m \geq n-1$.
 
-\dk Označme si úplné bipartitní grafy $B_1, \ldots, B_m$ a $X_k$, $Y_k$ jejich 
-partity, přičemž jednotlivý $B_i$ nemusí být pokrývat všechny vrcholy $K_n$.  
-Mějme matici $A_k$ pro graf $B_k$ velikosti $n \times n$ definovanou:
+\dk Označme $B_1, \ldots, B_m$ úplné bipartitní grafy v~rozkladu $K_n$. Dále označme $X_i$, $Y_i$ partity grafu $B_i$ a $A_i=((A_i)_{jk})$ matici o~rozměrech $n \times n$ indexovanou vrcholy grafu $K_n$ a definovanou následovně:
 \begin{align}
-	a_{ij} = \left\{\begin{array}{ll}1 & \text{pokud } i \in X_k\text{ a }j \in 
-	Y_k \\ 0 & \text{jinak} \end{array}\right.
+	(A_i)_{jk} = \begin{cases}1, & \text{pokud } j \in X_i\text{ a }k \in Y_i, \\
+	0 & \text{jinak.} \end{cases}
 \end{align}
-Protože v každém nenulovém řádku jsou jedničky právě pro sousedy daného vrcholu 
-v druhé partitě, jsou všechny nenulové řádky stejné (sousedství jsou stejná), 
-$A_k$ má tedy hodnost $1$.
+Nulové řádky matice $A_i$ odpovídají vrcholům grafu $K_n$ mimo partitu $X_i$, zatímco jedničky v~nenulových řádcích odpovídají sousedům vrcholů z~$X_i$. Protože $B_i$ je úplný bipartitní graf, mají všechny vrcholy z~$X_i$ stejné sousedy. Všechny nenulové řádky jsou tedy stejné a matice $A_i$ má hodnost $1$.
 
-Nyní uvažme matici $A=A_1 + \ldots + A_m$. Hodnost součtu je nanejvýš rovna 
-součtu hodností, proto $\rank(A) \leq m$. Nyní budeme chtít dokázat, že 
-$\rank(A) \geq n-1$:
+Položme $A=A_1 + \ldots + A_m$. Protože každá hrana grafu $K_n$ náleží právě jednomu $B_i$, má matice $A=(a_{jk})$ jedničku právě na 
+jednom z~míst $a_{jk}$ nebo $a_{kj}$. Na diagonále $A$ jsou samé nuly. Z~předchozích pozorování vyplývá, že $A+A^T$ je matice incidence $K_n$, tedy $A+A^T=J-I$, kde $J$ je matice samých jedniček.
 
-Protože každá hrana grafu náleží právě jednomu $B_k$, je jednička právě na 
-jednom z míst $a_{ij}$ nebo $a_{ji}$ (pozor, matice nejsou matice sousednosti -- 
-rozlišují partitu!). Na diagonále $A$ jsou pak samé nuly. Sečtením $A+A^T$ 
-získáme matici incidence $K_n$, tedy $A+A^T=J_n - I_n$.
-
-Dále pro spor předpokládejme, že $\rank(A) \leq n-2$. Připíšeme k matici jeden 
-řádek samých jedniček, čímž hodnost zvýšíme nanejvýš o $1$. Protože ale $A$ nemá 
-plnou hodnost, existuje netriviální lineární kombinace sloupců, která dává 
-$\vec{0}$ -- nechť jsou její koeficienty zaznamenány ve vektoru $\vec{x} \in 
-\R^n$ a tedy $A\vec{x}=\vec{0}$. Zároveň protože poslední řádek jsou samé 
-jedničky, platí $\sum x_i \cdot 1 = 0$ a tedy také $J_n\vec{x} = 0$. Počítejme 
-dvěmi způsoby:
-
+Ukážeme, že $\rank(A) \geq n-1$. Pro spor předpokládejme, že $\rank(A) \leq n-2$. Přidáním řádku samých jedniček k~matici $A$ vytvoříme matici $A'$, pro kterou platí $\rank(A')\leq n-1$. Protože $A'$ nemá plnou hodnost, existuje netriviální lineární kombinace jejích sloupců, která dává nulový vektor. Nechť jsou její koeficienty zaznamenány ve vektoru $x=(x_1,\dots,x_n)^T$. Tedy $A'x=0$ a rovněž $Ax=0$. Protože v~posledním řádku matice $A'$ jsou samé jedničky, platí $\sum_{i=1}^n 1\cdot x_i = 0$, a tedy i $Jx=0$. Počítejme dvěma způsoby:
 \begin{align}
-	&x^T(A + A^T) x = x^T(J_n - I_n)x = x^T(J_nx) - x^T(I_nx) = 0 - x^T x = - 
-	\sum x_i^2 < 0 \\
-	&x^T(A+A^T) x = x^TA^Tx + x^TAx = 0^Tx + x^T0 = 0
+  x^T(A+A^T) x &= x^TAx + x^TA^Tx = x^T0+0^Tx= 0,\\
+	x^T(A+A^T) x &= x^T(J - I)x = x^TJx - x^TIx = x^T0 - x^Tx = -\smash{\sum_{i=1}^n} x_i^2 < 0,
 \end{align}
+což je spor. Tedy $\rank(A) \geq n-1$.
 
-což dává spor. \qed
-
-
+Zároveň platí, že $\rank(A)\leq\rank(A_1)+\dots+\rank(A_m)$, protože prostor řádkových vektorů matice $A$ je generován řádkovými vektory matic $A_1,\dots,A_m$. To nám dává nerovnost $n-1\leq\rank(A)\leq m$.\qed
