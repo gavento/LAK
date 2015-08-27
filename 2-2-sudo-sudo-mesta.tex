@@ -1,33 +1,23 @@
 \subsection{Sudo-sudo města}
 
-\df $|X| = n$, $A_1, A_2, \dots, A_k \subseteq X$, $|A_i| \equiv 0 \pmod 2$, $|A_i\cap
-A_j| \equiv 0 \pmod 2$. Jaké největší může být $k = k(n)$?
 
-\vt $k(n) \ge 2^{\lfloor n / 2 \rfloor}$
+V~následující větě zachováme značení z~kapitoly o~lineární nezávislosti.
 
-\dk Utvoříme páry -- $2^{\lfloor n / 2 \rfloor}$ je počet podmnožin $\lfloor n / 2
-\rfloor$ prvkové množiny všech párů. \qed
+\vt Pro sudo-sudo město platí $m_{\max} = 2^{\lfloor n / 2 \rfloor}$.
 
-\vt $k(n) \le 2^{\lfloor n / 2 \rfloor}$
+\dk Nejprve sestrojíme sudo-sudo město o~velikosti $m=\lfloor\frac n2\rfloor$. Rozdělíme prvky množiny $X$ do dvojic (pokud jeden přebývá, odložíme ho stranou a dále se jím nebudeme zabývat) a za $A_1,\dots,A_m$ vezmeme všechny neprázdné podmnožiny množiny $X$, které obsahují z~každé dvojice buď oba prvky, nebo žádný. Takových podmnožin je $2^{\lfloor n / 2 \rfloor}$ a evidentně se jedná o~sudo-sudo město.
 
-\dk\footnote{$A_i$ budeme považovat za charakteristický vektor podmnožiny $A_i$
-v~množině $X$.} $A_i \in \GF(2)^n$. Nechť $M=\{A_1, A_2, \dots A_k\}$ je maximální (co do inkluze)
-sudo-sudo město. Ukážeme že $M$ je vektorový prostor.
-Vektory mají sudé průniky {\it (sudo-sudo město)} nad $\GF(2)$ tedy platí $\forall x,y\in M\colon \sk{x,y} = 0$.
-Dále:
+Nyní ukážeme nerovnost $m\leq\lfloor\frac n2\rfloor$. Nechť $M=\{A_1, A_2, \dots, A_m\}$ je co do inkluze maximální sudo-sudo město. Ztotožníme-li množiny $A_i$ s~jejich charakteristickými vektory, pak pro všechna $i,j\in\{1,\dots,n\}$ je $\sk{A_i,A_j} \text{ mod }2=0$. Tedy $M$ je vektorový prostor nad $\GF(2)$, neboť platí:
 \begin{align*}
-	&\emptyset \in M \\
-	&\forall u~\in M, \forall c\in \GF(2)\colon c\cdot u~\in M \\
-	&\forall x, \forall u,v\in M\colon \sk{x, u+v} = \sk{x,u} + \sk{x,v} = 0 + 0 = 0 \\
-	&\forall u,v \in M\colon \sk{u+v,u+v} = \sk{u,u} + 2\sk{u,v} + \sk{v,v} = 0 + 0 + 0 = 0
+	&\emptyset \in M, \\
+	&\forall u~\in M, \forall c\in \GF(2)\colon c\cdot u~\in M, \\
+	&\forall x, \forall u,v\in M\colon \sk{x, u+v} = \sk{x,u} + \sk{x,v} = 0 + 0 = 0, \\
+	&\forall u,v \in M\colon \sk{u+v,u+v} = \sk{u,u} + 2\sk{u,v} + \sk{v,v} = 0 + 0 + 0 = 0.
 \end{align*}
-
-Když $M \ll \GF(2)^n$ a $\dim M = k$, pak $|M| = 2^k$. 
-
-$$\forall x\in M\colon x\in M^\bot \quad\Rightarrow\quad M\subseteq M^\bot \quad\Rightarrow\quad \dim M \le \dim M^\bot$$
-
-$$k = \dim M \le \dim M^\bot = n-k \quad\Rightarrow\quad 2k \le n
-\quad\Rightarrow\quad k \le \lfloor {n / 2} \rfloor$$
-\qed
+Pokud $x\in M$, pak také $x\in M^\bot$, a tedy $M\subseteq M^\bot$. To znamená, že
+\begin{align}
+\dim M\leq\dim M^\bot=n-\dim M, \qquad\text{ekvivalentně } \dim M\leq\left\lfloor\frac n2\right\rfloor.
+\end{align}
+Jelikož $M \subseteq\GF(2)^n$ a $\dim M \leq\lfloor\frac n2\rfloor$, je $|M|=m \leq 2^{\lfloor n/2\rfloor}$. \qed
 
 

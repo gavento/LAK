@@ -1,40 +1,34 @@
-\df (Skalární součin) Dvěma vektorům $x,y$ z~vektorového prostoru $V = \mathbb{F}^n$
-přiřadíme skalární součin $\sk{x,y} = \sum x_iy_i$ \quad(případně $\sk{x,y} = \sum
-x_i\overline{y_i}$ pro $\mathbb{F} = \C$).
+\df {\it Skalárním součinem} vektorů $x=(x_1,\dots,x_n)^T$ a $y=(y_1,\dots,y_n)^T$ z~vektorového prostoru $\Ft^n$ rozumíme číslo $\langle x,y\rangle=\sum_{i=1}^nx_iy_i\in\Ft$ (případně $\langle x,y\rangle=\sum_{i=1}^nx_i\overline{y_i}$ pro $\Ft=\C$).
 
+\medskip
 \subsection{Ortogonální doplněk}
 
-\df $M \subseteq \mathbb{F}^n$ \quad $M^\bot = \{x \mid \forall a\in M\colon \sk{x,a} = 0\}$ je
-ortogonální doplněk $M$.
 
-\poz $\dim M^\bot = n - \dim \L M$
+\df Nechť $M \subseteq \Ft^n$. Množinu $M^\bot = \{x \mid \forall a\in M\colon \sk{x,a} = 0\}$ nazveme {\it ortogonálním doplňkem} $M$.
 
-\df (Součet podprostorů) $\L M + \L N = \left\{ u + v \mid u \in \L M, v \in \L N \right\} = \L{(M\cup N)}$
+\df {\it Součet podprostorů} $\langle M\rangle$ a $\langle N\rangle$ (symbol $\langle X\rangle$ značí lineární obal $X$) definujeme jako
+\begin{align}
+\langle M\rangle + \langle N\rangle = \left\{ u~+ v~\mid u~\in \langle M\rangle, v~\in \langle N \rangle\right\} = \langle M\cup N\rangle.
+\end{align}
 
-\poz $(A \cap B)^\bot = A^\bot + B^\bot$
+\poz Pro $M,N\subseteq\Ft^n$ platí:
+\begin{enumerate}\itemsep1pt \parskip0pt \parsep0pt
+	\item[(i)] $\dim M^\bot = n - \dim \langle M\rangle$,
+	\item[(ii)] ${(M^\bot)}^\bot = \langle M\rangle$,
+	\item[(iii)] $(\langle M\rangle \cap \langle N\rangle)^\bot = M^\bot + N^\bot$,
+	\item[(iv)] $(\langle M\rangle+\langle N\rangle)^\bot = M^\bot \cap N^\bot$,
+	\item[(v)] $\langle M\rangle + M^\bot =\Ft^n$.
+\end{enumerate}
 
-\poz $(A + B)^\bot = A^\bot \cap B^\bot$
+\vt (Dimenze spojení a průniku) Pro podprostory $U,V\subseteq\Ft^n$ platí \begin{align}
+\dim(U + V) + \dim(U \cap V) = \dim U+ \dim V.
+\end{align}
 
-\poz $\dim(M+M^\bot) = n$ a také $M + M^\bot = \mathbb{F}^n$
+Všimněme si, že pro tři podprostory už předchozí pozorování neplatí. Máme-li například v~rovině tři přímky $p,q,r$ procházející počátkem, pak $\dim(p + q + r) =2$, zatímco $\dim p + \dim q + \dim r - \dim(p \cap q) - \dim(p \cap r) - \dim(q \cap r) + \dim(p \cap q \cap r)=3$.
 
-\poz ${(M^\bot)}^\bot = \L M$
+\dsl Nechť $U,V \subseteq \mathbb{F}^n$ jsou podprostory, pro které platí $\dim U + \dim V > n$. Pak $\dim U \cap V \ge 1$, tedy existuje $u \neq 0$, $u \in U\cap V$.
 
-\dk \uv{$\supseteq$} jednoduché, \uv{$\subseteq$} přes dimenze\quad $n-(n-k) = k =
-\dim \L M$ \qed
+\dsl V~prostorech, ve kterých je skalární součin opravdu skalárním součinem, tedy $\sk{x,x} \neq 0$ pro $x\neq 0$, platí navíc $U\cap U^\bot = \{0\}$.
 
-\poz $\dim\left(\L M + \L N\right) + \dim\left(\L M \cap \L N\right) = \dim \L M + \dim \L N$
-
-Pozor, pro tři podprostory už předchozí pozorování neplatí! Například v~rovině tři
-přímky $U,V,W$ procházející počátkem, pak $\dim(U + V + W) \neq \dim(U) + \dim(V) +
-\dim(W) - \dim(U \cap V) - \dim(U \cap W) - \dim(V \cap W) + \dim(U \cap V \cap W)$
-(čísly $2 \neq 1 + 1 + 1 - 0 - 0 - 0 + 0$).
-
-\dsl Mějme podprostory $M,N \ll \mathbb{F}^n$, ve kterých platí $\dim M + \dim N > n$,
-pak $\dim M \cap N \ge 1$, tedy $\exists u \neq 0, u \in M\cap N$.
-
-\dsl Navíc pro tělesa, ve kterých standardní skalární součin je opravdu skalárním
-součinem, tedy $\sk{x,x} \neq 0$ pro $x\neq 0$, máme:  $M\cap M^\bot = \{0\}$.
-
-Například $\GF(2)^2$ předchozí podmínku nesplňuje a dokonce platí $\sk{(1,1), (1,1)} =
-0$, tedy vektor $(1,1)$ je kolmý sám na sebe v~$\GF(2)^2$.
-
+\medskip
+Například v~$\GF(2)^2$ je $\sk{(1,1), (1,1)} = 0$, tedy $(1,1)\in\langle(1,1)\rangle\cap\langle(1,1)\rangle^\bot$.

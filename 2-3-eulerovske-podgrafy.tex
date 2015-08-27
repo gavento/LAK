@@ -1,86 +1,69 @@
 \subsection{Eulerovské a úplné bipartitní podgrafy}
 
 
-$G = (V,E)$ je souvislý graf. $V_G = \{$spanning\footnote{Česky též \uv{napnuté} --
-podgrafy obsahující všechny vrcholy grafu $G$ (i kdyby některé z~nich byly
-izolované).} podgrafy $G\}$
+\df Nechť $G = (V,E)$ je souvislý graf. {\it Spanning podgraf} (česky též \uv{napnutý} podgraf) grafu $G$ je graf obsahující všechny vrcholy a některé hrany $G$.
 
-\tv $V_G$ je vektorový prostor nad $\GF(2)$, tedy místo sčítání podgrafů bereme jejich
-symetrickou diferenci.
+\medskip
+Spanning podgraf ztotožníme s~jeho charakteristickým vektorem délky $|E|$. Sčítání spanning podgrafů nad $\GF(2)$ je realizováno symetrickou diferencí.
 
 \begin{center}
 	\includegraphics{symetricka_diference.pdf}
 \end{center}
 
-\df $\varepsilon_G = \{$eulerovské podgrafy $\equiv \forall $ stupně sudé$\}$. Součtem
-dvou eulerovských podgrafů je eulerovský podgraf, tvoří tedy podprostor $V_G$.
+\tv Množina $V_G$ všech spanning podgrafů $G$ je vektorový prostor nad $\GF(2)$.
 
-\lm $\dim \varepsilon_G = |E| - n + 1$
+\df {\it Eulerovský spanning podgraf} grafu $G$ je takový spanning podgraf, který má všechny stupně sudé.
 
-\dk Vybereme si libovolnou kostru $T$ grafu $G$. Pro každou hranu, která není v~kostře
-existuje právě jedna elementární kružnice $K_e$ určená touto hranou. $\{ K_e\ |\ e \in
-E(G) - E(T) \}$ tvoří lineárně nezávislé vektory. Navíc tvoří bázi $\varepsilon_G$ ($H
-= \oplus \left\{ K_e \mid e \in E(L) \setminus E(T) \right\}$ pro daný eulerovský graf
-$L$, $H \oplus L$ je mimo kostru nulová a navíc víme, že je eulerovským podgrafem
-kostry, tedy prázdným podgrafem a tudíž máme jejich rovnost).
+\medskip
+Množinu všech eulerovských spanning podgrafů $G$ označme $\varepsilon_G$. Součtem dvou eulerovských podgrafů je zřejmě opět eulerovský podgraf, tedy $\varepsilon_G$ je podprostorem $V_G$.
 
-Z~toho $\dim \varepsilon_G = |E| - n + 1$, což je počet hran mimo kostru. \qed
+\lm Platí $\dim \varepsilon_G = |E| - n + 1$, kde $n=|V|$.
 
-\df $\beta_G = \{$úplné bipartitní spanning podgrafy $G\}$. $\beta_G$ je
-prostor všech řezů v~$G$.
+\dk Nechť $T$ je libovolná kostra grafu $G$. Pro každou hranu $e\in E(G)\backslash E(T)$ existuje právě jedna elementární kružnice $K_e$ určená touto hranou. Množina
+\begin{align}
+K_T=\{ K_e\mid e \in E(G) \backslash E(T) \}
+\end{align}
+je lineárně nezávislá, neboť pro $e\in E(G)\backslash E(T)$ má kružnice $K_e$ jako jediná nenulovou $e$-tou souřadnici.
 
-\lm $\beta_G \ll V_G$, $\beta_G = \langle\{$ hvězdy $\}\rangle$
+Pro $L\in\varepsilon_G$ položme
+\begin{align}
+	L'=\hspace{-10pt}\sum_{e\in E(L)\backslash E(T)}\hspace{-10pt}K_e.
+\end{align}
+Graf $L+L'$ neobsahuje žádné hrany mimo kostru a současně je součtem eulerovských grafů, tedy je nutně eulerovský. Jediným eulerovským podgrafem kostry je $0$, což znamená, že $L+L'=0$ a $L=L'$. Tedy $K_T$ tvoří bázi $\varepsilon_G$ a platí $\dim \varepsilon_G = |K_t|=|E| - n + 1$.\qed
 
-\dk Každý úplný bipartitní podgraf lze zapsat jako symetrickou diferenci hvězd.
-Vezmeme hvězdy ze všech vrcholů v~jedné z~partit. Mezi těmito vrcholy se hrany
-vyruší, mezi vrcholy z~druhé partity žádné nevedou a všude jinde ano. 
+\df {\it Úplný bipartitní spanning podgraf} grafu $G$ je řez v~$G$.
 
-Mám-li dva různé úplné bipartitní podgrafy, rozepíšu si je na součet hvězd a
-výsledkem musí být dle výše uvedeného opět úplný bipartitní podgraf.
+\begin{center}
+	\includegraphics{uplny_bipartitni_spanning.pdf}
+\end{center}
 
-\vt $\varepsilon_G^\bot = \beta_G$. Tedy eulerovské podgrafy jsou ortogonálním
-doplňkem úplných bipartitních podgrafů.
+\medskip
+Množinu všech úplných bipartitních spanning podgrafů $G$ označme $\beta_G$. 
 
-\dk Vezmeme si $H \in \varepsilon_G$ eulerovský podgraf a $u \in V(G)$. $H_u$
-označíme hvězdu z~vrcholu $u$. Platí $\sk{H,H_u} = \deg_H u$, neboť hvězda
-obsahuje všechny hrany jdoucí z~$u$ a žádné jiné. Protože v~$H$ vychází
-z~každého vrcholu sudý počet hran a počítáme nad $\GF(2)$:
+\lm Množina $\beta_G$ tvoří podprostor $V_G$, jehož množinou generátorů jsou všechny hvězdy v~$G$. Platí $\dim\beta_G=n-1$.
+
+\dk Každý úplný bipartitní spanning podgraf je součtem hvězd ze všech vrcholů jedné z~jeho partit. K~nahlédnutí, že součet dvou úplných bipartitních spanning podgrafů je opět úplný bipartitní spanning podgraf, stačí oba grafy rozepsat na součet hvězd.
+
+Všimněme si, že součet hvězd ze všech vrcholů $G$ je $0$, ovšem libovolných $n-1$ hvězd už tvoří lineárně nezávislou množinu. Netriviální lineární kombinace $n-1$ hvězd s~koeficienty v~$\GF(2)$ je totiž jen součet několika (aspoň jedné a nejvýše $n-1$) z~nich. Ten není nikdy nulový, neboť v~$G$ existuje hrana, pro niž se v~lineární kombinaci vyskytuje hvězda z~právě jednoho z~jejích koncových vrcholů. Tedy $\dim\beta_G=n-1$.
+
+\vt Platí $\varepsilon_G^\bot = \beta_G$.
+
+\dk Buď $H \in \varepsilon_G$, $u \in V(G)$ a $S_u$ hvězda z~vrcholu $u$. Protože
 \begin{align*}
-\forall u: \sk{H,H_u} = 0 \quad\Rightarrow\quad \forall B\in \beta_G: \sk{H,B} = 0 \quad\Rightarrow\quad H \in \beta_G^\bot \quad\Rightarrow\quad \varepsilon_G \subseteq \beta_G^\bot
+\sk{H,S_u}= \deg_H u\text{ mod }2=0,
 \end{align*}
+platí $\sk{H,B} = 0$ pro všechna $B\in\beta_G$, a tedy $H \in \beta_G^\bot$, což dává inkluzi $\varepsilon_G \subseteq \beta_G^\bot$.
 
-Naopak, každý podgraf $H$, který je kolmý na všechny hvězdy je nutně eulerovský:
-\begin{align*}
-\forall u: \sk{H,H_u} = 0 \quad\Rightarrow\quad \forall u: \deg_H u~\equiv 0 \mod 2 \quad\Rightarrow\quad H \in \varepsilon_G \quad\Rightarrow\quad \beta_G^\bot \subseteq \varepsilon_G
-\end{align*}
+Naopak, každý spanning podgraf $H$, pro který je $\sk{H,S_u} = 0$, má nutně všechny stupně sudé, a je tedy eulerovský. Proto je rovněž $\beta_G^\bot \subseteq \varepsilon_G$ a věta je dokázána.\qed
 
-Tedy $\varepsilon_G = \beta_G^\bot$, protože $\varepsilon_B^\bot = {\left(\beta_G^\bot\right)}^\bot = \beta_G$.
-\qed
+\vt Je-li $M$ podprostorem $\GF(2)^n$, pak $(1,\dots,1) \in M + M^\bot$.
 
-\dsl $\dim \varepsilon_G = \dim \beta_G^\bot = |E| - n + 1$.
+\dk Je-li $\dim(M \cap M^\bot) = 0$, pak $\dim(M + M^\bot) = n$, tedy zřejmě platí $(1,\dots,1)\in M$. Jestliže $\dim(M \cap M^\bot) > 0$, pak existuje $x=(x_1,\dots,x_n)\in M\cap M^\bot$, $x\neq0$. Dále
+\begin{align}
+\sk{x,(1,\dots,1)}=\sum_{i=1}^n x_i=\sum_{i=1}^n x_i^2=\sk{x,x}=0,
+\end{align}
+tedy $(1,\dots,1)\bot x$ a nutně platí $(1,\dots,1)\in M + M^\bot$.\qed
 
+\dsl Každý souvislý graf lze zapsat jako symetrickou diferenci eulerovského podgrafu a hranového řezu.
 
-\vt $M \subseteq \GF(2)^n \quad\Rightarrow\quad (1,1,\dots,1) \in \sk M + M^\bot = \sk{M\cup M^\bot}$
-
-\dk $\sk M \cap M^\bot$
-\begin{enumerate}
-\item[(a)] $\dim(\sk M \cap M^\bot) = 0 \quad\Rightarrow\quad \dim(\sk M + M^\bot) = k+n-k = n \Rightarrow \sk M + M^\bot = \GF(2)^n \Rightarrow (1,1,\dots,1)\in \sk M + M^\bot$
-\item[(b)] $\dim(\sk M \cap M^\bot) > 0 \quad\Rightarrow\quad \exists u\in \sk M \cap M^\bot$ \\ 
-$\forall u\in \sk M \cap M^\bot: \sk{u,u} = 0 \Rightarrow \sum u_i^2 \equiv 0 \mod 2 \Rightarrow \sum u_i = \sk{u, (1,1,\dots,1)}$ \\
-nad $\GF(2)$ platí $u_i^2 = u_i$ \\
-$\Rightarrow (1,1,\dots,1) \in {(\sk M \cap M^\bot)}^\bot = {\sk M}^\bot + {(M^\bot)}^\bot = M^\bot + \sk M$
-\end{enumerate}
-\qed
-
-
-\vt $\forall G \ \exists V_1,V_2,\ V_1\overset{.}{\cup} V_2 = V(G)$ takové, že
-$G[V_1]$ i $G[V_2]$ mají všechny stupně sudé.
-
-\dk $M = \varepsilon_G \ll V_G$
-
-$G = (1,1,\dots,1) \in \varepsilon_G + \varepsilon_G^\bot = \varepsilon_G + \beta_G$
-\qed
-
-\dsl $\exists H \in \varepsilon_G\ \exists B\in \beta_G: G = H + B$ (tedy každý graf lze zapsat jako symetrickou diferenci eulerovského podgrafu a hranového řezu).
-
-
+\dk V~prostoru $V_G$ je podle předchozí věty $G=(1,\dots,1)\in\varepsilon_G+\beta_G$, tedy existují grafy $H\in\varepsilon_G$ a $B\in\beta_G$ takové, že $H+B=G$.\qed
