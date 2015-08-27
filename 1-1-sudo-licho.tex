@@ -5,16 +5,16 @@ rovnice $\sum_{i=1}^n \alpha_iv_i=0$.
 \subsection{Sudo-licho města a skorodisjunktní systémy podmnožin}
 
 
-\df Buď $X$ $n$-prvková množina a $A_1,\dots,A_m$ systém jejích neprázdných podmnožin takový, že $A_i \ne A_j$ pro $i\neq j$. Úloha {\it A-B město} se ptá, jak velké může být $m$, je-li $|A_i|\sim B$ a $|A_i\cap A_j|\sim A$ pro všechna $i,j=1,\dots,m$, $i\neq j$.
+\df Buď $X$ $n$-prvková množina a $A_1,\dots,A_m$ systém jejích podmnožin takový, že $A_i \ne A_j$ pro $i\neq j$. Úloha {\it A-B město} se ptá, jak velké může být $m$, je-li $|A_i|\sim B$ a $|A_i\cap A_j|\sim A$ pro všechna $i,j=1,\dots,m$, $i\neq j$.
 
 \medskip
-V~případě sudo-licho města tedy máme omezení na sudé průniky a liché velikosti.
+V~případě sudo-licho města tedy máme omezení na liché velikosti a sudé průniky.
 
 \vt Pro sudo-licho město platí $m \leq n$.
 
 \dk Podmnožinu množiny $X$ ztotožněme s~jejím charakteristickým vektorem délky $n$ a označme $A$ matici o~rozměrech $m\times n$, která má v~$i$-tém řádku vektor $A_i^T$. Platí
 \begin{align}
-A_i^TA_j\!\mod2=\begin{cases}1,&\text{je-li }i=j,\\0,&\text{je-li }i\neq j,\end{cases}
+A_i^TA_j\text{ mod }2=\begin{cases}1,&\text{je-li }i=j,\\0,&\text{je-li }i\neq j,\end{cases}
 \end{align}
 tedy nad $\GF(2)$ máme
 \begin{align}
