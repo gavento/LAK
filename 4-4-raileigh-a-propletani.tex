@@ -1,8 +1,8 @@
-\subsection{Raileighův princip a proplétání}
+\subsection{Rayleighův princip a proplétání}
 
 
-\vt (Raileighův princip) Nechť $A$ je matice s ortonormální bazí z vlastních 
-vektorů $x_i$ a vlastními čísly $\lambda_i \geq \lambda_k$. Potom:
+\vt (Rayleighův princip) Nechť $A$ je matice $n\times n$ s ortonormální bazí z vlastních 
+vektorů $x_i$ a vlastními čísly $\lambda_1 \geq \lambda_2 \geq\dots\geq\lambda_n$. Potom:
 \begin{enumerate}
 \item $x \in\sk{x_1,\dots,x_k} \Rightarrow x^*Ax\ge \lambda_kx^*x$
 \item $x \in\sk{x_k,\dots,x_n} \Rightarrow x^*Ax\le \lambda_kx^*x$
@@ -30,7 +30,7 @@ matic $A,B$ platí:
 	\lambda_1 \geq \mu_1 \geq \lambda_2 \geq \dots\geq \mu_{n-1} \geq \lambda_n
 \end{align}
 
-\dk Dokazujeme indukcí $\lambda_k \geq \mu_k \geq \lambda_{k+1}$. Označme $x_i$ 
+\dk Dokazujeme $\lambda_k \geq \mu_k \geq \lambda_{k+1}$. Označme $x_i$ 
 a $y_i$ vlastní vektory matic $A$ a $B$.  Zaveďme následující vektorové 
 podprostory $\C^n$ (ačkoli druhý z nich nemá dostatek složek, můžeme mu jednu 
 nulovou přidat a nic se nestane):
@@ -53,21 +53,21 @@ $\mu_i$ a $y_i$. Potom $\mu_i$ proplétají $\lambda_i$ a pokud navíc $\mu_i =
 \lambda_i$ pro nějaké $i$, tak $Sy_i$ je vlastní vektor $A$ příslušící vlastnímu 
 číslu $\lambda_i$.
 
-\dk Použijeme Raileighův princip podobně, jako v předchozím tvrzení. Všimneme 
+\dk Použijeme Rayleighův princip podobně jako v předchozím tvrzení. Všimneme 
 si, že:
 \begin{align}
-	x \in \L\{ S^Tx_k, \dots, S^Tx_{k-1}\}^\perp \Leftrightarrow
-	Sx \in \L\{ x_k, \dots, x_{k-1}\}^\perp
+	x \in \L\{ S^Tx_k, \dots, S^Tx_{n}\}^\perp \Leftrightarrow
+	Sx \in \L\{ x_k, \dots, x_{n}\}^\perp
 \end{align}
 Stačí si opět vzít vhodný prvek $x$ z průniku:
 \begin{align}
-	x \in \L\{ S^Tx_k, \dots, S^Tx_{k-1}\}^\perp \cap \L\{y_1, \dots, y_k\}
+	x \in \L\{ S^Tx_k, \dots, S^Tx_{n}\}^\perp \cap \L\{y_1, \dots, y_k\}
 \end{align}
 A můžeme použít Reileighův princip:
 \begin{align}
-	\lambda_i \geq \frac{Sx^TASx}{Sx^TSx} = \frac{x^TBx}{x^Tx} \geq \mu_i \\
+	\lambda_k \geq \frac{(Sx)^TASx}{(Sx)^TSx} = \frac{x^TBx}{x^Tx} \geq \mu_k \\
 \end{align}
-Na navíc platí pokud $\lambda_i = \mu_i$, potom:
+Navíc platí, že pokud $\lambda_i = \mu_i$, potom:
 \begin{align}
 	\frac{x^TBx}{x^Tx} = \lambda_i \quad\Rightarrow\quad x^TBx=x^Tx\lambda_i 
 	\quad\Rightarrow\quad Bx = \lambda_i x
@@ -93,7 +93,7 @@ A $x$ je vlastní vektor příslušící $\lambda_i$, jak jsme chtěli dokázat.
 \vt (Věta o proplétání kvocientu) Pokud $B$ je kvocient $A$, pak vlastní čísla
 $B$ proplétají vlastní čísla $A$.
 
-\dk Mějme $\widetilde S$ je matici incidence blokové $A$:
+\dk Mějme $\widetilde S$ matici incidence blokové $A$:
 \begin{align*}
 	\widetilde S = \left(\begin{array}{llll}
 		\framebox[3em][c]{1} & & & \hfil\bigzero \\

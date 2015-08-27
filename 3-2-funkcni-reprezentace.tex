@@ -1,7 +1,6 @@
 \subsection{Funkční reprezentace grafu}
 
-\df Nechť $G$ je graf, $\F$ je systém funkcí, $X$ množina reprezentantů
-a $\Ft$ těleso. Pak pro vrchol $v$ mějme $c_v\in X$ a $f_v \in \F$, že
+\df Nechť $G$ je graf, $X$ množina, $\Ft$ těleso a $\F\colon X\rightarrow\Ft$ systém funkcí. Pak pro vrchol $v$ mějme $c_v\in X$ a $f_v \in \F$, že
 $f_v: X \to \Ft$ a platí:
 \begin{enumerate*}
 	\item $f_v(c_v) \neq 0$
@@ -20,7 +19,7 @@ funkci v bodech $A$.
 \begin{align}
 M = \left(
 	\begin{matrix}
-		f_1(c_1) & f_2(c_2) & \dots \\
+		f_1(c_1) & f_1(c_2) & \dots \\
 		f_2(c_1) & f_2(c_2) & \dots \\
 		\vdots &&\\
 	\end{matrix}\right)
@@ -34,11 +33,11 @@ $\dim M \le \dim\F$.
 
 \lm(O dimenzi součinu reprezentací) Pokud $G_1$ má reprezentaci $\F_1$,
 $G_2$ reprezentaci $\F_2$ nad stejným tělesem, pak $G = G_1 \boxtimes
-G_2$ má reprezentaci $\F$ a $\dim\F \leq \dim\F_1 \cdot \dim\F_2$.
+G_2$ má reprezentaci $\F$,pro kterou platí $\dim\F \leq \dim\F_1 \cdot \dim\F_2$.
 
 \dk Definujeme: 
 \begin{align*}
-& X = X_1 \times X_1 \\
+& X = X_1 \times X_2 \\
 & c_{(v_1,v_2)} = (c_{v_1}, c_{v_2}) \\
 & f_{(v_1, v_2)}((x_1,x_2)) = f_{v_1}(x_1) \cdot f_{v_2}(x_2)
 \end{align*}
@@ -57,8 +56,8 @@ $$
 \dk 
 $$\shn(G) = \sup_i \alpha(G^i)^{1/i} \leq \sup_i(\dim f.r.(G^i))^{1/i} \leq \sup_i\dim f.r. (G) = \dim f.r.(G)$$
 
-První nerovnost plyne z lemma o vztahu $\alpha$ a $\dim\F$, druhá z
-lemma o dimenzi součinu reprezentací.
+První nerovnost plyne z lemmatu o vztahu $\alpha$ a $\dim\F$, druhá z
+lemmatu o dimenzi součinu reprezentací.
 \qed
 
 
@@ -73,7 +72,7 @@ Reprezentaci vytvoříme nad tělesem $\Ft = \Z_2$, $X = \Z_2^s$:
 \end{align*}
 
 Ověříme, že se jedná o funkční reprezentaci a všimneme si, že každá
-funkce $f_A$ je kombinace tří funkcí $b_i(x) = x_i$, přičemž funkcí
+funkce $f_A$ je kombinace tří funkcí $b_i(x) = x_i$, přičemž počet funkcí
 $b_i$ je $s$.
 $$
 \dim f.r.(G) \le s \qquad\Rightarrow\qquad \shn(G) \le s
@@ -93,7 +92,7 @@ $$
 
 $$\shn(G + \overline G) \ge \sqrt{2{s\choose 3}} > 2s+1 \ge \shn(G) + \shn(\overline G)$$
 
-První nerovnost platí z lemma o dvojité kapacitě a ostrou nerovnost
+První nerovnost platí z lemmatu o dvojité kapacitě a ostrou nerovnost
 musíme splnit, aby věta platila. Zvolíme si tedy $s \ge 16$.
 \qed
 

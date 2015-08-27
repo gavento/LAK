@@ -1,7 +1,7 @@
 \subsection{Silně regulární grafy}
 
 
-\df Silně regulární graf je d-regulární, $\forall$ hranu $xy\in E$ $\exists!e$
+\df Silně regulární graf je d-regulární graf splňující $\forall$ hranu $xy\in E$ $\exists!e$
 vrcholů $u: ux,uy\in E$ a $\forall$ nehranu $xy\not\in E$ $\exists!f$ vrcholů
 $u: ux,uy\in E$.
 
@@ -44,8 +44,9 @@ $A$, neboť graf $G$ je $d$-regulární.
 
 \begin{align}
 	&d^2 + (f-e)d + (f-d) \in \Sp(fJ) \\
-	&d^2 + (f-e)d + (f-d) = fn \\
+	&d^2 + (f-e)d + (f-d) = fn
 \end{align}
+
 \begin{align}
 	&\lambda \in \Sp(A) - \{d\} \Rightarrow \lambda^2 + (f-e)\lambda + (f-d) = 0 \\
 	&\lambda_{1,2} = {e-f \pm \sqrt{(f-e)^2-4(f-d)} \over 2} \qquad \sqrt{(f-e)^2-4(f-d)} = s
@@ -59,7 +60,7 @@ $\lambda_2$ ($q$-násobné).
 \begin{enumerate}
 	\item[(1)] $1 + p + q = n$ (celkový počet vlastních čísel)
 
-	\item[(2)] $d + p\lambda_1 + q\lambda_2 = \Tr A = 0$ (stopa\footnote{Stopou (čtvercové) matice rozumíme součet čísel na diagonále. Je známo, že součet vlastních čísel (včetně násobností) je roven stopě matice. Značíme ji $\Tr A$.} matice $A$ je 0) \\
+	\item[(2)] $d + p\lambda_1 + q\lambda_2 = \Tr A = 0$ (stopa matice $A$ je 0) \\
 	$d + p\left({e-f+s\over 2}\right) + q\left({e-f-s\over 2}\right) = 0$ \\
 	$d + \left({p+q\over 2}\right)(e-f) + \left({s\over 2}\right)(p-q) = 0$
 
@@ -67,8 +68,8 @@ $\lambda_2$ ($q$-násobné).
 \end{enumerate}
 
 \begin{enumerate}
-	\item[(a)] $s\not\in Q \Rightarrow p = q$ \quad $d + p(e-f) = 0 \Rightarrow p = {d\over f-e} \Rightarrow (f-e)|d$ \\
-	$f-e > 0$ \quad $n = 1 + 2p = 1 + {2d\over f-e}$ \quad (z rovnice (1))
+	\item[(a)] $s\not\in |Q \Rightarrow p = q$ \quad $d + p(e-f) = 0 \Rightarrow p = {d\over f-e} \Rightarrow (f-e)|d$ \\
+	$n = 1 + 2p = 1 + {2d\over f-e}$ \quad (z rovnice (1)) $\Rightarrow$ $f-e > 0$
 
 	Pokud $f-e = 1$, pak $e = f-1$ (což chceme). \\
 	Pokud $f-e = 2$, pak $n = 1+d$ a $G = K_{d+1}$, ale úplné grafy jsme si zakázali. \\
@@ -121,6 +122,6 @@ A ověříme celočíselnost polynomu $p$ s tím, že $t:=s/2=\sqrt m$, tedy $s=
 	&= {m+1 \over 4t} ((m+1+0)(2t+0)-2)\\
 	&= {(t^2 + 1)(t^3-1) \over 2t}
 \end{align}
-Což má být přirozené číslo. To je pravda zřejmě jenom pro $t=1$, tedy $n=3$ a pokud náš graf není trojúhelník, jde to spor. Pokud to trojúhelník je, splňuje žádanou vlastnost triviálně. \qed
+Což má být přirozené číslo. To je pravda zřejmě jenom pro $t=1$, tedy $n=3$ a pokud náš graf není trojúhelník, je to spor. Pokud to trojúhelník je, splňuje žádanou vlastnost triviálně. \qed
 
 

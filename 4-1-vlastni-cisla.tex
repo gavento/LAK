@@ -1,11 +1,11 @@
-\subsection{Vlastní čísla grafu}
+\subsection{Vlastní čísla matic}
 
 
 \df Nechť $A$ je čtvercová matice. Potom pokud pro nějaké $\lambda$ a $x$ netriviální platí, že $Ax=\lambda x$ říkáme, že $\lambda$ je vlastní číslo $A$ a $x$ je vlastní vektor příslušící k $\lambda$.
 
 \df Spektrum matice $A$ je množina jejích vlastních čísel. Značíme $\Sp(A) = \{ \lambda_1, \ldots, \lambda_n \}$.
 
-\df Podprostorem generovaným vlastním číslem číslem $\lambda$ rozumíme $V_\lambda = \{u | Au = \lambda u \}$. Geometrická násobnost $\lambda$ je poté dimenze tohoto prostoru $V_\lambda$.
+\df Podprostorem generovaným vlastním číslem $\lambda$ rozumíme $V_\lambda = \{u | Au = \lambda u \}$. Geometrická násobnost $\lambda$ je poté dimenze tohoto prostoru $V_\lambda$.
 
 \tv $V_\lambda$ je vektorový prostor.
 
@@ -16,6 +16,7 @@
 Tedy i $u+v\in V_\lambda$. \qed
 
 \tv Vlastní čísla matice $A$ lze vypočítat jako kořeny rovnice $\det(A - \lambda \cdot E) = 0$.
+
 \dk Z definice počítejme:
 \begin{align}
 	Au &= \lambda u \\
@@ -34,6 +35,7 @@ Přičemž v posledním kroku využíváme faktu, že pro součin netriviálníh
 &GN(\lambda) \geq 1 \Leftrightarrow \lambda \in \Sp(A) \Leftrightarrow AN(\lambda) \geq 1\\
 \text{a}\qquad &GN(\lambda) \leq AN(\lambda)
 \end{align}
+
 \dk {\it (bez důkazu)}
 
 \df Hermitovská transpozice matice $A$ je matice $A^*$, taková, že $A_{ij}^* = \overline{A_{ji}}$.
