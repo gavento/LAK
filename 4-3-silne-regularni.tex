@@ -1,13 +1,13 @@
 \subsection{Silně regulární grafy}
 
 
-\df Silně regulární graf je d-regulární graf splňující $\forall$ hranu $xy\in E$ $\exists!e$
+\df $G$ je \uv{silně regulární graf} pokud existují čísla $d, e, f$ taková, že $G$ je $d$-regulární a $\forall$ hranu $xy\in E$ $\exists!e$
 vrcholů $u: ux,uy\in E$ a $\forall$ nehranu $xy\not\in E$ $\exists!f$ vrcholů
-$u: ux,uy\in E$.
+$u: ux,uy\in E$. (Tedy existuje předepsaný počet společných vrcholů hrany a nehrany)
 
 Abychom mohli zanedbat triviální případy, dodáváme $f>0$ a $G\neq K_n$.
 Příkladem silně regulárního grafu je úplný bipartitní graf se stejně velkými
-partitami ($e=0$). Nejmenším nebipartitním silně regulárním grafem je
+partitami ($e=0$, $f$ velikost partity). Nejmenším nebipartitním silně regulárním grafem je
 pětiúhelník ($e=0$, $f=1$).
 
 \vt $G$ je silně regulární graf s parametry $d$, $e$, $f$ a $n$ vrcholy. Potom:
@@ -19,8 +19,7 @@ pětiúhelník ($e=0$, $f=1$).
 \end{enumerate}
 
 \dk Nechť G je silně regulární, $A$ je jeho matice sousednosti. $(A^2)_{ij} =
-e$, pokud $A_{ij} = 1$. Na ostatních souřadnících bude $f$, na diagonále $d$
-(to plyne z jednoduchého pozorování počtu sledů délky 2).
+e$, pokud $A_{ij} = 1$, na ostatních souřadnících bude $f$ (v obou připadech půjdeme po společných sousedech hran) a na diagonále bude $d$ (vyrazíme po hraně a zase zpátky). Sledovali jsme v podstatě počet sledů délky $2$.
 
 $$
 A^2 = \left(
@@ -93,7 +92,7 @@ Friendship theorem tedy tvrdí, že takový graf musí vypadat jako \uv{mlýn}.
 \includegraphics{friendship.pdf}
 \end{center}
 
-\dk Nejprve si připomeňme, co jsou to konečné projektivní roviny.
+\dk Nejprve si připomeňme, co jsou to konečné projektivní roviny (KPR).
 
 \df Konečná projektivní rovina je množina bodů a přímek, že:
 \begin{enumerate}

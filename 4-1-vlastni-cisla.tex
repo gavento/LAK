@@ -66,9 +66,28 @@ Přičemž v posledním kroku využíváme faktu, že pro součin netriviálníh
 	\item \uv{$\Leftarrow$} \todo{gavento} byl jen pochybny naznak
 \end{description}
 
-\vt Nechť $A_i \in \C^{n\times n}$ a $\forall i,j$ jsou $A_i$ a $A_j$ normální a $A_iA_j = A_j A_i$. Potom existuje společná ortonormální báze z vlastních vektorů.
+\vt Nechť $A, B \in \C^{n\times n}$, $A$ a $B$ jsou normální a komutují, tedy $AB = BA$. Potom existuje společná ortonormální báze složená z vlastních vektorů.
 
-\dk \todo{Gavento}
+\dk
+Nejdřive dokážeme, že pokud je $v$ vlastní vektor $B$, pak i $Av$ je vlastní vektor $B$ (pokud $Av \neq 0$).
+
+Mějme $Bv = \lambda v$. Potom $A(Bv) = A(\lambda v) = \lambda Av$. Z komutativity plyne $B(Av) = \lambda (Av)$. Tedy máme, co jsme chtěli.
+
+Nyní dokážeme, že $A$ a $B$ mají společný vlastní vektor, tedy že existuje nenulové $v$ a
+skaláry $\lambda, \mu$ takové, že $Av = \lambda v$ a $Bv = \mu v$.
+
+Nechť je $\lambda$ vlastním číslem $B$ a $X$ přislušný prostor.
+\begin{align}
+	X = \{ x: Ax = \lambda x \}
+\end{align}
+
+Z předchozího vidíme, že $A$ mapuje $X$ na $X$. Tedy $A$ má vlastní vektor v $X$ a z definice $X$ už plyne, že $A$ a $B$ mají společný vlatní vektor.
+
+Nyní už je vše připraveno. Najdeme jeden společný vlastní vektor $v_1$, BÚNO je jednotkové normy. Nyní jako $W$ označme všechny vektory kolmé na $v_1$.
+Jak už víme, $A$ i $B$ mapují $W$ na $W$. Ve $W$ opět najdeme společný vlastní vektor (znormovaný) a označíme ho $v_2$. Mějme $W'$ vektory kolmé na $v_1$ i $v_2$.
+Opět můžeme celý postup opakovat. Takto dostaneme hledanou ortonormální bázi.
+
+\qed
 
 \vt Nechť $A$ je hermitovská matice, tedy $A = A^*$. Potom všechna její vlastní čísla jsou reálná.
 

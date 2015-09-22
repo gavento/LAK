@@ -16,14 +16,14 @@ Potřebujeme-li kód, který opraví jednu chybu, můžeme na $C_5$ najít pouze
 kódová slova ($\alpha(C_5) = 2$). Naproti tomu, $\alpha(C_5 \boxtimes C_5) = 5
 > 2^2$. Posílání zpráv ve větších blocích tedy může být efektivnější.
 
-\df Shannonova kapacida grafu:
+\df Shannonova kapacita grafu:
 $$\shn(G) = \sup_{i\ge 1}(\alpha(G^i))^{1/i}$$
 
 \lm $\shn(G\boxtimes H) \ge \shn(G) \cdot \shn(H)$
 
 \dk Vezměme si maximální nezávislou množinu v $G$ a maximální nezávislou
 množinu v $H$. Z vlastností domečkového součinu plyne, že mezi vrcholy
-$G\boxtimes H$ zkombinovanými z těchto množin nepovede žádná hrana a tudíž
+$G\boxtimes H$ zkombinovanými z těchto dvou nezávislých množin nepovede žádná hrana a tudíž
 budou tvořit nezávislou množinu velikosti alespoň $\alpha(G)\cdot\alpha(H)$.
 
 \poz $\shn(G^i) \ge \shn(G)^i$
@@ -74,8 +74,14 @@ Pokud aplikujeme tento poznatek na vektory $\rho(v)$ rozšířené na bázi (co�
 \begin{align}
 	1=||u||^2 \geq \sum_{v\in A}\sk{\rho(v),e_1}^2
 \end{align}
-Tedy existuje alespoň jeden vrchol $w$, že $\sk{\rho(w),e_1}^2 \leq 1/|A|$ a dosadíme-li do zlomku z definice $\vartheta$, získáme odhad $ \alpha(G) = |A| \leq\vartheta(H,\rho)$, což jsme chtěli dokázat. \qed
+Tedy existuje alespoň jeden vrchol $w$, že $\sk{\rho(w),e_1}^2 \leq 1/|A|$.
 
+Stačí totiž vzít takový vrchol $w \in A$, že $\sk{\rho(w),e_1}^2$ je minimální a dostáváme:
+\begin{align}
+	1 \geq \sum_{v\in A}\sk{\rho(v),e_1}^2 \geq |A| \cdot \sk{\rho(w),e_1}^2
+\end{align}
+
+Dosadíme-li do zlomku z definice $\vartheta$, získáme odhad $ \alpha(G) = |A| \leq\vartheta(H,\rho)$, což jsme chtěli dokázat. \qed
 
 
 \lm (O součinu $\vartheta$) Nechť $H_1$ a $H_2$ jsou grafy, a $\rho_i$ jejich 
@@ -91,6 +97,10 @@ Kde operace $\otimes$ je tenzorový součin vektorů, tedy pro $x \in \R^n$ a $y
 \in \R^m$ je výsledek vektor $z \in \R^{mn}$, který obsahuje všechny součiny 
 $x_iy_i$. 
 
+\pr Mějme vektory $(a_1, a_2)$ a $b_1, b_2)$. Potom:
+\begin{align}
+	(a_1, a_2) \otimes b_1, b_2) = (a_1 b_1, a_1 b_2, a_2 b_1, a_2 b_2).
+\end{align}
 Zbývá pouze ověřit, že dělá správnou věc. Podívejme se tedy nejdříve na skalární 
 součin:
 \begin{align}
