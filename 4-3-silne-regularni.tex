@@ -1,126 +1,194 @@
 \subsection{Silně regulární grafy}
+% Stanislava Tlustá
 
+% úvod
+Dalším typem regulárních grafů jsou silně regulární grafy.
 
-\df $G$ je \uv{silně regulární graf} pokud existují čísla $d, e, f$ taková, že $G$ je $d$-regulární a $\forall$ hranu $xy\in E$ $\exists!e$
-vrcholů $u: ux,uy\in E$ a $\forall$ nehranu $xy\not\in E$ $\exists!f$ vrcholů
-$u: ux,uy\in E$. (Tedy existuje předepsaný počet společných vrcholů hrany a nehrany)
+\df $r$-regulární graf $G$ se nazývá silně regulární, pokud existují $e, f \in \N$ taková, že:
+\begin{itemize}
+	\item každá hrana $uv \in E(G)$ se vyskytuje právě v $e$ trojúhelnících (tj. $|N(u) \cap N(v)| = e$) a zároveň
+	\item každá nehrana $uv \not\in E(G)$ se vyskytuje právě v $f$ třešničkách (tj. $|N(u) \cap N(v)| = f$).
+\end{itemize}
 
-Abychom mohli zanedbat triviální případy, dodáváme $f>0$ a $G\neq K_n$.
+\pzn Abychom mohli zanedbat triviální případy, dodáváme $f>0$ a $G\neq K_n$.
 Příkladem silně regulárního grafu je úplný bipartitní graf se stejně velkými
 partitami ($e=0$, $f$ velikost partity). Nejmenším nebipartitním silně regulárním grafem je
 pětiúhelník ($e=0$, $f=1$).
 
-\vt $G$ je silně regulární graf s parametry $d$, $e$, $f$ a $n$ vrcholy. Potom:
+\vt Nechť $G$ je silně regulární graf s parametry $(r,e,f)$ na $n$ vrcholech. Potom:
 \begin{enumerate}
-	\item[(a)] Zafixujeme $f$: $e = f-1$; $d = 2f$; $n = 4f+1$
-	\item[] {\it nebo}
-	\item[(b)] $\exists s \in \Z$, že platí $(e-f)^2-4(f-d) = s^2$ \\
-	a výraz \ ${d\over 2fs}((d-1+f-e)(s+f-e)-2f)$ je přirozené číslo
+	\item[(a)] $f-e = 1$, $n = 2r +1$,  $r = 2f$ nebo
+%	\item[] {\it nebo}
+	\item[(b)] $\exists s \in \Z$ takové, že platí $(e-f)^2-4(f-r) = s^2$ \\
+	a výraz \ ${r\over 2fs}((r-1+f-e)(s+f-e)-2f)$ je přirozené číslo.
 \end{enumerate}
 
-\dk Nechť G je silně regulární, $A$ je jeho matice sousednosti. $(A^2)_{ij} =
-e$, pokud $A_{ij} = 1$, na ostatních souřadnících bude $f$ (v obou připadech půjdeme po společných sousedech hran) a na diagonále bude $d$ (vyrazíme po hraně a zase zpátky). Sledovali jsme v podstatě počet sledů délky $2$.
+\dk
+% jak na to
+Technika tohoto důkazu je stejná jako u předchozí věty o Mooreových grafech.
 
-$$
-A^2 = \left(
-	\begin{matrix}
-		d & & f & \\
-		& d & & e \\
-		f & & \ddots & \\
-		& e & & d\\
-	\end{matrix}\right)
-$$
-
+% sestavení polynomu
+Matici souslednosti grafu $G$ označíme $A$. Její druhá mocnina má na diagonále $r$. Mimo diagonálu má buď hodnotu $e$ pro případ kdy v $A$ byla jednička ($e$ trojúhelníků), nebo hodnotu $f$, pokud v $A$ byla nula ($f$ třešniček). Vidíme tedy vztah:
 \begin{align}
-	A^2 = dI + eA + f(J-I-A) &= fJ + (d-f)I + (e-f)A \\
-	A^2 + (f-e)A + (f-d)I &= fJ \\
-	\lambda^2 + (f-e)\lambda + (f-d) &\rightarrow \Sp(fJ)\qquad \lambda\in\Sp A
+A^2 = rI + eA + f(J-I-A),
+\end{align}
+kde $E$ je jednotková matice a $J$ je matice samých jedniček. Úpravou dostaneme polynomiální vztah
+\begin{align}
+p(A) = A^2 + (f-e)A + (f-r)E = fJ.
 \end{align}
 
-Víme, že vlastní čísla jedničkové matice $J$ jsou $\Sp(J) = \{n, 0^{n-1}\}$.
-Proto $\Sp(fJ) = \{fn, 0^{n-1}\}$. Dále víme, že $d$ je vlastním číslem matice
-$A$, neboť graf $G$ je $d$-regulární.
+% spektra
+Dále platí, že pro $\lambda \in \Sp(A)$ je $p(\lambda) \in Sp(fJ)$. Spektrum $fJ$ známe: obsahuje $fn$ s násobností $1$ a $0$ s násobností $n-1$.
 
+% % \lambda = r
+Protože $G$ je $r$-regulární, tak je $r$ také jeho vlastním číslem. Dosadíme tedy $r$ do $p$:
 \begin{align}
-	&d^2 + (f-e)d + (f-d) \in \Sp(fJ) \\
-	&d^2 + (f-e)d + (f-d) = fn
+p(r) &= r^2 + (f-e)r + (f-r) \\
+p(r) &= r^2 +fr -er +f -r +1 -1 \\
+p(r) &= (r^2 -er +1) + f(r+1) -(r+1) \\
+p(r) &= (r^2 -er +1) + (r+1)(f-1).
+\end{align}
+Protože $f>0$, tak platí $(r+1)(f-1) \geq 0$.
+Navíc zřejmě $e<r$, tudíž $r^2 -er +1 >0$. Jediné vlastní číslo, které toto splňuje je $fn$, proto
+\begin{align}
+\label{4-3:vztah-pro-vrcholy}
+p(r) = fn
 \end{align}
 
+%%%%%%%%
+% % p(x)=0
+Nyní zbývá vyřešit případ, kdy $p(\lambda)=0$.
+Řešení této kvadratické rovnice je 
 \begin{align}
-	&\lambda \in \Sp(A) - \{d\} \Rightarrow \lambda^2 + (f-e)\lambda + (f-d) = 0 \\
-	&\lambda_{1,2} = {e-f \pm \sqrt{(f-e)^2-4(f-d)} \over 2} \qquad \sqrt{(f-e)^2-4(f-d)} = s
+\lambda_{1,2} = {e-f \pm s \over 2}, \qquad s = \sqrt{(f-e)^2 -4(f-r)}.
+\end{align}
+Násobnosti těchto kořenů označíme $m_1, m_2$. Jejich součet je zřejmě roven $n-1$.
+% % stopa
+Využitím faktu, že stopa matice je suma vlastních čísel 
+včetně násobností, získáme rovnici
+\begin{align}
+	0 = \Tr(A) = r + m_1\lambda_1 + m_2\lambda_2,
+\end{align}
+kterou upravíme
+\begin{align}
+0 &= r + {m_1 \over 2}(e -f +s) + {m_2 \over 2}(e -f -s) \\
+0 &= 2r + (e-f)(m_1 +m_2) +s(m_1 -m_2). \label{4-3:rovnice-pro-s}
 \end{align}
 
-$$\lambda_1 = {e-f+s\over 2}\qquad\qquad \lambda_2 = {e-f-s\over 2}$$
-
-Matice $A$ má vlastní čísla $d$ (1-násobné), $\lambda_1$ ($p$-násobné) a
-$\lambda_2$ ($q$-násobné).
-
+% % rozbor odmocniny
+Řešení rozdělíme na dva případy.
 \begin{enumerate}
-	\item[(1)] $1 + p + q = n$ (celkový počet vlastních čísel)
+% % % \not\in \Q
+\item $s \not\in \Q$: potom $m_1 = m_2$. Potom se rovnice zjednoduší
+\begin{align}
+0 &= 2r +2m_{1}(e-f) \\
+m_1 &= {r \over f-e}.
+\end{align}
+Z toho vidíme, že
+\begin{align}
+\label{4-3:rovnice-ef}
+	(f-e)|r, \quad f-e > 0, \quad n = 1 + 2m_1 = 1 + {2r\over f-e}.
+\end{align}
+Pokud $f-e = 1$, tak jsme hotovi. \\
+Pokud $f-e = 2$, pak $n = 1+r$ a $G = K_{r+1}$, ale úplné grafy jsme si zakázali. \\
+Pokud $f-e > 2$, pak $n < 1+r$, což je nesmysl.
 
-	\item[(2)] $d + p\lambda_1 + q\lambda_2 = \Tr A = 0$ (stopa matice $A$ je 0) \\
-	$d + p\left({e-f+s\over 2}\right) + q\left({e-f-s\over 2}\right) = 0$ \\
-	$d + \left({p+q\over 2}\right)(e-f) + \left({s\over 2}\right)(p-q) = 0$
+Po dosazení $f-e=1$ do poslední rovnice \ref{4-3:rovnice-ef} vidíme, že $n = 2r+1$. \\
+Po dosazení téhož do polynomu $p$ a použitím vztahu \ref{4-3:vztah-pro-vrcholy} dostáváme
+\begin{align}
+r^2 + r + (f-r) = f(2r+1).
+\end{align}
+Z toho již snadnou úpravou získáme hledané rovnosti
+\begin{align}
+r = 2f, \qquad n = 4f+1.
+\end{align}
 
-	\item[(3)] $d^2 + p\lambda_1^2 + q\lambda_2^2 = \Tr A^2 = nd$ (vlastní čísla matice $A^2$ jsou druhé mocniny vlastních čísel matice $A$).
-\end{enumerate}
-
-\begin{enumerate}
-	\item[(a)] $s\not\in |Q \Rightarrow p = q$ \quad $d + p(e-f) = 0 \Rightarrow p = {d\over f-e} \Rightarrow (f-e)|d$ \\
-	$n = 1 + 2p = 1 + {2d\over f-e}$ \quad (z rovnice (1)) $\Rightarrow$ $f-e > 0$
-
-	Pokud $f-e = 1$, pak $e = f-1$ (což chceme). \\
-	Pokud $f-e = 2$, pak $n = 1+d$ a $G = K_{d+1}$, ale úplné grafy jsme si zakázali. \\
-	Pokud $f-e > 2$, pak $n < 1+d$, což je nesmysl.
-
-	$e = f-1 \quad\Rightarrow\quad n = 2d+1$ \\
-	$d^2 + d + (f-d) = f(2d+1) \quad\Rightarrow\quad d = 2f \quad\Rightarrow\quad n = 4f+1$
-
-	\item[(b)] $s\in\Q\Rightarrow s\in\N$ \\
-	\todo Prý pokračování na cvičení, nemůžu ho ale najít. Já taky ne. \\
-	$$p = {d\over 2fs}\left((d-1+f-e)(s+f-e)-2f\right) \in \N$$
+%%%%%%
+% % %  \in \Q
+\item $s \in \Q$, což implikuje $s \in \N$.
+Vezmeme vztah pro násobnosti vlastních čísel a vztah \ref{4-3:vztah-pro-vrcholy} pro $n$
+\begin{align}
+m_2 = n - 1 - m_1 = {r^2 -er +1 +(r+1)(f-1) \over f} -1 -m_1.
+\end{align}
+Dosadíme do rovnice \ref{4-3:rovnice-pro-s}. Dostaneme:
+\begin{align}
+0 = 2r +m_1(e-f+s) + ({r^2 -er +1 +(r+1)(f-1) \over f} -1 -m_1)(e-f-s) 
+\end{align}
+Což dále upravíme
+\begin{align}
+& m_1(-(e-f+s)+(e-f-s)) = 2r + {1 \over f}((r^2 -er +rf -r +f)-f)(e-f-s), \\
+& m_1(-2s) = 2r +{1 \over f}(r^2 -er +fr -r)(e-f-s), \\
+& m_1 = {1 \over 2sf}(-2rf +r(r-e+f-1)(-e+f+s)), \\
+& m_1 = {r \over 2sf}(r-1+f-e)(s+f-e) -2f).
+\end{align}
+Protože $m_1$ je násobnost vlastního čísla $\lambda_1$, tak se jedná o přirozené číslo.
 \end{enumerate}
 \qed
 
+\vt(Friendship theorem) Nechť každí dva lidé mají právě jednoho společného známého. Pak existuje jeden (starosta), který zná všechny.
 
-\vt (Friendship theorem) Nechť $G$ je graf, jehož každé dva vrcholy mají právě jednoho společného souseda. Pak v $G$ existuje vrchol stupně $n-1$.
+Neboli: nechť pro každé dva různé vrcholy $u, v \in V(G)$ platí $|N(u) \cap N(v)| = 1$. Potom existuje vrchol $c \in V$ takový, že $N(c) \cup \{c\} = V$.
 
-Friendship theorem tedy tvrdí, že takový graf musí vypadat jako \uv{mlýn}.
-
-\begin{center}
-\includegraphics{friendship.pdf}
-\end{center}
-
-\dk Nejprve si připomeňme, co jsou to konečné projektivní roviny (KPR).
-
-\df Konečná projektivní rovina je množina bodů a přímek, že:
-\begin{enumerate}
-	\item Každé dvě přímky sdílejí právě jeden bod.
-	\item Každé dva body spojuje právě jedna přímka.
-	\item Existují 4 body a žádná přímka neprotíná více než dva z nich.
-\end{enumerate}
-
-Nyní si označme symbolem $N(v)$ množinu sousedů vrcholu $v$. Všimneme si, že
-sousedství pro náš graf přesně odpovídají přímkám v KPR a body jsou body. Protože ale třetí
-podmínka by znamenala, že naše věta neplatí, budeme si přát, aby to KPR nebyla
--- pak snadno najdeme vrchol, který je spojený s každým dalším.
-
-Pro spor tedy předpokládejme, že graf KPR je. Protože v KPR mají všechny přímky stejnou mohutnost, je také $d$-regulární. Navíc každé $u,v$ má právě jednoho společného souseda, což znamená, že $G$ je silně regulární s parametry  $e=f=1$.
-
-Podle předchozí věty to ověříme: možnost (a) nastat nemůže, protože $e=f$.
-Počítejme tedy, že nastala možnost (b). Protože je to KPR řádu $m$, tak $d=m+1$ a $n=m^2 + m + 1$.
+\pzn Friendship theorem tvrdí, že takový graf musí vypadat jako
+mlýn (hromádka trojúhelníků, které se stýkají v jednom centrálním vrcholu), viz obrázek \ref{4-3:obr-mlyn}.
 \begin{align}
-	(e-f)^2 - 4(f-d) = 0^2 - 4 - 4(m+1))= s^2 \\
-	4m = s^2 \\
-	s=2\sqrt m 
+\label{4-3:obr-mlyn}
+\begin{tikzpicture}[thick,scale=1.1]
+% obrázek: šestilopatkový mlýn
+\draw \foreach \x in {15,75,...,315}
+    {
+        (0,0) -- (\x:2) \vrchol -- (\x+30:2) \vrchol -- cycle
+    };
+\draw (0,0) \vrchol;
+% popisek
+\draw (5,0) node {šestilopatkový mlýn};
+\end{tikzpicture}
 \end{align}
-A ověříme celočíselnost polynomu $p$ s tím, že $t:=s/2=\sqrt m$, tedy $s=2t$ a $m=t^2$:
+
+\dk
+% převzato z:
+% http://math.mit.edu/~fox/MAT307-lecture20.pdf
+% jak na to - sporem
+Pro spor předpokládejme, že takový vrchol $c$ neexistuje. Nejprve si všimněme, že podmínka na množství sousedů implikuje, že $G$ neobsahuje čtyřúhelník. 
+
+% G regulární
+% % u,v nesousedí
+Nejdříve ukážeme, že $G$ je regulárním grafem. Vezměme libovolné dva vrcholy $u$, $v$, které spolu nesousedí a označme $w_1, ..., w_k$ sousedy vrcholu $u$. Každý vrchol $w_i$ musí mít jednoho společného souseda $z_i$ s vrcholem $v$. Vrcholy $z_i$ musí být různé, jinak by vznikl čtyřúhelník ($u, w_i,z_i =z_j, w_j$). Vrchol $v$ má tedy také alespoň $k$ sousedů. Symetrickou úvahou pak dostáváme rovnost $deg(u) = deg(v)$. 
+
+% % ostatní vrcholy
+Vrcholy $u$ a $v$ mají právě jednoho společného souseda $c$.
+Bez újmy na obecnosti můžeme předpokládat, že je to $c=w_1$. Jakýkoliv jiný vrchol $w \in V(G)$ již sousedí nanejvýše s jedním z vrcholů $u$ a $v$ (jinak by vznikl čtyřúhelník). Zopakováním předchozí úvahy pro vrchol se kterým $w$ nesousedí vidíme $deg(w) = deg(u) = deg(v)$. Nakonec $w_1$ nemůže podle předpokladu být spojen se všemi vrcholy, proto i pro něj platí $deg(w_1) = deg(u) = deg(v)$.
+
+Všechny vrcholy tedy mají stejný stupeň a graf $G$ je $k$-regulární. Dokonce je silně regulární ($e=f=1$).
+
+% délky cest
+Nyní se podíváme na sledy délky $2$. Od každého vrcholu $x \in V$ jich vede $k^2$, protože $G$ je $k$-regulární. Navíc z vrcholu $x$ vede do každého jiného vrcholu $y \in V$ právě jedna cesta délky $2$ ($e=f=1$). Sledů z $x$ do $x$ je přesně $k$. Dostáváme tedy vztah, ze kterého vyjádříme počet vrcholů:
 \begin{align}
-	p &= {d \over 2fs} ((d-1+f-e)(s+f-e)-2f) \\
-	&= {m+1 \over 4t} ((m+1+0)(2t+0)-2)\\
-	&= {(t^2 + 1)(t^3-1) \over 2t}
+k^2 &= (n-1) + k \\
+n &= k^2 -k +1. \label{4-3:friendship-vrcholy}
 \end{align}
-Což má být přirozené číslo. To je pravda zřejmě jenom pro $t=1$, tedy $n=3$ a pokud náš graf není trojúhelník, je to spor. Pokud to trojúhelník je, splňuje žádanou vlastnost triviálně. \qed
 
+% vlastní čísla
+V dalším kroku zopakuje již známý postup pro hledání polynomiálního vztahu vlastních čísel. Matici souslednosti grafu $G$ označíme $A$.
+Z rozboru sledů délky $2$ provedeném v předchozím kroku vidíme, že matice $A^2$ má na diagonále $k$ a všude mimo diagonálu jedničky. Dostáváme tedy vztah
+\begin{align}
+A^2 = J + (k-1)I.
+\end{align}
+Vlastními čísly matice $A^2$ jsou tedy $n+(k-1) = k^2$ s násobností $1$ a $k-1$ s násobností $n-1$. Vlastní čísla matice $A^2$ jsou druhými mocninami vlastních čísel matice $A$.  
+Tudíž matice $A$ má vlastní čísla $k$ s násobností $1$ a $\pm \sqrt{k-1}$ s násobnostmi $m_1$, $m_2$.
+Použitím vztahu pro stopu matice dostáváme:
+\begin{align}
+0 = \Tr(A) = k + (m_1 -m_2)\sqrt{k-1}.
+\end{align}
+To upravíme do tvaru
+\begin{align}
+k^2 = (m_2 -m_1)^2(k-1),
+\end{align}
+z něhož plyne, že $k-1|k^2$. To je však možné pouze pro $k = 1,2$. Jinak totiž $k-1$ dělí $k^2-1$, nemůže tedy dělit zároveň $k$. 
 
+% závěr
+Hodnotě $k=1$ odpovídá po dosazení do rovnice \ref{4-3:friendship-vrcholy} graf $K_1$.
+Hodnotě $k=2$ odpovídá graf $K_3$. 
+Oba splňují jak předpoklady, tak závěr věty. 
+Pro jakýkoliv jiný graf nastává spor, tudíž musel vrchol $c$ sousedit se všemi ostatními.
+\qed
