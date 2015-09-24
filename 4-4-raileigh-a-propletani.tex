@@ -35,8 +35,8 @@ a $y_i$ vlastní vektory matic $A$ a $B$.  Zaveďme následující vektorové
 podprostory $\Compl^n$ (ačkoli druhý z nich nemá dostatek složek, můžeme mu jednu 
 nulovou přidat a nic se nestane):
 \begin{align}
-S_1 := \L\{x_k, \dots, x_n\} \subseteq \Compl^n \\
-S_2 := \L\{y_1, \dots, y_k\} \subseteq \Compl^n
+S_1 := \calL\{x_k, \dots, x_n\} \subseteq \Compl^n \\
+S_2 := \calL\{y_1, \dots, y_k\} \subseteq \Compl^n
 \end{align}
 Zřejmě $\dim(S_1) + \dim(S_2) = (n-k+1) + k > n$, tedy $\exists x \in S_1\cap S_2$. Použijeme 
 Reileighův princip pro oba prostory a máme:
@@ -56,12 +56,12 @@ $\mu_i$ a $y_i$. Potom $\mu_i$ proplétají $\lambda_i$ a pokud navíc $\mu_i =
 \dk Použijeme Rayleighův princip podobně jako v předchozím tvrzení. Všimneme 
 si, že:
 \begin{align}
-	x \in \L\{ S^Tx_k, \dots, S^Tx_{n}\}^\perp \Leftrightarrow
-	Sx \in \L\{ x_k, \dots, x_{n}\}^\perp
+	x \in \calL\{ S^Tx_k, \dots, S^Tx_{n}\}^\perp \Leftrightarrow
+	Sx \in \calL\{ x_k, \dots, x_{n}\}^\perp
 \end{align}
 Stačí si opět vzít vhodný prvek $x$ z průniku:
 \begin{align}
-	x \in \L\{ S^Tx_k, \dots, S^Tx_{n}\}^\perp \cap \L\{y_1, \dots, y_k\}
+	x \in \calL\{ S^Tx_k, \dots, S^Tx_{n}\}^\perp \cap \calL\{y_1, \dots, y_k\}
 \end{align}
 A můžeme použít Reileighův princip:
 \begin{align}

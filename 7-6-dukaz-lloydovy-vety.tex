@@ -68,33 +68,33 @@ Nyní bychom rádi dosadili $V$ za $v_i$, abychom $V$ upočítali, ale k tomu
 se potřebujeme zbavit $i$. Z vlastností vytvořujících funkcí víme:
 \begin{align}
   \sum_{i=0}^\infty v_{i+1}(\lambda) x^i &= \frac{V(x) - 1}{x} \\
-  \sum_{i=0}^\infty i v_i(\lambda) x^i     &= x \frac{\d V(x)}{\d x} \\
-  \sum_{i=0}^\infty (i+1) v_{i+1}(\lambda) x^i &= \frac{\d V(x)}{\d x} \\
+  \sum_{i=0}^\infty i v_i(\lambda) x^i     &= x \frac{\rmd V(x)}{\rmd x} \\
+  \sum_{i=0}^\infty (i+1) v_{i+1}(\lambda) x^i &= \frac{\rmd V(x)}{\rmd x} \\
   \sum_{i=0}^\infty (i+2) v_{i+2}(\lambda) x^i &=
-    \frac{1}{x}\br{ \frac{\d V(x)}{\d x} - \lambda }
+    \frac{1}{x}\br{ \frac{\rmd V(x)}{\rmd x} - \lambda }
 \end{align}
 Přepíšeme vztah pro $v_i$, aby platil od $i = 0$, dosadíme a upravíme:
 \begin{align}
   (q - 1)n v_i - (q - 1) i v_i + (q-2)(i+1)v_{i+1}
     - \lambda v_{i+1} +(i+2)v_{i+2} &= 0 \\
-  (q - 1)n V(x) - (q - 1)x \frac{\d V(x)}{\d x}
-    + (q-2)\frac{\d V(x)}{\d x} - \lambda \frac{V(x) - \lambda}{x}
-    + \frac{1}{x}\br{\frac{\d V(x)}{\d x} - \lambda } &= 0 \\
+  (q - 1)n V(x) - (q - 1)x \frac{\rmd V(x)}{\rmd x}
+    + (q-2)\frac{\rmd V(x)}{\rmd x} - \lambda \frac{V(x) - \lambda}{x}
+    + \frac{1}{x}\br{\frac{\rmd V(x)}{\rmd x} - \lambda } &= 0 \\
   V(x) \br{ (q - 1)n - \frac{\lambda}{x} } -
-    \frac{\d V(x)}{\d x} \br{ (1 - q)x + (q-2) + \frac{1}{x} }
+    \frac{\rmd V(x)}{\rmd x} \br{ (1 - q)x + (q-2) + \frac{1}{x} }
     + \frac{\lambda}{x} - \frac{\lambda}{x} &= 0 \\
-  V(x)\br{ (1 - q)nx - \lambda } - \frac{\d V(x)}{\d x} \br{
+  V(x)\br{ (1 - q)nx - \lambda } - \frac{\rmd V(x)}{\rmd x} \br{
     (q - 1)x^2 + (q-2)x + 1
     } &= 0
 \end{align}
 Nyní přeskupíme a zintegrujeme pomocí rozkladu na parciální zlomky:
 \begin{align}
-  \int \frac{\d V}{V} &=
-    \int \frac{(q - 1)nx - \lambda}{(1 - q)x^2 + (q-2)x + 1} \d x \\
-  \ln V + c &= \int \frac{(n+\lambda)(q-1)}{q(1 + x(q-1))} \d x +
-               \int \frac{\lambda - n(q - 1)}{q(1 - x)} \d x \\
-   &= \frac{(n+\lambda)(q-1)}{q} \int \frac{1}{1 + x(q-1)} \d x +
-               \frac{\lambda - n(q - 1)}{q} \int \frac{1}{1 - x} \d x \\
+  \int \frac{\rmd V}{V} &=
+    \int \frac{(q - 1)nx - \lambda}{(1 - q)x^2 + (q-2)x + 1} \rmd x \\
+  \ln V + c &= \int \frac{(n+\lambda)(q-1)}{q(1 + x(q-1))} \rmd x +
+               \int \frac{\lambda - n(q - 1)}{q(1 - x)} \rmd x \\
+   &= \frac{(n+\lambda)(q-1)}{q} \int \frac{1}{1 + x(q-1)} \rmd x +
+               \frac{\lambda - n(q - 1)}{q} \int \frac{1}{1 - x} \rmd x \\
    &= \frac{(n+\lambda)(q-1)}{q} \frac{\ln (1 + x(q-1))}{q-1} +
                \frac{\lambda - n(q - 1)}{q} (-1) \ln (1 - x) \\
    &= \frac{n+\lambda}{q} \ln (1 + x(q-1)) -
