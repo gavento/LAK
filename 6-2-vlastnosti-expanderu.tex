@@ -1,7 +1,10 @@
-\subsection{Mixing lemma}
+\subsection{Applications and properties of expanders}
 
+Mixing lemma v podstatě říká, že každý $d$-regulární expandér $G$ na $n$ vrcholech má počet hran mezi libovolnými $S,T\subseteq V$ přibližně podobný náhodnému $d$-regulárnímu grafu, tedy $\frac{|S||T|}{n}$.
 
-\vt (Mixing lemma) $\forall G$ $d$-regulární, $\forall S,T \subseteq V, S\cap T = \emptyset: |e(S,T) - {d\cdot|S|\cdot|T|\over n}| \le \lambda d\cdot\sqrt{|S|\cdot|T|}$
+\vt (Mixing lemma) $\forall G$ $d$-regulární,%TODO myslím, že by tu měl být nějaký předpoklad alespoň souvislot d???
+$\forall S,T \subseteq V, S\cap T = \emptyset$ platí: 
+$$|e(S,T) - {d\cdot|S|\cdot|T|\over n}| \le \lambda d\cdot\sqrt{|S|\cdot|T|}$$
 
 \dk Buďte $\chi_S, \chi_T$ charakteristické vektory $S$ a $T$. $u = (1,1,\dots)$ je první vlastní vektor. $\chi_S^\bot$ značí vektor kolmý na $u$.
 

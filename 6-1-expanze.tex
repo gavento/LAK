@@ -1,5 +1,9 @@
-\subsection{Expanze}
+Intuivně, expandér je graf, jehož každá "rozumně velká" podmnožina má "dostatečně velkou" hranici. Tato vlastnost lze formalisovat několika způsoby: z pohledu hran, vrcholů a nebo vlastní čísel.
 
+Žádný nesouvislý graf není dobrý expandér, zatímco úplný graf je typicky nejlepší expandér. Jeho problém tkví v jeho velikosti, jak si povíme později. Obecně se tedy snažíme najít rodinu grafů, která je dostatečně malá (typicky má malý stupeň), ale zato má poměrně dobrou expanzi.
+
+
+\subsection{Expanzei formálně}
 
 \df
 \begin{itemize}
@@ -17,11 +21,12 @@
 \begin{itemize}
 	\item Rodina expanderů $\{G_i\}_\infty$\quad$2^i \ge |G_i| \ge i: h(G_i) \ge \varepsilon$, $G_i$ je $d$-regulární.
 	\item Spectral gap $= d - \max\{\lambda_2,-\lambda_n\}$
-	\item Spektrální expanze $= d - \lambda_2$
+	\item Spektrální expanze $h_s(G)=\lambda_1-\lambda_2 = d - \lambda_2$
 	\item $\lambda = \max\{\lambda_2,-\lambda_n\}$ (druhé největší vlastní číslo v absolutní hodnotě)
 \end{itemize}
 
-\vt ${1\over 2}(d-\lambda_2) \le h(G) \le \sqrt{d(d-\lambda_2)}$ (G je $d$-regulární graf).
+\vt (Cheegerovi nerovnosti) Mějme $G$ $d$-regulární graf, potom platí:  
+$${1\over 2}(d-\lambda_2) \le h(G) \le \sqrt{2d(d-\lambda_2)}.$$
 
 \dk (Jen první nerovnost, druhá je bez důkazu). Sporem: nechť $S$ je množina
 vrcholů s malou hranovou expanzí.

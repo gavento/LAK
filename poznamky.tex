@@ -6,11 +6,15 @@
 \usepackage[small,compact]{titlesec}
 \usepackage{anyfontsize}
 \usepackage{rotating}
+\usepackage{wrapfig}
+\usepackage{subcaption}
 \usepackage{mdwlist}
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{tikz} % knihovna pro kreslení obrázků
 
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		  \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
 \newcommand{\shn}{\Theta}
 \newcommand{\lm}{\smallskip\noindent\bf Lemma\rm{} }
 \newcommand{\dk}{\smallskip\noindent\bf Důkaz\rm{} }
@@ -37,6 +41,7 @@
 %\newcommand{\qed}{\hfill QED}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\zz}{\circled{z}}
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\Ker}{Ker}
 \newcommand\bigzero{\makebox(0,0){\text{\huge0}}}
@@ -70,6 +75,7 @@ Jan Horáček\\
 Radek Hušek\\
 Karel Král\\
 Ladislav Láska\\
+Tomáš Masařík\\
 Honza Musílek\\
 Stanislava Tlustá\\
 Martina Vaváčková\\
@@ -130,8 +136,8 @@ Tomáš Gavenčiak (ed.)\\}
 \section{Expandéry}
 
 \input{6-1-expanze.tex}
-\input{6-2-mixing-lemma.tex}
-\input{6-3-zvetsovani-expanze.tex}
+\input{6-2-vlastnosti-expanderu.tex}
+\input{6-3-konstrukce-expanderu.tex}
 
 
 \section{Perfektní kódy}

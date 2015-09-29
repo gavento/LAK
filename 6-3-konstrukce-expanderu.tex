@@ -1,0 +1,71 @@
+\subsection{Konstrukce expandérů}
+%úvod
+
+
+Ačkoliv například úplný graf je dobrý expandér ve smyslu, že má vysokou 
+expanzi, bohužel s expanzí a velikostí roste neúnosně stupeň. Následující 
+konstrukce vytváří grafy, které mají vyokou expanzi, ale konstantně malý 
+stupeň.
+
+\vt (Randomizovaná) Mějme $2n$ vrcholů. Pro $d$-regulární expandér zvolíme $d$ 
+uniformě náhodných prefektních párování nad těmito vrcholy. Sjednocení těchto 
+párování dává $d$-regulární graf, který je navíc dobrý expandér.
+
+\vt (Prvočíselná) Nechť $p$ je prvočíslo a $V:=Z_p$. Definujeme $G_p=(V,E)$ s 
+hranami $(x, x\pm 1)$ a $(x,x^{-1})$. Pak $G_p$ je rodina dobrých expandérů.
+
+\vt (Margulis) Nechť $G_m=(V,E)$ a $V=\Z_m \times \Z_M$. Definujeme hrany pro 
+$4$-regulární graf jako: $(x\pm y, y)$ a $(x,y\pm x)$. Pak $G_m$ je rodina 
+dobrých expandérů.
+
+%zig-zag součin
+\df (Zig-Zag) Nechť $G$ je $g$-regulární graf a $H$ je $h$-regulární graf na $g$ 
+vrcholech. Definujeme $G \zz H$ následujícím způsobem:
+\begin{enumerate}
+	\item Říkejme, že hrany z $G$ jsou {\bf\color{red}červené} a hrany z $H$ 
+		jsou {\bf\color{blue}modré}.
+	\item Vrcholy $G$ nahradíme grafy $H$ tak, že každému vrcholu $H$ přiřadíme 
+	jednu hranu $G$. Protože $G$ je $g$-regulární a $H$ má právě $g$ vrcholů, 
+	nyní každý vrchol má právě jednu hranu z $G$.
+	\item Pro každou cestu tvaru 
+		{\bf\color{blue}modrá}-{\bf\color{red}červená}-{\bf\color{blue}modrá} 
+		vytvoříme {\bf\color{magenta}růžovou} hranu z prvního vrcholu do 
+		posledního vrcholu.
+	\item Odstraníme z grafu {\bf\color{blue}modré} a {\bf\color{red}červené} 
+		hrany.
+\end{enumerate}
+Ukázka konstrukce je na obrázku \ref{zigzag-konstrukce}. Pro názornost není
+graf $H$ regulární (nepodařilo se mi najít lepší příklad). Příklad je převzat z
+webu.\footnote{\url{http://math.stackexchange.com/questions/454162/clearing-doubt-over-a-definition}}
+
+\begin{figure}
+\centering
+\begin{subfigure}{7.5cm}{\includegraphics[width=\textwidth]{img/zigzag1.png}}\caption{Vložení 
+$H$ do $G$}\end{subfigure}
+\begin{subfigure}{7.5cm}{\includegraphics[width=\textwidth]{img/zigzag2.png}}\caption{Napojení 
+hran $G$ na vrcholy $H$}\end{subfigure}
+\begin{subfigure}{7.5cm}{\includegraphics[width=\textwidth]{img/zigzag3.png}}\caption{Tvorba 
+růžových hran}\end{subfigure}
+\begin{subfigure}{7.5cm}{\includegraphics[width=\textwidth]{img/zigzag4.png}}\caption{Výsledek}\end{subfigure}
+\caption{Příklad Zig-Zag součinu. Pro jednoduchost není $H$ regulární, na funkci
+to ale nic nemění.}
+\label{zigzag-konstrukce}
+\end{figure}
+
+\poz Díky této konstrukci máme graf, který zachovává velikost $G$ (dokonce ji 
+zvětšuje), ale dědí stupeň po grafu $H$ (pokud stupeň byl $h$, nyní bude $h^2$ 
+-- to sice není úplně dobré, ale mohlo by to být horší).
+
+
+ %Nechť $H$ je "dobrý" $d$-regulární expandér, $G_1 := H^2$. Potom 
+%rodina grafů $G_{i+1} := G^2_i\zz H$ jsou "dobré" expandéry.
+Pokud $H$ i $G$ jsou \uv{dobré} expandéry, potom také jejich zig-zag součin bude \uv{dobrý} expandér
+
+\vt (Zig-Zag zachovává spectralní expanzi) 
+
+Mějme $g$-regulární graf $G$ na $n$ vrcholech s v absolutní hodnotě druhým největším vlastním číslem $\lambda_G$ a $H$ bude $h$-regulární graf na $g$ vrcholech s v absolutní hodnotě druhým největším vlastním číslem $\lambda_H$, potom jejich zig-zag součin ($G\zz H$) bude $h^2$-regulární graf na $ng$ vrcholech s v absolutní hodnotě druhým největším vlastním číslem menším než $\lambda_G+\lambda_H+\lambda_H^2$.
+
+%http://math.stackexchange.com/questions/454162/clearing-doubt-over-a-definition
+%https://lucatrevisan.wordpress.com/2011/03/07/cs359g-lecture-17-the-zig-zag-product/#more-2203
+
+%TODO Vzdálenostní množiny.
